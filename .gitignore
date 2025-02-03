@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+*_cache
+*_files
+_docs
+*.html
+search_index.json

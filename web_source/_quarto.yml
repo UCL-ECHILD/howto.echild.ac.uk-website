@@ -1,0 +1,39 @@
+project:
+  type: book
+  resources: static/*
+  output-dir: ../_docs
+  # pre-render: 
+  # post-render:
+ 
+book:
+  title: "ECHILD SUBDOMAIN"
+  reader-mode: true
+  page-footer: >
+    The content of this site is licensed under the
+    [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-nc-sa/4.0/),
+    except example source code which is provided under the
+    [MIT license](https://github.com/UCL-ECHILD/SUBDOMAIN.echild.ac.uk-website/blob/main/LICENSE.md).
+  # cover-image: cover.jpg
+  # favicon: favicon.ico
+  site-url: https://SUBDOMAIN.echild.ac.uk/
+  repo-url: https://github.com/UCL-ECHILD/SUBDOMAIN.echild.ac.uk-website
+  repo-subdir: web_source/
+  repo-branch: main
+  repo-actions: [edit, issue]
+  chapters:
+    - index.qmd
+    - part: "Part 1"
+      chapters:
+        - chapter-1.qmd
+format:
+  html:
+    theme:
+      - cosmo
+    code-copy: true
+    code-link: true
+    
+# bibliography: references.bib
+# csl: CITATION-STYLE.csl
+# link-citations: true
+# nocite: |
+#   @*

@@ -1,0 +1,12 @@
+Package: SUBDOMAIN
+Title: ECHILD Research Database SUBDOMAIN Website
+Version: 0.0.0.9000
+Authors@R: 
+    person("Tony", "Stone", , "tony-stone@users.noreply.github.com", 
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-0167-3800"))
+Description: The website for the ECHILD Research Database SUBDOMAIN.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

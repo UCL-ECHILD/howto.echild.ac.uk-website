@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "SUBDOMAIN.echild.ac.uk-website"
+version = "0.1.0"
+description = ""
+authors = ["tony-stone <tony-stone@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
