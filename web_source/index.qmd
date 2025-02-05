@@ -1,3 +1,15 @@
-# SUBDOMAIN homepage {.unnumbered}
+# ECHILD How To Guides {.unnumbered}
 
-Welcome to the SUBDOMAIN homepage.
+Welcome to the ECHILD How To Guides!
+
+Here you will eventually find a series of guides that will help you extract and manage data in ECHILD, along with full example scripts.
+
+Please bear with us while we get things up and running.
+
+For any queries, please contact [Matthew Jay](mailto:matthew.jay@ucl.ac.uk).
+
+# ECHILD
+
+ECHILD is [Education and Child Health Insights from Linked Data](https://www.echild.ac.uk){target="_blank"}, which links the National Pupil Database and Hospital Episode Statistics plus other relevant datasets) for all of England.
+
+![](static/echild-intro.png){fig-alt="The ECHILD logo."}

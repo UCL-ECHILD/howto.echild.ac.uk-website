@@ -6,17 +6,17 @@ project:
   # post-render:
  
 book:
-  title: "ECHILD SUBDOMAIN"
+  title: "ECHILD How To Guides"
   reader-mode: true
   page-footer: >
     The content of this site is licensed under the
     [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-nc-sa/4.0/),
     except example source code which is provided under the
-    [MIT license](https://github.com/UCL-ECHILD/SUBDOMAIN.echild.ac.uk-website/blob/main/LICENSE.md).
+    [MIT license](https://github.com/UCL-ECHILD/howto.echild.ac.uk-website/blob/main/LICENSE.md).
   # cover-image: cover.jpg
   # favicon: favicon.ico
-  site-url: https://SUBDOMAIN.echild.ac.uk/
-  repo-url: https://github.com/UCL-ECHILD/SUBDOMAIN.echild.ac.uk-website
+  site-url: https://howto.echild.ac.uk/
+  repo-url: https://github.com/UCL-ECHILD/howto.echild.ac.uk-website
   repo-subdir: web_source/
   repo-branch: main
   repo-actions: [edit, issue]
@@ -24,7 +24,7 @@ book:
     - index.qmd
     - part: "Part 1"
       chapters:
-        - chapter-1.qmd
+        - acknowledgements.qmd
 format:
   html:
     theme:

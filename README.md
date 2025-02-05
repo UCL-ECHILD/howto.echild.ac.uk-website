@@ -1,3 +1,10 @@
+# howto.echild.ac.uk website
+
+Repo for the ECHILD How To Guides website at https://howto.echild.ac.uk.
+
+
+
+
 # SUBDOMAIN.echild.ac.uk website (Quarto template)
 
 Template repo for the ECHILD SUBDOMAIN (Quarto) websites at <https://SUBDOMAIN.echild.ac.uk>.
