@@ -24,7 +24,7 @@ To use this template:
     1.  Create SUBDOMAIN pages project (`Workers & Pages > Create [button] > Pages > Upload assets [button]`)
     1.  Add DNS CNAME record for SUBDOMAIN (`Workers & Pages > SUBDOMAIN Pages project > Custom Domains`)
     1.  Edit Bulk Redirect list (`SUBDOMAIN.pages.dev` -> `SUBDOMAIN.echild.ac.uk`)
-1.  Enable repo access to required GitHub Organization Secrets (`CLOUDFLARE_ID` and `CLOUDFLARE_PAGES_TOKEN`)
+1.  Enable repo access to required GitHub Organization Secrets (`CLOUDFLARE_ID` and `CLOUDFLARE_PAGES_TOKEN`) - only UCL-ECHILD organisation Owners have sufficient rights to do this.
 1.  Uncomment lines 4-6 in `.github/workflows/publish.yml`
 1.  Remove this SETUP section from this `README.md`
 1.  Make and push a commit to the GitHub hosted repo
