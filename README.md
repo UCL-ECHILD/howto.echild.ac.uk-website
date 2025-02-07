@@ -5,6 +5,8 @@ Repo for the ECHILD How To Guides website at https://howto.echild.ac.uk.
 
 
 
+
+
 # SUBDOMAIN.echild.ac.uk website (Quarto template)
 
 Template repo for the ECHILD SUBDOMAIN (Quarto) websites at <https://SUBDOMAIN.echild.ac.uk>.
@@ -16,15 +18,21 @@ To use this template:
 1.  Create a new GitHub repo from this template and clone it locally 
     (`gh repo create UCL-ECHILD/[NEW-SUBDOMAIN].echild.ac.uk-website --public --template=UCL-ECHILD/SUBDOMAIN.echild.ac.uk-website-quarto-template --clone` 
     - don't forget to replace `[NEW-SUBDOMAIN]`!)
-1.  Remove/replace all instances of `SUBDOMAIN` across new repo 
+1.  Remove/replace all instances of `SUBDOMAIN` across new repo. Check all files, including:
+    1. .github/workflows/_publish.yml
+    2. pyproject.toml
+    3. web_source/_quarto.yml
 1.  Add content/images/favicons/etc.
 1.  Update `renv.lock` file (see [R renv documentation](https://rstudio.github.io/renv/articles/renv.html))
+    1.  se renv::snapshot() to write a new renv.lock file.
 1.  Update `pyproject.toml` file (see [Python Poetry documentation](https://python1.poetry.org/docs/basic1.usage/))
+    1. pdate line 2.
 1.  Amend the `echild.ac.uk` DNS records on Cloudflare
     1.  Create SUBDOMAIN pages project (`Workers & Pages > Create [button] > Pages > Upload assets [button]`)
     1.  Add DNS CNAME record for SUBDOMAIN (`Workers & Pages > SUBDOMAIN Pages project > Custom Domains`)
     1.  Edit Bulk Redirect list (`SUBDOMAIN.pages.dev` -> `SUBDOMAIN.echild.ac.uk`)
+    2.  You will need a Cloudfare account and be invited to join and manage the ECHILD account. If you do not see any ECHILD details, you have not been invited (or accepted an invitation).
 1.  Enable repo access to required GitHub Organization Secrets (`CLOUDFLARE_ID` and `CLOUDFLARE_PAGES_TOKEN`) - only UCL-ECHILD organisation Owners have sufficient rights to do this.
 1.  Uncomment lines 4-6 in `.github/workflows/publish.yml`
 1.  Remove this SETUP section from this `README.md`
-1.  Make and push a commit to the GitHub hosted repo
+1.  Make and push a commit to the GitHub hosted repo. The workflow .github/workflows/_publish.yml will run the Build and Deploy GitHub Action. Wait for this to complete.
