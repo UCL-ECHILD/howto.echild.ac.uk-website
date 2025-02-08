@@ -1,10 +1,6 @@
-# Welcome {.unnumbered}
+# {.unnumbered}
 
-This website is still under construction. Please bear with us while we get things up and running. For any queries, please contact [Matthew Jay](mailto:matthew.jay@ucl.ac.uk).
-
-Welcome to the ECHILD How To Guides!
-
-Here you will find a series of guides that will help you extract and manage data in ECHILD, along with full example scripts. The guides will take you through a range of ECHILD datasets from cohort inception, to extracting exposure, outcome and covariate data and producing an analysis-ready dataset.
+Welcome to the ECHILD How To Guides! Here you will find a series of guides that will help you extract and manage data in ECHILD, along with full example scripts. The guides will take you through a range of ECHILD datasets from cohort inception, to extracting exposure, outcome and covariate data and producing an analysis-ready dataset.
 
 # How to use the guides
 
