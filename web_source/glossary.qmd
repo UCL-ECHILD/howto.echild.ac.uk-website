@@ -6,7 +6,7 @@ Term | Definition
 Children's social care (CSC) data | Children's social care provides a range of services for children in need and children at risk of abuse or neglect. The children's social care datasets are the child in need census and children looked after return.
 ECHILD | [Education and Child Health Insights from Linked Data](https://www.echild.ac.uk){target="_blank"}, a project that links the National Pupil Database (along with its social care data), the Hospital Episode Statistics and other NHS datasets for 20 million people born since September 1984.
 Hospital Episode Statistics (HES) | All-of-England hospital admission, outpatient and emergency department data.
-National Pupil Database (NPD) | All-of-England data for covering children enrolled in state schools.
+National Pupil Database (NPD) | All-of-England data covering children enrolled in state schools.
 Pupil Matching Reference (PMR) | The unique, encrypted child identifier available in the NPD.
 Token person ID (TPID) | The unique, encrypted child identifier available in HES and other NHS datasets.
 
