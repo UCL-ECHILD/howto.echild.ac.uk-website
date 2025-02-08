@@ -22,9 +22,22 @@ book:
   repo-actions: [edit, issue]
   chapters:
     - index.qmd
-    - part: "Part 1"
+    - glossary.qmd
+    - acknowledgements.qmd
+    - part: "Guides"
       chapters:
-        - acknowledgements.qmd
+        - guide01_intro.qmd
+        - guide02_mgmt.qmd
+        - guide03_cohort.qmd
+        - guide04_demo_npd.qmd
+        - guide05_demo_hes.qmd
+        - guide06_birth_chars.qmd
+        - guide07_phenotype.qmd
+        - guide08_enr_abs_excl.qmd
+        - guide09_exam.qmd
+        - guide10_opa.qmd
+        - guide11_combine.qmd
+        - guide12_csc.qmd
 format:
   html:
     theme:

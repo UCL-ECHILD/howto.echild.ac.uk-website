@@ -1,12 +1,35 @@
-# ECHILD How To Guides {.unnumbered}
+# Welcome {.unnumbered}
+
+This website is still under construction. Please bear with us while we get things up and running. For any queries, please contact [Matthew Jay](mailto:matthew.jay@ucl.ac.uk).
 
 Welcome to the ECHILD How To Guides!
 
-Here you will eventually find a series of guides that will help you extract and manage data in ECHILD, along with full example scripts.
+Here you will find a series of guides that will help you extract and manage data in ECHILD, along with full example scripts. The guides will take you through a range of ECHILD datasets from cohort inception, to extracting exposure, outcome and covariate data and producing an analysis-ready dataset.
 
-Please bear with us while we get things up and running.
+The guides can be accessed from the navigation pane to the left or by clicking here:
 
-For any queries, please contact [Matthew Jay](mailto:matthew.jay@ucl.ac.uk).
+* [Guide 1: Introduction](guide01_intro.qmd)
+* [Guide 2: script management, coding principles and working in the SRS](guide02_mgmt.qmd)
+* [Guide 3: identify a cohort and create a cohort spine](guide03_cohort.qmd)
+* [Guide 4: NPD demographic and SEND data](guide04_demo_npd.qmd)
+* [Guide 5: HES demographic data (your turn!)](guide05_demo_hes.qmd)
+* [Guide 6: birth characteristics](guide06_birth_chars.qmd)
+* [Guide 7: phenotyping](guide07_phenotype.qmd)
+* [Guide 8: enrolment, exclusions and absence](guide08_enr_abs_excl.qmd)
+* [Guide 9: exams](guide09_exam.qmd)
+* [Guide 10: outpatients](guide10_opa.qmd)
+* [Guide 11: combine it all together](guide11_combine.qmd)
+* [Guide 12: children's social care](guide12_csc.qmd)
+
+You can also access a [glossary of key terms](glossary.qmd).
+
+# How to use the guides
+
+There are twelve guides that are designed to be read in order, from start to finish. They are intended to be self-explanatory, at least in terms of the concepts covered. Each guide is accompanied by an R script (or scripts). Some guides and scripts are naturally longer and more complex than others. You are encouraged to study them carefully, line by line.
+
+You are free to use and adapt the scripts as you wish though we would appreciate it if you included an appropriate citation if you do ([acknowledgements here](acknowledgements.qmd)). Indeed, given that different ECHILD projects will usually have access to different modules of ECHILD data (e.g., not every project uses outpatient data, different projects cover different years), you will have to adapt the scripts to some extent or another.
+
+Because ECHILD links together pre-existing datasets, users of these datasets outside of ECHILD are also, of course, more than welcome to use this resource if they wish.
 
 # ECHILD
 
