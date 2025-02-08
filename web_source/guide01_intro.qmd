@@ -1,1 +1,3 @@
 # Guide 1: introduction {.unnumbered}
+
+Here is an [exmaple R script](scripts/test.R).
