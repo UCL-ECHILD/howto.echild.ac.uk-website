@@ -4,13 +4,13 @@ Welcome to the ECHILD How To Guides! Here you will find a series of guides that 
 
 # How to use the guides
 
-There are twelve guides that are designed to be read in order, start to finish. They are intended to be self-explanatory, at least in terms of the concepts covered. We have mind a typical researcher interested in answer their substantive problem but who may be less experienced in the necessary data management steps that come with administrative data. The scripts are written as simply as possible, bearing in mind ECHILD's inherent complexity. Each guide is accompanied by an R script (or scripts). Some guides and scripts are naturally longer and more complex than others. You are encouraged to study them carefully, line by line.
+The twelve guides are designed to be read in order, start to finish. They are intended to be self-explanatory, at least in terms of the concepts covered. We have mind a typical researcher interested in answering their substantive problem but who may be less experienced in the necessary data management steps that come with administrative data. The scripts are written as simply as possible, bearing in mind ECHILD's inherent complexity. Each guide is accompanied by at least one, full R script. You are encouraged to study them carefully, line by line working with your data to fully understand what they are doing.
 
-You are free to use and adapt the material on this site as you wish. Indeed, given that different ECHILD projects will usually have access to different modules of data (e.g., not every project uses outpatient data, different projects cover different years), you will have to adapt the scripts to some extent or another. Because ECHILD links together pre-existing datasets, users of these datasets outside of ECHILD are, of course, also more than welcome to use this resource. We would appreciate it if you included an appropriate [citation](acknowledgements.qmd) if you do.
+You are free to use and adapt the material on this site as you wish. Indeed, given that different ECHILD projects will usually have access to different modules of data (e.g., not every project uses outpatient data, different projects cover different years), you will have to adapt the scripts to some extent or another. Because ECHILD links together pre-existing datasets, users outside of ECHILD are, of course, also more than welcome to use this resource. We would appreciate it if you included an appropriate [citation](acknowledgements.qmd) if you do.
 
 Access the guides from the navigation pane to the left or here:
 
-* [Guide 1: Introduction](guide01_intro.qmd)
+* [Guide 1: introduction](guide01_intro.qmd)
 * [Guide 2: script management, coding principles and working in the SRS](guide02_mgmt.qmd)
 * [Guide 3: identify a cohort and create a cohort spine](guide03_cohort.qmd)
 * [Guide 4: NPD demographic and SEND data](guide04_demo_npd.qmd)
