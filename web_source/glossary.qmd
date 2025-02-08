@@ -1,3 +1,26 @@
 # Glossary {.unnumbered}
 
-Under construction
+# Data
+Term | Definition
+--- | ---
+Children's social care (CSC) data | Children's social care provides a range of services for children in need and children at risk of abuse or neglect. The children's social care datasets are the child in need census and children looked after return.
+ECHILD | [Education and Child Health Insights from Linked Data](https://www.echild.ac.uk){target="_blank"}, a project that links the National Pupil Database (along with its social care data), the Hospital Episode Statistics and other NHS datasets for 20 million people born since September 1984.
+Hospital Episode Statistics (HES) | All-of-England hospital admission, outpatient and emergency department data.
+National Pupil Database (NPD) | All-of-England data for covering children enrolled in state schools.
+Pupil Matching Reference (PMR) | The unique, encrypted child identifier available in the NPD.
+Token person ID (TPID) | The unique, encrypted child identifier available in HES and other NHS datasets.
+
+# Study design
+Term | Definition
+--- | ---
+Academic year | The school year typically begins in September, with summer holidays starting late July. In ECHILD, we generally define an academic year as 1st September to 31 August. The NPD is organised by academic year *ending*, such that a table labelled 2015, for example, refers to the 2014/15 academic year.
+Financial year | Strictly speaking, the financial year runs from 6th April of one year to 5th April of the next. However, the HES "financial year" runs from 1 April to 31 March. We therefore also usually define our "financial year" as running from 1st April to 31 March. HES data are organised according to financial year *starting*. Therefore, a HES table labelled 2018 refers to the 2018/19 year.
+HES birth cohort | A cohort study whose key feature is that children are included by virture of their having a birth record in HES inpatients data. Around 98% of births in England are in NHS hospitals.
+NPD inception cohort | A cohort study whose key feature is that children are included by virture of their enrolment in a state school and recorded in the NPD. Each year, around 93% of school-aged children are enrolled in state schools in England. Greater than 97% of children will ever attend state school.
+Phenotype | Anything observable about a unit of study. In the context of ECHILD, and especially the Hospital Episode Statistics (HES), we are often referring to health conditions. Refer to the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk){target="_blank"} for more information.
+
+# Education
+Term | Definition
+--- | ---
+Key Stage | Stages of education as defined in the [National Curriculum](https://www.gov.uk/national-curriculum){target="_blank"}. Key Stages 1 and 2 cover primary education and Key Stages 3 and 4, secondary. Children typically start school by age 5. School is compulsory until the child's 16th birthday, though those aged 16 and 17 must be in some form of education or training until they achieve a certain level of qualifications.
+GCSE | General Certificate of Secondary Education. State exams sat at the end of Key Stage 4.
