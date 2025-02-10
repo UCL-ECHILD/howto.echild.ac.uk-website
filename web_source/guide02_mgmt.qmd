@@ -1,1 +1,82 @@
 # Guide 2: script management, coding principles and working in the SRS {.unnumbered}
+
+# Introduction
+
+Working with administrative data involves a significant amount of data management and processing before you have an analysis-ready dataset. For novices, this can be sometimes be one of the most challenging aspects of working with administrative data. While the data have undergone various checks and cleaning (for example, on submission to the Department for Education and NHS England), this does not mean they are ready for running analyses. In addition, ECHILD data are held in over 600 tables, some containing hundreds of variables. While most projects will only ever have access to a subset of these, there will still be a very large amount of data to manage and process. Good coding practice is therefore essential to enable you to work effectively with the data and minimise disruption when you inevitably find errors or make changes to steps earlier in your processing pipeline.
+
+# Data are held on a SQL server
+
+All ECHILD data are stored on a Structured Query Language (SQL) server. Details of the server and database name are confidential and cannot be exported from the Secure Research Service (SRS). You will therefore need to obtain this information from ONS. Documentation should be in your project share.
+
+Because data are stored on a SQL server, you will need to use SQL queries to extract the data. SQL queries are a specialist syntax designed for working with databases. You only need a very basic knowledge of SQL. In these guides, we show you how to extract data from the SQL server directly into R. To do this, we embed a very simple SQL SELECT query into the R script. A SELECT query has the form as shown in Code Snippet 1, where the asterisk means “all columns.” Square brackets around table and column names are optional. If you ran this query when connected to a database, you would select everything from the table. You could always just do this and carry out further operations in R.
+
+*Code Snippet 1 (SLQ)*
+```{=sql}
+SELECT * FROM [table_name]
+```
+
+To select just specific columns, you could run a query in the form of Code Snippet 2. Note how each column is separated by a comma. You can put the columns in whatever order you want.
+
+*Code Snippet 2 (SLQ)*
+```{=sql}
+SELECT [col1], [col2], [col3] FROM [table_name]
+```
+
+In these guides, we usually use a WHERE statement to subset according to certain variables (Code Snippet 3). Here the WHERE statement uses three conditions joined by AND. You could also join by OR and use brackets as you would with any Boolean operation (you will see this in the guides).
+
+*Code Snippet 3 (SLQ)*
+```{=sql}
+SELECT * FROM [table_name]
+WHERE [col1] >= some_value AND [col1] <= some_other_value AND [col2] = ‘some_string’
+```
+
+SQL queries can be more complex than this. If you wish to explore using more advanced queries, a good starting place are the tutorials on [W3 schools](https://www.w3schools.com/sql/){target="_blank"}.
+
+# Modular, parsimonious scripts
+
+The ECHILD team is not prescriptive in how you go about your coding. It is up to you to work out a process that works for you. In this series of How To guides, we provide one example of working in a modular fashion. Working with multiple scripts that fit together in a clear order makes it much easier to identify where changes need to be made and make those changes, without having to re-run all scripts from the start.
+Additionally, we try to maintain parsimony throughout. This includes:
+
+* Not writing data to the hard disk until this is necessary. Writing intermediate datasets to the hard disk should be discouraged, especially where these are not immediately deleted. A format which is more compressed, and therefore of a smaller file size, should be preferred (e.g., rda files are preferable to csv files). As the SRS is a shared resource, users are asked to ensure they do not save more than is necessary.
+* Reducing the amount of information held in memory during a session. This includes reducing the size of data frames (e.g., by dropping rows for individuals not in the cohort) and removing temporary objects as soon as they have served their purpose.
+* Using the simplest, clearest coding as possible, with as few additional packages as possible. This also involves good practice in writing code such as including spaces after commas and between operators, a clear structure overall and neat and tidy comments.
+
+The scripts we have created, and the guides to which they relate, are shown in Table 1 of Guide 1. When run in order, we will end up with an analysis-ready dataset that we can use to answer our research question. While these guides are not exhaustive of everything you can or should do with ECHILD, we hope that they will serve as a useful starting point and reference to support you in your data management and analyses.
+
+# Initialisation
+
+Open `00_run_cleaning.r`. The first section of this script sets the working directory, the R library path (necessary when working in the SRS) and loads necessary libraries. Note that system architecture (file structures and connection strings) is confidential and cannot be exported from the SRS. Consult your documentation to find your connection string.
+
+*Code Snippet 4 (R)*
+```{=r}
+# Set-up ------------------------------------------------------------------
+
+setwd("[path_omitted]”)
+assign(".lib.loc", c(.libPaths(), "path_omitted"), envir = environment(.libPaths))
+library(data.table)
+library(RODBC)
+```
+
+## Working directory
+
+The working directory in all guides assumes a simple structure containing five sub-folders: `codelists`, `csc_data`, `outputs`, `processed`, `scripts` (Figure 1). Folder `codelists` contains phenotype code lists obtained from the ECHILD Phenotype Code List Repository (more information in [Guide 7](guide07_phenotype.qmd)). Folder `csc_data` contains a copy of the processed CSC data (more information in [Guide 12](guide12_csc.qmd)). Folder `outputs` would contain all outputs from analyses (e.g., tables and graphs), `processed` will contain our processed datasets and `scripts` contains the R scripts.
+
+![](static/fake_wd.png){fig-alt="An example working directory."}
+
+## R packages
+
+To use R packages in the SRS, the R library path must be set as in Code Snippet 4. We will make use of just two packages: [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"} and [RODBC](https://cran.r-project.org/web/packages/RODBC/index.html){target="_blank"}. Package `data.table` makes it significantly easier and quicker to work with data frames, especially large ones and `RODBC` enables us to connect to the SQL Server where the data are stored. Consult documentation in your project or contact the SRS helpdesk for help on installing and loading packages if you are having problems.
+
+# Run scripts
+
+The second part of `00_run_cleaning.r` then runs each of the other scripts in order. The first block creates our basic cohort spine (either from the NPD or HES birth records). The second block carries out data extraction and the third combines the extracted data into our spine.
+
+Each block also runs `00a_prelim.r.` This script clears memory, specifies the birth cohorts we are interested in (and the year they will be in year 7) and the ODBC connection string. It also contains a function called `mode_fun()` and one called `clean_hes_data()`, to which we will return in subsequent guides.
+
+In `00a_prelim.r`, the vector `birth_cohorts` contains the values 2003 to 2005. In the National Pupil Database, the years (for example, of each census), refer to academic years ending. For example, 2003 refers to the academic year starting in September 2002 and ending in August 2003. We adopt the same convention in these guides, though do keep in mind that the HES is organised according to financial year (April to March) and so in some scripts we make reference to financial years, as well.
+
+You will also see that `00a_prelim.r` contains the vector `year7_cohorts`, which is just `birth_cohorts + 12`. In other words, in contains the values 2015 to 2017. Again, these will refer to academic years 2014/15 to 2016/17 and are the inception years for our cohort (see Figure 1 of Guide 1).
+
+# Coming up...
+
+In the next Guide—[Identify a cohort and create a cohort spine](guide03_cohort.qmd)—we will run the first substantive script sand carry out the actions necessary to create our cohort spine based on a school inception (NPD) cohort or a HES birth records cohort.
