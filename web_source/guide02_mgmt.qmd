@@ -10,22 +10,22 @@ All ECHILD data are stored on a Structured Query Language (SQL) server. Details 
 
 Because data are stored on a SQL server, you will need to use SQL queries to extract the data. SQL queries are a specialist syntax designed for working with databases. You only need a very basic knowledge of SQL. In these guides, we show you how to extract data from the SQL server directly into R. To do this, we embed a very simple SQL SELECT query into the R script. A SELECT query has the form as shown in Code Snippet 1, where the asterisk means “all columns.” Square brackets around table and column names are optional. If you ran this query when connected to a database, you would select everything from the table. You could always just do this and carry out further operations in R.
 
-*Code Snippet 1 (SLQ)*
-```{=sql}
+*Code Snippet 1 (SQL)*
+```
 SELECT * FROM [table_name]
 ```
 
 To select just specific columns, you could run a query in the form of Code Snippet 2. Note how each column is separated by a comma. You can put the columns in whatever order you want.
 
-*Code Snippet 2 (SLQ)*
-```{=sql}
+*Code Snippet 2 (SQL)*
+```
 SELECT [col1], [col2], [col3] FROM [table_name]
 ```
 
 In these guides, we usually use a WHERE statement to subset according to certain variables (Code Snippet 3). Here the WHERE statement uses three conditions joined by AND. You could also join by OR and use brackets as you would with any Boolean operation (you will see this in the guides).
 
-*Code Snippet 3 (SLQ)*
-```{=sql}
+*Code Snippet 3 (SQL)*
+```
 SELECT * FROM [table_name]
 WHERE [col1] >= some_value AND [col1] <= some_other_value AND [col2] = ‘some_string’
 ```
@@ -48,7 +48,7 @@ The scripts we have created, and the guides to which they relate, are shown in T
 Open `00_run_cleaning.r`. The first section of this script sets the working directory, the R library path (necessary when working in the SRS) and loads necessary libraries. Note that system architecture (file structures and connection strings) is confidential and cannot be exported from the SRS. Consult your documentation to find your connection string.
 
 *Code Snippet 4 (R)*
-```{=r}
+```
 # Set-up ------------------------------------------------------------------
 
 setwd("[path_omitted]”)
@@ -61,7 +61,7 @@ library(RODBC)
 
 The working directory in all guides assumes a simple structure containing five sub-folders: `codelists`, `csc_data`, `outputs`, `processed`, `scripts` (Figure 1). Folder `codelists` contains phenotype code lists obtained from the ECHILD Phenotype Code List Repository (more information in [Guide 7](guide07_phenotype.qmd)). Folder `csc_data` contains a copy of the processed CSC data (more information in [Guide 12](guide12_csc.qmd)). Folder `outputs` would contain all outputs from analyses (e.g., tables and graphs), `processed` will contain our processed datasets and `scripts` contains the R scripts.
 
-![](static/fake_wd.png){fig-alt="An example working directory."}
+![Figure 1: An example working directory](static/fake_wd.png){fig-alt="An example working directory."}
 
 ## R packages
 
