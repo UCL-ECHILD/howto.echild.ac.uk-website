@@ -29,7 +29,7 @@ The school censuses present us with two challenges: each (three terms per year) 
 We could write our code that extracts data from each table individually, table by table, query by query, but this will be (a) boring, (b) time-consuming to code, (c) more difficult to change things later (which may lead to errors), (d) inelegant and more difficult to read later. It would be better to loop through the tables and select variables automatically. This is what the first part of our script starts to do (Code Snippet 1).
 
 *Code Snippet 1 (R)*
-```
+```{r}
 dbhandle <- odbcDriverConnect(conn_str)
 
 tables <- subset(sqlTables(dbhandle), TABLE_SCHEM == "dbo")
