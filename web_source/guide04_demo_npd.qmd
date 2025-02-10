@@ -11,6 +11,7 @@
 In the previous guide, we created our initial cohort spine, whether using an NPD or HES inception. We will now extract demographic and SEND data. We are doing this across three different scripts because we are taking data at different time points/using different summaries (Table 1). Our choices here, including time frame, are more or less arbitrary and are chosen for the purposes of illustrating different ways of summarising and extracting this kind of data.
 
 | Variable | Nature | Time point |
+|----------|--------|------------|
 | Gender | Time invariant* | Modal value across reception to year 7 |
 | Ethnicity | Time invariant* | Modal value across reception to year 7 |
 | First language group major | Time invariant* | Modal value across reception to year 7 |
