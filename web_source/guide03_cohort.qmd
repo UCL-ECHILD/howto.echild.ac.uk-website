@@ -29,7 +29,8 @@ The school censuses present us with two challenges: each (three terms per year) 
 We could write our code that extracts data from each table individually, table by table, query by query, but this will be (a) boring, (b) time-consuming to code, (c) more difficult to change things later (which may lead to errors), (d) inelegant and more difficult to read later. It would be better to loop through the tables and select variables automatically. This is what the first part of our script starts to do (Code Snippet 1).
 
 *Code Snippet 1 (R)*
-```{r}
+``` r
+---
 dbhandle <- odbcDriverConnect(conn_str)
 
 tables <- subset(sqlTables(dbhandle), TABLE_SCHEM == "dbo")
@@ -43,6 +44,7 @@ keep <- tables$TABLE_NAME[!grepl("Schools", tables$TABLE_NAME)]
 tables <- tables[tables$TABLE_NAME %in% keep, ]
 
 rm(keep)
+---
 ```
 
 In Code Snippet 1, we first connect to the SQL server using the connection string previously specified and extract the table scheme. This is so we can create a vector (`tables$TABLE_NAME`) that contains the table names we want. We get all table names on the SQL server, and then only retain those with “Autumn,” “Spring” or “Summer” in their names and then, of these, we retain only those corresponding to our year 7 years. Finally, we remove the tables with “Schools” in their name as these are the school-level censuses, not pupil-level.
