@@ -13,7 +13,7 @@ Token person ID (TPID) | The unique, encrypted child identifier available in HES
 # Study design
 Term | Definition
 --- | ---
-Academic year | The school year typically begins in September, with summer holidays starting late July. In ECHILD, we generally define an academic year as 1st September to 31 August. The NPD is organised by academic year *ending*, such that a table labelled 2015, for example, refers to the 2014/15 academic year.
+Academic year | The school year typically begins in September, with summer holidays starting late July. In ECHILD, we generally define an academic year as 1st September to 31st August. The NPD is organised by academic year *ending*, such that a table labelled 2015, for example, refers to the 2014/15 academic year.
 Financial year | Strictly speaking, the financial year runs from 6th April of one year to 5th April of the next. However, the HES "financial year" runs from 1st April to 31st March. We therefore also usually define our "financial year" as running from 1st April to 31st March. HES data are organised according to financial year *starting*. Therefore, a HES table labelled 2018 refers to the 2018/19 year.
 HES birth cohort | A cohort study whose key feature is that children are included by virture of their having a birth record in HES inpatients data. Around 98% of births in England are in NHS hospitals.
 NPD inception cohort | A cohort study whose key feature is that children are included by virture of their enrolment in a state school and recorded in the NPD. Each year, around 93% of school-aged children are enrolled in state schools in England. Greater than 97% of children will ever attend state school.
