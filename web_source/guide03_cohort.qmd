@@ -7,15 +7,13 @@
 
 # Introduction
 
-There are two main approaches to defining a cohort in ECHILD (Figure 1): HES birth cohorts and school inception cohorts. In either case, further NPD and HES data can be used to ascertain both exposures and outcomes, depending on the purpose of the study. There are, of course, many possibilities and refinements that could be made but we expect that most studies would adopt one of these two basic approaches.
+There are two main approaches to defining a cohort in ECHILD (Figure 1): HES birth cohorts and school inception cohorts. We will show you a basic approach for both. In either case, further NPD and HES data can be used to ascertain both exposures and outcomes, depending on the purpose of the study. There are, of course, many possibilities and refinements that could be made but we expect that most studies would adopt one of these two basic approaches.
 
 ![Figure 1: Two possible cohort inception designs, HES birth records or NPD inception.](static/main_cohort_approaches.png){fig-alt="Diagrams showing a school inception cohrot and birth cohort."}
 
-We will show you a basic approach for both.
-
 # A note on selection and linkage bias
 
-It is important to recall that, whichever approach you adopt, your study may be subject to selection bias due to the fact that not all births are recorded in HES and that not all children are enrolled in the NPD. Each year, around 7% of children are in other settings (e.g., private schools, home schools or not receiving any education) and children may move in and out of the state sector. Additionally, there may be bias induced by linkage error. Not all children in HES link to NPD records and not all children enrolled in the NPD link to HES records. In accordance with the RECORD statement, you should always report linkage rates for your cohort and, where possible, investigate those who and do not link to inform possible biases in your analyses.
+It is important to recall that, whichever approach you adopt, your study may be subject to selection bias due to the fact that not all births are recorded in HES and that not all children are enrolled in the NPD. Each year, around 7% of children are in other settings (e.g., private schools, home schools or not receiving any education) and children may move in and out of the state sector. Additionally, there may be [bias induced by linkage error](https://ijpds.org/article/view/1671){target="_blank"}. Not all children in HES link to NPD records and not all children enrolled in the NPD link to HES records. In accordance with the [RECORD statement](https://www.record-statement.org/){target="_blank"}, you should always report linkage rates for your cohort and, where possible, investigate those who and do not link to inform possible biases in your analyses.
 
 # Creating an NPD inception cohort
 
@@ -25,13 +23,13 @@ We will start with creating an NPD inception cohort and move to HES birth cohort
 
 # Loading year 7 enrolments
 
-For an NPD inception cohort, we need script [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r). The script starts by identifying children enrolled in year 7 in the autumn, spring and summer censuses of our target academic years (2014/15 to 2016/17). It then also adds in children enrolled in the alternative provision (AP) census, where they are not already included (we would also include the pupil referral unit census had it not been incorporated into the main censuses before our inception years). Finally, we use the NPD-HES bridging file to get the HES TPID.
+For an NPD inception cohort, we need script [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r). The script starts by identifying children enrolled in year 7 in the autumn, spring and summer censuses of our target academic years (2014/15 to 2016/17). It then also adds in children enrolled in the alternative provision (AP) census, where they are not already included. We would also include the pupil referral unit census had it not been incorporated into the main censuses before our inception years. Finally, we use the NPD-HES bridging file to get the HES TPID.
 
 # School censuses
 
-The school censuses present us with two challenges: each (three terms per year) is stored in its own table on the SQL server and each has different variable names for the same variables. This is because each census has a suffix for each variable name. For example, the column `[PupilMatchingRefAnonymous]` in the 2015 spring census table (i.e., the spring census for the 2012/13 academic year) is actually called `[PupilMatchinfRefAnonymous_SPR15]`. That of 2016 is `[PupilMatchinfRefAnonymous_SPR16]`. A simple for loop that just included `[PupilMatchinfRefAnonymous]` in a query would therefore not work.
+The school censuses present us with two challenges. Each (three terms per year) is stored in its own table on the SQL server and each has different variable names for the same variables. This is because each census has a suffix for each variable name. For example, the column `[PupilMatchingRefAnonymous]` in the 2015 spring census table (i.e., the spring census for the 2014/15 academic year) is actually called `[PupilMatchinfRefAnonymous_SPR15]`. That of 2016 is `[PupilMatchinfRefAnonymous_SPR16]`. A simple for loop that just included `[PupilMatchinfRefAnonymous]` in a query would therefore not work.
 
-We could write our code that extracts data from each table individually, table by table, query by query, but this will be (a) boring, (b) time-consuming to code, (c) more difficult to change things later (which may lead to errors), (d) inelegant and more difficult to read later. It would be better to loop through the tables and select variables automatically. This is what the first part of our script starts to do (Code Snippet 1).
+We could write our code that extracts data from each table individually, table by table, query by query, but this will be boring, time-consuming to code, more difficult to change things later (which may lead to errors), inelegant and more difficult to read later. It would be better to loop through the tables and select variables automatically. This is what the first part of our script starts to do (Code Snippet 1).
 
 *Code Snippet 1 (R)*
 ``` r
@@ -276,7 +274,7 @@ birth_records <-
 ---
 ```
 
-There is, however, one complicating factor: HES is organised in financial years, rather than in academic years as used in NPD. Additionally, HES is organised in financial years starting, rather than ending in NPD. Therefore, the HES APC file marked 2002 refers to April 2002 to March 2003. Therefore, if we want birth records for children born in academic years 2002/3, 2003/4 and 2004/5 (September 2002 to August 2005), we need to select HES birth years that actually encompass these.
+There is, however, one complicating factor: HES is organised in *financial years starting*, rather than in *academic years ending* as used in NPD. Therefore, the HES APC file marked 2002 refers to April 2002 to March 2003. Therefore, if we want birth records for children born in academic years 2002/3, 2003/4 and 2004/5 (September 2002 to August 2005), we need to select HES birth years that actually encompass these.
 
 You will therefore see that the years we supply to our custom `extract_hes_data()` function are not exactly the birth cohort years that we specify in script [00b_prelim.r](scripts/00b_prelim.r). In Code Snippet 8, you will see that we supply `c(birth_cohorts[1] – 1, birth_cohorts)`:
 
@@ -294,15 +292,15 @@ The next bit of the script that differs substantially from the NPD inception ver
 
 Working with clean dates is essential in HES, especially if you are interested in factors such as timing of healthcare contacts, duration of hospital admissions and re-admissions. We therefore encourage you to carefully study this function. Run it piece by piece and see what effect it has on the data. The comments should help you understand what each section is doing.
 
-Recall that in HES, each row represents a finished consultant episode. An admission to hospital can consist of one or more episodes. Patients can be transferred between hospitals. These count as separate admissions in HES but often we are interested in a patient’s total spell in hospital. We therefore here join together admissions into spells. Where an admission ends and a new admission begins on the same day, we join them together. Our code also deals with situations where an admission is recorded as ending after a new admission begins.
+Recall that in HES, [each row represents a finished consultant episode](https://docs.echild.ac.uk/hes){target="_blank"}. An admission to hospital can consist of one or more episodes. Patients can be transferred between hospitals. These count as separate admissions in HES but often we are interested in a patient’s total spell in hospital. We therefore here join together admissions into spells. Where an admission ends and a new admission begins on the same day, we join them together. Our code also deals with situations where an admission is recorded as ending after a new admission begins.
 
 # The rest of the script
 
-The rest of the script is relatively straightforward. The next section identifies birth episodes. Here we make use of the code list for identifying births that is available through the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk){target="_blank"}. It will be well worth consulting the documentation for this code list and the papers on which it is based if you are interested in HES birth cohorts. Next, we carry out some basic cleaning (e.g., removing implausible values), deduplicate the data and derive an academic year of birth variable. We then load the linkage spine (exactly as above) in order to link in the TPID. Finally, we save the dataset!
+The rest of the script is relatively straightforward. The next section identifies birth episodes. Here we make use of the code list for identifying births that is available through the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk/births_zylb_v1){target="_blank"}. It will be well worth consulting the documentation for this code list and the papers on which it is based if you are interested in HES birth cohorts. Next, we carry out some basic cleaning (e.g., removing implausible values), deduplicate the data and derive an academic year of birth variable. We then load the linkage spine (exactly as above) in order to link in the TPID. Finally, we save the dataset!
 
 # Summary
 
-In this rather long guide, we have shown you two approaches to creating your cohort spine: one starting with a school inception and one starting with HES birth records. If you are starting with an NPD inception, you will have ended up with a dataset that contains PMR, inception year and, where available, TPID. If, however, you are starting with a HES birth cohort, your dataset will contain TPID, birth characteristics data, academic year of birth and, where available, PMR.
+In this rather long guide, we have shown you two approaches to creating your cohort spine: one starting with a school inception and one starting with HES birth records. If you are starting with an NPD inception, you will have ended up with a dataset that contains PMR, inception year and, where available, TPID. If you are starting with a HES birth cohort, your dataset will contain TPID, birth characteristics data, academic year of birth and, where available, PMR.
 
 Whichever approach you took, all subsequent scripts are the same. They will use the same IDs to link the relevant data into the spine. The difference, of course, will be one of who is and is not included in your study.
 

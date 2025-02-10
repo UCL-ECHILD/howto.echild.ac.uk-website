@@ -1,1 +1,86 @@
 # Guide 7: phenotyping {.unnumbered}
+
+# Script needed for this guide
+
+* [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r)
+
+# Introduction
+
+A phenotype is any observable or measurable trait. In the present context, we are usually referring to specific conditions or health states or groups of conditions (such as chronic conditions generally, neurodisability or congenital anomalies). Phenotypes might also describe types of presentation at hospital and broader circumstances surrounding them, including stress-related presentations and adversity-related admissions.
+
+HES admitted patient care contains rich diagnostic data (ICD-10 codes) for all episodes and procedure coding (OPCS-4) where procedures are relevant. These data offer the opportunity to define a wide range of clinical phenotypes that can be used as exposures, outcomes or covariates in your analyses.
+
+We are focusing on HES admitted patient care episodes. There is limited scope for identifying clinical phenotypes in outpatients as diagnostic data is largely absent. We show how you can use outpatient specialty in [Guide 10](guide10_opa.qmd). A&E data contain some diagnostic information but its use is relatively underexplored. The National Pupil Database censuses also contain information on special educational needs that may be relevant to your phenotypes.
+
+If you want to read more about phenotyping, a good starting place will be the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk){target="_blank"}, which contains a primer on phenotyping, including an introduction to the coding systems used in HES, as well as a catalogue of code lists that you can easily implement in ECHILD along with example code. In fact, we used and adapted the example code developed for the Repository in this guide.
+
+# A note on biases
+
+There are a number of sources of bias in hospital diagnostic data you should be mindful of.  As we are dealing with hospital admissions, we only detect diagnoses for sicker patients on average and we miss diagnoses for conditions that are primarily treated in non-hospital settings (such as many mental health conditions). We also only see instances of diagnostic recording: this may not be the actual date of diagnosis, which could have occurred outside of hospital, and we do not see if or when patients recover. There is also variation over time and space in coding practice that may affect your results independently of any changes in underlying disease incidence or prevalence.
+
+# Extracting inpatient data
+
+By now, you will be used to our approach to extracting data from the server and this time is no different. We start by identifying the relevant tables and then looping through these using a SQL query to extract the relevant data. There are a couple of things to note about the SQL query at this stage (Code Snippet 1).
+
+*Code Snippet 1*
+``` r
+---
+temp <- data.table(
+  sqlQuery(
+    dbhandle, paste0(
+      "SELECT TOKEN_PERSON_ID, EPISTART, EPIEND, ",
+      "ADMIDATE, DISDATE, ADMIMETH, STARTAGE, ", 
+      paste0("DIAG_", sprintf("%02d", 1:20), collapse = ", "), ", ",
+      paste0("OPERTN_", sprintf("%02d", 1:24), collapse = ", "),
+      " FROM ", table_name)
+  )
+)
+---
+```
+
+The first is that we use `paste0()` as a way of selecting all `DIAG` and `OPERTN` columns. In fact, we did this before, but didn’t comment on it. If you run just the `paste0()` function you will see what is happening. For `DIAG`, for example, we are simply defining a vector of strings of `DIAG_01` to `DIAG_20.` We use the `sprintf()` function to ensure that leading zeros are included. Finally, the collapse argument collapses the vector into one string, inserting a comma between each element. This is necessary so that it fits into the overall string that is our SQL query.
+
+In this query, we are also selecting some additional data that will be necessary to deal with certain flags in the phenotype code lists that we are using. For example, we will use the [Hardelid et al list of chronic health conditions](https://code.echild.ac.uk/chc_hardelid_v1){target="_blank"}. In this list, certain codes are only valid if the length of stay is at least 3 days and others are only valid if the patient is aged at least 10 years. We therefore need information about the duration of the hospital spell and the patient’s age.
+
+# Identifying phenotypes
+
+In this example, we use the list of [chronic health conditions by Hardelid et al](https://code.echild.ac.uk/chc_hardelid_v1){target="_blank"} and the list of [stress-related presentations by Ní Chobhthaigh et al](https://code.echild.ac.uk/srp_nichobhthaigh_v2){target="_blank"}. If you are unfamiliar with the phenotyping and phenotype code lists, we recommend you visit the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk/){target="_blank"} for an introduction to how these list work. The also contains example scripts associated with each code list and these contain more comments on what the scripts are doing.  In script [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r) included here, we incorporate the Repository scripts without the same level of comment detail to avoid repetition.
+
+The general approach is that we convert the diagnostic and (where relevant) operation data to long format first to make it easier to work with, we identify the codes that are in our target phenotype, deal with any special flags and then we create indicator variables that we can use later. All of this is explained in more detail in the scripts included in the Repository.
+
+The key difference is that here we are dealing with two separate phenotypes. We handle this by creating a new data table called `phen_codes` that stores the phenotype codes from both code lists, identified using a variable we create called `phen_group` (Code Snippet 2). 
+
+*Code Snippet 2*
+``` r
+---
+# Code that identifies Hardelid codes...
+
+hardelid_diagnoses[, phen_group := "hardelid"]
+
+hardelid_diagnoses <-
+  hardelid_diagnoses[, c("tokenpersonid", "inception_year",
+                         "code", "group", "epistart",
+                         "phen_group")]
+
+phen_codes <- data.table()
+phen_codes <- rbind(phen_codes, hardelid_diagnoses)
+
+
+# Code that identifies Ní Chobhthaigh codes...
+
+phen_codes <- rbind(phen_codes, diagnoses)
+
+print("Saving")
+
+save(phen_codes, file = "processed/phen_codes.rda")
+---
+```
+
+# Saving the dataset
+
+At the end of this script, you will end up with a long format dataset that includes relevant phenotype codes for each patient and the episode start where they were recorded. We save this dataset and, like the other datasets we save, we will return to it later when we join data into our spine.
+
+# Coming up...
+
+In the next guide, we return to the NPD to look at how to extract [enrolment, exclusion and absence data](guide08_enr_abs_excl.qmd).
+

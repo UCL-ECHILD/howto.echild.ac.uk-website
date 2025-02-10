@@ -10,7 +10,7 @@ The general approach is depicted in Figure 1. We will carry out a longitudinal s
 
 ![Figure 1: Study design diagram](static/school_cohort.png){fig-alt="Diagram showing longitudinal design."}
 
-The approach depicted in Figure 1 represents a school inception cohort. We will also show you how you can alternatively create a cohort based on birth records in the HES admitted patient care records. Whether you start with a school or HES cohort, however, the general approach to data extraction will be the same, described in more detail in Guide 3 – Identify Cohort.
+The approach depicted in Figure 1 represents a school inception cohort. We will also show you how you can alternatively create a cohort based on birth records in the HES admitted patient care records. Whether you start with a school or HES cohort, however, the general approach to data extraction will be the same, described in more detail in [Guide 3 – Identify a cohort and create a cohort spine](guide03_cohort.qmd).
 
 We have not attempted to provide the best approach scientifically. For example, we do not take account of health exposures or covariates during the secondary school years. We completely ignore the pre-school period. This example is designed to show how to manage the data to create an analysis-ready dataset. Exactly what those analyses are and what that dataset is, is of course up to you.
 
@@ -23,17 +23,17 @@ Note also that these guides make use of the following modules of data:
 * NPD KS4 data
 * Children’s social care (CSC) data
 
-Not all projects need access to all data and so you may not be able to reproduce all scripts exactly as they are given in these guides. Additionally, there are datasets we have not used, such as exams results from other Key Stages or the early years data. There should, however, be enough to get you going. You are free to adapt the scripts as you wish for your work.
+Not all projects need access to all data and so you may not be able to reproduce all scripts exactly as they are given in these guides. Additionally, there are datasets we have not used, such as exams results from other Key Stages or the early years data. There should, however, be enough to get you going.
 
 # The scripts
 
-To answer our research question, we will create an analysis-ready dataset in a series of steps as outlined across several guides, each with its own R scripts (Table 1).
+We will create an analysis-ready dataset across several guides, each with its own R scripts (Table 1).
 
 | # | Guide | Scripts |
 |---|-------|---------|
 | 1 | Introduction (this guide) | None |
 | 2 | [Script management, coding principles and working in the SRS](guide02_mgmt.qmd) | [00a_run_cleaning.r](scripts/00a_run_cleaning.r), [00b_prelim.r](scripts/00b_prelim.r) |
-| 3 | [Identify a cohort and create a cohort spine](guide03_cohort.qmd) | [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r) |
+| 3 | [Identify a cohort and create a cohort spine](guide03_cohort.qmd) | [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r), 01b_identify_hes_cohort.r |
 | 4 | [NPD demographic and SEND data](guide04_demo_npd.qmd) | [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r), [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r), [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) |
 | 5 | [HES demographic data (your turn!)](guide05_demo_hes.qmd) | None |
 | 6 | [Birth characteristics](guide06_birth_chars.qmd) | [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) |
@@ -46,15 +46,11 @@ To answer our research question, we will create an analysis-ready dataset in a s
 
 : Table 1. Series of guides and scripts
 
-You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already produced and published CSC data extraction and cleaning code that produces cleaned datasets. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in Guide 11 whereas Guide 12 discusses the CSC data more generally and summarise the cleaning steps that the other scripts undertake.
+You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already [produced and published CSC data extraction and cleaning code that produces cleaned datasets](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in [Guide 11](guide11_combine.qmd) whereas [Guide 12](guide12_csc.qmd) discusses the CSC data more generally and summarise the cleaning steps that the other scripts undertake.
 
-# How much R do I need?
+# How much R do I need and what version?
 
-These guides assume at least a basic working knowledge of R. Throughout we try to explain the more unusual and trickier concepts in detail. 
-
-# What version of R do I need?
-
-Because we have used only two packages, both of which are very widely used, we hope that the code provided here will prove robust to updates to R. The code was all developed and tested inside the Secure Research Service using R 4.4.0.
+These guides assume at least a basic working knowledge of R. Throughout we try to explain the more unusual and trickier concepts in detail. Because we have used only two packages, both of which are very widely used, we hope that the code provided here will prove robust to updates to R. The code was all developed and tested inside the Secure Research Service using R 4.4.0.
 
 # Coming up...
 
