@@ -8,7 +8,7 @@ Each guide should really be read in order as they follow on from each other. The
 
 The general approach is depicted in Figure 1. We will carry out a longitudinal study and include anyone enrolled in year 7 in academic years 2014/15 to 2016/17 (and who therefore were born in 2002/03 to 2004/05) and who linked to any HES record. We will use HES admitted patient care records across primary school for our chronic health condition codes and we will use NPD across primary school for the covariates. The outcomes will come from Key Stage 4 (KS4) data, absences, exclusions and enrolments.
 
-![](static/school_cohort.png){fig-alt="Diagram showing longitudinal design."}
+![Figure 1: Study design diagram](static/school_cohort.png){fig-alt="Diagram showing longitudinal design."}
 
 The approach depicted in Figure 1 represents a school inception cohort. We will also show you how you can alternatively create a cohort based on birth records in the HES admitted patient care records. Whether you start with a school or HES cohort, however, the general approach to data extraction will be the same, described in more detail in Guide 3 – Identify Cohort.
 
