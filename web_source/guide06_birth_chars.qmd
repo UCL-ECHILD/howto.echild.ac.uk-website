@@ -1,1 +1,26 @@
 # Guide 6: birth characteristics {.unnumbered}
+
+# Script needed for this guide
+
+* [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r)
+
+# Introduction
+
+If you adopted an NPD inception cohort, you might be interested in including information recorded at birth, such as gestational age, birthweight, maternal age and deprivation, as such factors may be important predictors for the outcomes you are interested in. We therefore need to extract HES admitted patient care episodes for the years that correspond to the academic years of birth for our cohort, identify which are birth episodes and clean the data.
+
+# Extracting and identifying birth episodes
+
+The process for extracting and identifying birth episodes is exactly the same that we adopted in [Guide 3](guide03_cohort.qmd) when identifying a HES birth cohort. We will not repeat that information here and so we encourage you to study that part of the guide if you skipped over it. In fact, if you compare script [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) with 01b_identify_hes_cohort.r, you will see that they are virtually identical. The only major differences are that, in the loop that extracts the data, we subset the data to children in our cohort spine (Code Snippet 1) and now we do not need to load the linkage spine.
+
+*Code Snippet 1*
+``` r
+---
+temp <- temp[TOKEN_PERSON_ID %in% cohort_spine$tokenpersonid]
+---
+```
+
+Recall that we are here implementing the code list that identifies birth episodes available through the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk/births_zylb_v1){target="_blank"}. It will be well worth consulting the documentation for this code list and the papers on which it is based if you are interested in using birth records in HES.
+
+Coming up...
+
+Next, we will be sticking with HES data [in order to carry out clinical phenotyping](guide07_phenotype.qmd). In other words, we will identify admitted patient care records that contain diagnostic information for a range of health conditions that we might be interested in studying.

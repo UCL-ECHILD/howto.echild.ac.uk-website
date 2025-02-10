@@ -8,12 +8,12 @@
 
 # Introduction
 
-In the previous guide, we created our initial cohort spine, whether using an NPD or HES inception. We will now extract demographic and SEN data. We are doing this across three different scripts because we are taking data at different time points/using different summaries (Table 1). Our choices here, including time frame, are more or less arbitrary and are chosen for the purposes of illustrating different ways of summarising and extracting this kind of data.
+In the previous guide, we created our initial cohort spine, whether using an NPD or HES inception. We will now extract demographic and SEND data. We are doing this across three different scripts because we are taking data at different time points/using different summaries (Table 1). Our choices here, including time frame, are more or less arbitrary and are chosen for the purposes of illustrating different ways of summarising and extracting this kind of data.
 
-| Variable | Nature | Time point
-| Gender | Time invariant (a) | Modal value across reception to year 7 |
-| Ethnicity | Time invariant (a) | Modal value across reception to year 7 |
-| First language group major | Time invariant (a) | Modal value across reception to year 7 |
+| Variable | Nature | Time point |
+| Gender | Time invariant* | Modal value across reception to year 7 |
+| Ethnicity | Time invariant* | Modal value across reception to year 7 |
+| First language group major | Time invariant* | Modal value across reception to year 7 |
 | Year of birth | Time invariant | Modal value across reception to year 7 |
 | Month of birth | Time invariant | Modal value across reception to year 7 |
 | IDACI rank (tenth) - year 7 | Time variant | IDACI rank in year 7 |
@@ -22,7 +22,7 @@ In the previous guide, we created our initial cohort spine, whether using an NPD
 | Ever SEND | Time variant | Whether ever had SEND in reception year 7 |
 | Highest level of SEND | Time variant | Highest level of SEND reception to  year 7 |
 
-: Table 1. Demographic data to be extracted. FSM free school meals; IDACI income deprivation affecting children index; SEN special educational needs. * This is not necessarily the case. See text that follows.
+: Table 1. Demographic data to be extracted. FSM free school meals; IDACI income deprivation affecting children index; SEND special educational needs and disability. * This is not necessarily the case. See text that follows.
 
 # Time invariant variables
 
@@ -34,7 +34,7 @@ Another factor to bear in mind is whether your variable is truly time invariant.
 
 # Time variant values
 
-Many variables are time variant, such as whether a child is getting free school meals (FSM) and their income deprivation affecting children index (IDACI) rank. This is because a child is not always necessarily eligible for FSM (this depends on their parent getting means-tested benefits) and because a child may move between areas, into areas of more or less deprivation. Sometimes we are only interested in values in a given year, for example, at baseline. In this example, we will extract FSM and IDACI rank (available in tenths in ECHILD) at year 7. In other instances, we may wish to know whether a child ever experienced something, such as whether they ever had FSM, or the highest level of something they experienced, such as the highest level of SEN provision they ever received. We therefore also extract variables that indicate whether a child ever had FSM, whether they ever had SEN provision and their highest level of SEN provision from reception to year 7.
+Many variables are time variant, such as whether a child is getting free school meals (FSM) and their income deprivation affecting children index (IDACI) rank. This is because a child is not always necessarily eligible for FSM (this depends on their parent getting means-tested benefits) and because a child may move between areas, into areas of more or less deprivation. Sometimes we are only interested in values in a given year, for example, at baseline. In this example, we will extract FSM and IDACI rank (available in tenths in ECHILD) at year 7. In other instances, we may wish to know whether a child ever experienced something, such as whether they ever had FSM, or the highest level of something they experienced, such as the highest level of SEND provision they ever received. We therefore also extract variables that indicate whether a child ever had FSM, whether they ever had SEND provision and their highest level of SEND provision from reception to year 7.
 
 # Modal values from reception to year 7
 
@@ -51,7 +51,7 @@ years <- 2008:2017
 ---
 ```
 
-These are the years that CONTAIN the reception to year 7 years for ALL THREE birth cohorts (born academic years 2002/3 to 2004/5), not the years that ARE the reception to year 7 years for each (e.g., the 2002/3 cohort will be in year 7 in 2014/15). However, this is not a problem, because we deal with year selection when constructing our SQL query (Code Snippet 2). Here we use the IN operator within our WHERE statement to select the relevant years from `NCYearActual`.
+These are the years that CONTAIN the reception to year 7 years for ALL THREE birth cohorts (born academic years 2002/3 to 2004/5), not the years that ARE the reception to year 7 years for each (e.g., the 2002/3 cohort will be in year 7 in 2014/15). However, this is not a problem, because we deal with year selection when constructing our SQL query (Code Snippet 2). Here we use the `IN` operator within our `WHERE` statement to select the relevant years from `NCYearActual`.
 
 *Code Snippet 2*
 ``` r
@@ -71,7 +71,7 @@ paste0(
 ---
 ```
 
-We also define an object called skips (Code Snippet 3), which we use to tell our function to skip certain censuses (Code Snippet 4). This is necessary because ethnicity is not contained in the summer census from 2011, nor the autumn census from 2012. In Code Snippet 3 we use the collapse argument within `paste0()` to create a string that serves as our regular expression in `grepl()` in the next line. Run the `paste0()` functions separately if you are not sure how these are working together.
+We also define an object called `skips` (Code Snippet 3), which we use to tell our function to skip certain censuses (Code Snippet 4). This is necessary because ethnicity is not contained in the summer census from 2011, nor the autumn census from 2012. In Code Snippet 3 we use the `collapse` argument within `paste0()` to create a string that serves as our regular expression in `grepl()` in the next line. Run the `paste0()` functions separately if you are not sure how these are working together.
 
 *Code Snippet 3*
 ``` r
@@ -113,6 +113,7 @@ if (!(table_name %in% skips)) {
 Before we actually select our modal value, we should clean the data. The script carries out the steps shown in Table 2. 
 
 | Variable | Cleaning |
+|----------|----------|
 | Gender | Sets values `0` and `9` to `NA.` Then creates a variable called female, where `1` indicates female, and `0` male. This is a practice for binary variables that we recommend generally as there can never be confusion as to the coding. Binary variables coded as `1` and `2` should certainly be avoided. Then we drop the now-redundant gender variable. |
 | Ethnicity | Ethnicity	Ethnic groups are combined into the five major ethnic groups. |
 | Language | Language	Languages are combined into English or not English. |
@@ -197,7 +198,7 @@ Finally, script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) i
 ---
 ```
 
-Next, we clean our SEND variable to combine the old Action and Action Plus values with the new Support value. “Support” replaced Action/Action Plus from academic year 2014/15. Similarly, our SEN variable combines the old statements of SEN with the new Education, Health & Care Plan (which were phased in from 2014/15). We also add children enrolled in alternative provision or pupil referrals units to our `specialist_school` flag, as children only in alternative provision will not be captured in the Get Information About Schools database (Code Snippet 9).
+Next, we clean our SEND variable to combine the old Action and Action Plus values with the new Support value. “Support” replaced Action/Action Plus from academic year 2014/15. Similarly, our SEND variable combines the old statements of SEND with the new Education, Health & Care Plan (which were phased in from 2014/15). We also add children enrolled in alternative provision or pupil referrals units to our `specialist_school` flag, as children only in alternative provision will not be captured in the Get Information About Schools database (Code Snippet 9).
 
 *Code Snippet 9*
 ``` r
@@ -220,7 +221,7 @@ demographics_ever[, fsm_ever_primary := max(fsmeligible), by = PupilMatchingRefA
 
 # The result
 
-Finally, we retain just four variables, PMR, `fsm_ever_primary`, senprovision and `specialist_school.` Note that we so far have not defined an “ever SEN” variable. We will do this in the next guide. For now, we just save the resulting object as its own file and clear the workspace.
+Finally, we retain just four variables, PMR, `fsm_ever_primary`, `senprovision` and `specialist_school.` Note that we so far have not defined an “ever SEN” variable. We will do this in [Guide 11](guide11_combine.qmd). For now, we just save the resulting object as its own file and clear the workspace.
 
 # Coming up...
 
