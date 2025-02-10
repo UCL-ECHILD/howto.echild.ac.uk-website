@@ -1,1 +1,14 @@
 # Guide 12: children's social care {.unnumbered}
+
+*This page is under construction. Please check back soon.*
+
+ECHILD contains the two children's social care datasets: the child in need (CiN) census and the children looked after (CLA) return. The CiN contains data on children referred to social care, including children in need and those on child protection plans. The CLA return contains data on all children looked after.
+
+While we build this page, to find out more about children's social care data you can consult the data resource profiles:
+
+* Emmott EH, Jay MA and Woodman J. [Cohort Profile: Children in Need Census (CIN) records of children referred for social care support in England](https://bmjopen.bmj.com/content/9/2/e023771){target="_blank"}. BMJ Open 2019;9:e023771.
+* Mc Grath-Lone L, Harron K, Dearden L, Nasim B, Gilbert R. [Data Resource Profile: Children Looked After Return (CLA)](https://pubmed.ncbi.nlm.nih.gov/27413104/){target="_blank"}. Int J Epi 2016;45(3):716-714f.
+* Jay MA, Mc Grath-Lone L and Gilbert R. [Data Resource Profile: National Pupil Database (NPD)](https://ijpds.org/article/view/1101){target="_blank"}. Int J Pop Data Sci 2019;4:1:08.
+* Mc Grath-Lone L, Libuy N, Harron K, Jay MA, Wijlaars L, Etoori D, Lilliman M, Gilbert R, Blackburn R. [Data Resource Profile: The Education and Child Health Insights from Linked Data (ECHILD) Database](https://academic.oup.com/ije/advance-article/doi/10.1093/ije/dyab149/6425590){target="_blank"}. Int J Epi 2021. doi: 10.1093/ije/dyab149.
+
+You can read more about children's social care data cleaning and R code in a [blog post on the ADRUK website](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}.
