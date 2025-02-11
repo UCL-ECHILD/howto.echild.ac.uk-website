@@ -10,7 +10,7 @@ If you adopted an NPD inception cohort, you might be interested in including inf
 
 # Extracting and identifying birth episodes
 
-The process for extracting and identifying birth episodes is exactly the same as that which we adopted in [Guide 3](guide03_cohort.qmd) when identifying a HES birth cohort. We will not repeat that information here and so we encourage you to study that part of the guide if you skipped over it. In fact, if you compare script [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) with 01b_identify_hes_cohort.r, you will see that they are virtually identical. The only major differences are that, in the loop that extracts the data, we subset the data to children in our cohort spine (Code Snippet 1) and now we do not need to load the linkage spine.
+The process for extracting and identifying birth episodes is exactly the same as that which we adopted in [Guide 3](guide03_cohort.qmd) when identifying a HES birth cohort. We will not repeat that information here and so we encourage you to study that part of the guide if you skipped over it. In fact, if you compare script [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) with [01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r), you will see that they are virtually identical. The only major differences are that, in the loop that extracts the data, we subset the data to children in our cohort spine (Code Snippet 1) and now we do not need to load the linkage spine.
 
 *Code Snippet 1 (R - [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r))*
 ``` r
