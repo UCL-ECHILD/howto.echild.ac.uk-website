@@ -29,7 +29,7 @@ Below we provide some guidance for each of these steps.
 
 Let’s say you are interested in extracting data on gender/sex, ethnic group and deprivation. Your first task is to use the [HES data dictionary](https://digital.nhs.uk/data-and-information/data-tools-and-services/data-services/hospital-episode-statistics/hospital-episode-statistics-data-dictionary){target="_blank"} to identify what these variables are called. The HES data dictionary is a large Excel file that can be a little clunky to navigate. There are separate sheets for each dataset (e.g., admitted patient care, outpatients and so on) and within each, each row represents one variable, sorted alphabetically. You can use Ctrl+F to search by text.
 
-For example, Figure 1 shows the entries for `imd04` (not available in ECHILD) `imd04_decile`, found by searching “deprivation.”
+For example, Figure 1 shows the entries for `imd04` (not available in ECHILD) and `imd04_decile`, found by searching “deprivation.”
 
 ![Figure 1: Search of the HES admitted patient care dictionary for “deprivation”](static/hes_dd_deprivation.png){fig-alt="Screenshot from the HES data diciontary with a search for deprivation."}
 
