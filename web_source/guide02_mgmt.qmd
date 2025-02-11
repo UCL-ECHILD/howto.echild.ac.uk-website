@@ -58,7 +58,7 @@ The scripts we have created, and the guides to which they relate, are shown in T
 
 Open [00a_run_cleaning.r](scripts/00a_run_cleaning.r). The first section of this script sets the working directory, the R library path (necessary when working in the SRS) and loads necessary libraries. Note that system architecture (file structures and connection strings) is confidential and cannot be exported from the SRS. Consult your documentation to find your connection string.
 
-*Code Snippet 4 (R)*
+*Code Snippet 4 (R - [00a_run_cleaning.r](scripts/00a_run_cleaning.r))*
 ``` r
 ---
 # Set-up ------------------------------------------------------------------

@@ -45,7 +45,7 @@ Our first script, [02_npd_demographic_modals.r](scripts/02_npd_demographic_modal
 
 At this stage it is worth noting that the years we define here are 2008 to 2017 (Code Snippet 1).
 
-*Code Snippet 1*
+*Code Snippet 1 (R -[02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
 ``` r
 ---
 years <- 2008:2017
@@ -54,7 +54,7 @@ years <- 2008:2017
 
 These are the years that CONTAIN the reception to year 7 years for ALL THREE birth cohorts (born academic years 2002/3 to 2004/5), not the years that ARE the reception to year 7 years for each (e.g., the 2002/3 cohort will be in year 7 in 2014/15). However, this is not a problem, because we deal with year selection when constructing our SQL query (Code Snippet 2). Here we use the `IN` operator within our `WHERE` statement to select the relevant years from `NCYearActual`.
 
-*Code Snippet 2*
+*Code Snippet 2 (R - [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
 ``` r
 ---
 paste0(
@@ -74,7 +74,7 @@ paste0(
 
 We also define an object called `skips` (Code Snippet 3), which we use to tell our function to skip certain censuses (Code Snippet 4). This is necessary because ethnicity is not contained in the summer census from 2011, nor the autumn census from 2012. In Code Snippet 3 we use the `collapse` argument within `paste0()` to create a string that serves as our regular expression in `grepl()` in the next line. Run the `paste0()` functions separately if you are not sure how these are working together.
 
-*Code Snippet 3*
+*Code Snippet 3 (R - [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
 ``` r
 ---
 skipstr <- paste0(paste0("Autumn_Census_", 2012:2017, collapse = "|"), "|",
@@ -83,7 +83,7 @@ skips <- tables$TABLE_NAME[grepl(skipstr, tables$TABLE_NAME)]
 ---
 ```
 
-*Code Snippet 4*
+*Code Snippet 4 (R - [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
 ``` r
 ---
 if (!(table_name %in% skips)) {
@@ -126,7 +126,7 @@ Before we actually select our modal value, we should clean the data. The script 
 
 In order to get the modal value, we use `mode_fun()`, which finds the modal element of a vector or, where the vector we supply is multimodal (i.e., there are at least two options that occur equally with the highest frequency), we pick one at random using a single random draw from a multinomial distribution (Code Snippet 5, from [00b_prelim.r](scripts/00b_prelim.r)).
 
-*Code Snippet 5 (from [00b_prelim.r](scripts/00b_prelim.r))*
+*Code Snippet 5 (R - [00b_prelim.r](scripts/00b_prelim.r))*
 ``` r
 ---
 mode_fun <- function(x) {
@@ -145,7 +145,7 @@ mode_fun <- function(x) {
 
 There are two alternatives in Code Snippet 6: (1) try to find a modal value and if multimodal, return the last value; (2) always return the last value, regardless of the mode. If using these, you will need to go back and edit the script that extracts data to also include year and census, so that you can ensure the data are ordered properly.
 
-*Code Snippet 6*
+*Code Snippet 6 (R)*
 ``` r
 ---
 # Try to find a mode; if multimodal, return the last value
@@ -168,7 +168,7 @@ get_last_value <- function(v) { return(v[length(v)]) }
 
 We use `mode_fun()` (Code Snippet 5) to get the modal value of each of the time invariant demographic variables by PMR, i.e., using all of each child’s records from reception to year 7 (Code Snippet 7). We first set a seed because we use a stochastic process (random draw from a multinomial distribution) in `mode_fun()`. 
 
-*Code Snippet 7*
+*Code Snippet 7 (R - [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
 ``` r
 ---
 set.seed(100)
@@ -192,7 +192,7 @@ Script [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r) is signi
 
 Finally, script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) is a little more complex. We first extract data. We then identify which children are enrolled in special school schools (which we flag using a variable called `specialist_school`). To do this, we use the Get Information About Schools database and link the relevant information using the school unique reference number (URN) (Code Snippet 8). [Note: this step is still under construction.]
 
-*Code Snippet 8*
+*Code Snippet 8 (R - [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r))*
 ``` r
 ---
 # Under construction - code omitted
@@ -201,7 +201,7 @@ Finally, script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) i
 
 Next, we clean our SEND variable to combine the old Action and Action Plus values with the new Support value. “Support” replaced Action/Action Plus from academic year 2014/15. Similarly, our SEND variable combines the old statements of SEND with the new Education, Health & Care Plan (which were phased in from 2014/15). We also add children enrolled in alternative provision or pupil referrals units to our `specialist_school` flag, as children only in alternative provision will not be captured in the Get Information About Schools database (Code Snippet 9).
 
-*Code Snippet 9*
+*Code Snippet 9 (R - [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r))*
 ``` r
 ---
 demographics_ever[senprovision %in% c("A", "P", "K"), senprovision := "support"]
@@ -213,7 +213,7 @@ demographics_ever[census %in% c("AP", "PRU"), specialist_school := T]
 
 Next, we define `fsm_ever_primary` by taking the maximum value of `fsmeligible` across all records (Code Snippet 10). If there is ever a `1` (the maximum of `0` and `1`), then this operation will return a `1` by child.
 
-*Code Snippet 9*
+*Code Snippet 9 (R - [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r))*
 ``` r
 ---
 demographics_ever[, fsm_ever_primary := max(fsmeligible), by = PupilMatchingRefAnonymous]

@@ -45,7 +45,7 @@ You might want to extract data from HES admitted patient care, outpatients, emer
 
 Code Snippet 1 is taken from the script that identifies our HES birth cohort (01b_identify_hes_cohort.r, [Guide 3](guide03_cohort.qmd)). You will see that we incorporated the code that identifies the tables and the loop that carries out the extraction into one function. Modifying the `grepl()` pattern and the SQL query and supplying the correct vector of years should be enough to extract the data that you need.
 
-*Code Snippet 1*
+*Code Snippet 1 (R - 01b_identify_hes_cohort.r)*
 ``` r
 ---
 extract_hes_data <- function(years) {
