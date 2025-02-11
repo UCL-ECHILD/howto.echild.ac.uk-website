@@ -7,7 +7,7 @@
 
 # Introduction
 
-Working with administrative data involves a significant amount of data management and processing before you have an analysis-ready dataset. For novices, this can be sometimes be one of the most challenging aspects of working with administrative data and even experienced researchers may never have received any formal data management training   . While the data have undergone various checks and cleaning (for example, on submission to the Department for Education and NHS England), this does not mean they are ready for running analyses. In addition, ECHILD data are held in over 600 tables, some containing hundreds of variables. While most projects will only ever have access to a subset of these, there will still be a very large amount of data to manage and process. Good coding practice is therefore essential to enable you to work effectively with the data and minimise disruption when you inevitably find errors or make changes to steps earlier in your processing pipeline.
+Working with administrative data involves a significant amount of data management and processing before you have an analysis-ready dataset. For novices, this can be sometimes be one of the most challenging aspects of working with administrative data. Even experienced researchers may never have received any formal data management training. While the data have undergone various checks and cleaning (for example, on submission to the Department for Education and NHS England), this does not mean they are ready for running analyses. In addition, ECHILD data are held in over 600 tables, some containing hundreds of variables. While most projects will only ever have access to a subset of these, there will still be a very large amount of data to manage and process. Good coding practice is therefore essential to enable you to work effectively with the data and minimise disruption when you inevitably find errors or make changes to steps earlier in your processing pipeline.
 
 # Data are held on a SQL server
 
@@ -45,14 +45,11 @@ SQL queries can be more complex than this. If you wish to explore using more adv
 
 # Modular, parsimonious scripts
 
-The ECHILD team is not prescriptive in how you go about your coding. It is up to you to work out a process that works for you. In this series of How To guides, we provide one example of working in a modular fashion. Working with multiple scripts that fit together in a clear order makes it much easier to identify where changes need to be made and make those changes, without having to re-run all scripts from the start.
-Additionally, we try to maintain parsimony throughout. This includes:
+The ECHILD team is not prescriptive in how you go about your coding. It is up to you to work out a process that works for you. In this series of How To guides, we provide one example of working in a modular fashion. Working with multiple scripts that fit together in a clear order makes it much easier to identify where changes need to be made and to make those changes. Additionally, we try to maintain parsimony throughout. This includes:
 
-* Not writing data to the hard disk until this is necessary. Writing intermediate datasets to the hard disk should be discouraged, especially where these are not immediately deleted. A format which is more compressed, and therefore of a smaller file size, should be preferred (e.g., rda files are preferable to csv files). As the SRS is a shared resource, users are asked to ensure they do not save more than is necessary.
+* Not writing data to the hard disk until this is necessary. Writing intermediate datasets to the hard disk should be discouraged, especially where these are not compressed and immediately deleted. A format which is more compressed, and therefore of a smaller file size, should be preferred (e.g., rda files are preferable to csv files). As the SRS is a shared resource, users are asked to ensure they do not save more than is necessary.
 * Reducing the amount of information held in memory during a session. This includes reducing the size of data frames (e.g., by dropping rows for individuals not in the cohort) and removing temporary objects as soon as they have served their purpose.
 * Using the simplest, clearest coding as possible, with as few additional packages as possible. This also involves good practice in writing code such as including spaces after commas and between operators, a clear structure overall and neat and tidy comments.
-
-The scripts we have created, and the guides to which they relate, are shown in Table 1 of [Guide 1](guide01_intro.qmd). When run in order, we will end up with an analysis-ready dataset that we can use to answer our research question. While these guides are not exhaustive of everything you can or should do with ECHILD, we hope that they will serve as a useful starting point and reference to support you in your data management and analyses.
 
 # Initialisation
 
