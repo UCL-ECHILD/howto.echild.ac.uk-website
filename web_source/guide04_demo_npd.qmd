@@ -31,11 +31,13 @@ Time invariant variables are those that are fixed, or considered fixed, in analy
 
 When taking the modal value, we are assigning equal weight to each record. In other words, each record is equally believable. If you have reason to believe that some records carry more weight, then you could employ a different method, for example by selecting the most recent value in situations where you believe that the most recent record is accurate. This assigns 100% weight to the most recent record and 0% to all previous records, regardless of their value and how many times they occur. We will show you how you can easily modify the code in our script to do this. In theory, you could employ more complex weights, though whether this is justified (i.e., whether it ever makes a difference to your analyses) should be borne in mind in determining whether the extra effort is worth it.
 
-Another factor to bear in mind is whether your variable is truly time invariant. We have noted gender, ethnicity and language with an asterisk in Table 1 because, in reality, how people identify in terms of their gender, ethnicity and language can legitimately change over their life course. When working with administrative data, this problem becomes even more acute when recognising that data quality for variables such as ethnicity for some groups (e.g., non-White children) is likely to be poorer and that it is not always clear who is reporting and recording the values in question, nor exactly what they think they are recording (consider, e.g., the difference between gender and sex). As such, discerning whether a conflicting ethnicity, language or gender value is a true change in identity, correction of earlier records, data entry error, linkage error or something else, is very complex. You always have the option of sensitivity analyses, which may be warranted where the amount of conflicting information is high and/or where these variables are a particular focus of your study.
+Another factor to bear in mind is whether your variable is truly time invariant. We have noted gender, ethnicity and language with an asterisk in Table 1 because, in reality, how people identify in terms of their gender, ethnicity and language can change over their life course. This could then be reflected in the data. When working with administrative data, this becomes difficult when recognising that data quality for variables such as ethnicity for some groups (e.g., non-White children) is likely to be poorer and that it is not always clear who is reporting and recording the values in question, nor exactly what they think they are recording (consider, e.g., the difference between gender and sex). As such, discerning whether a conflicting ethnicity, language or gender value is a true change in identity, correction of earlier records, data entry error, linkage error or something else, is very complex. You always have the option of sensitivity analyses, which may be warranted where the amount of conflicting information is high and/or where these variables are a particular focus of your study.
 
 # Time variant values
 
-Many variables are time variant, such as whether a child is getting free school meals (FSM) and their income deprivation affecting children index (IDACI) rank. This is because a child is not always necessarily eligible for FSM (this depends on their parent getting means-tested benefits) and because a child may move between areas, into areas of more or less deprivation. Sometimes we are only interested in values in a given year, for example, at baseline. In this example, we will extract FSM and IDACI rank (available in tenths in ECHILD) at year 7. In other instances, we may wish to know whether a child ever experienced something, such as whether they ever had FSM, or the highest level of something they experienced, such as the highest level of SEND provision they ever received. We therefore also extract variables that indicate whether a child ever had FSM, whether they ever had SEND provision and their highest level of SEND provision from reception to year 7.
+Many variables are time variant, such as whether a child is getting free school meals (FSM) and their income deprivation affecting children index (IDACI) rank. This is because a child is not always necessarily eligible for FSM (this depends on their parents getting means-tested benefits) and because a child may move between areas, into areas of more or less deprivation.
+
+Sometimes we are only interested in values in a given year, for example, at baseline. In this example, we will extract FSM and IDACI rank (available in tenths in ECHILD) at year 7. In other instances, we may wish to know whether a child ever experienced something, such as whether they ever had FSM, or the highest level of something they experienced, such as the highest level of SEND provision they ever received. We therefore also extract variables that indicate whether a child ever had FSM, whether they ever had SEND provision and their highest level of SEND provision from reception to year 7.
 
 # Modal values from reception to year 7
 
@@ -114,7 +116,7 @@ if (!(table_name %in% skips)) {
 Before we actually select our modal value, we should clean the data. The script carries out the steps shown in Table 2. 
 
 | Variable | Cleaning |
-|----------|----------|
+|------|--------------|
 | Gender | Sets values `0` and `9` to `NA.` Then creates a variable called female, where `1` indicates female, and `0` male. This is a practice for binary variables that we recommend generally as there can never be confusion as to the coding. Binary variables coded as `1` and `2` should be avoided as this then requires one to consult a data dictionary. Then we drop the now-redundant gender variable. |
 | Ethnicity | Ethnic groups are combined into the five major ethnic groups. |
 | Language | Languages are combined into English or not English. |
@@ -190,7 +192,7 @@ Script [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r) is signi
 
 # “Ever” values across reception to year 7
 
-Finally, script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) is a little more complex. We first extract data. We then identify which children are enrolled in special schools (which we flag using a variable called `specialist_school`). To do this, we use the Get Information About Schools database and link the relevant information using the school unique reference number (URN) (Code Snippet 8). [Note: this step is still under construction.]
+Script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) is a little more complex. We first extract data. We then identify which children are enrolled in special schools (which we flag using a variable called `specialist_school`). To do this, we use the Get Information About Schools database and link the relevant information using the school unique reference number (URN) (Code Snippet 8). [Note: this step is still under construction.]
 
 *Code Snippet 8 (R - [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r))*
 ``` r
@@ -211,7 +213,7 @@ demographics_ever[census %in% c("AP", "PRU"), specialist_school := T]
 ---
 ```
 
-Next, we define `fsm_ever_primary` by taking the maximum value of `fsmeligible` across all records (Code Snippet 10). If there is ever a `1` (the maximum of `0` and `1`), then this operation will return a `1` by child.
+Finally, we define `fsm_ever_primary` by taking the maximum value of `fsmeligible` across all records (Code Snippet 10). If there is ever a `1` (the maximum of `0` and `1`), then this operation will return a `1` by child.
 
 *Code Snippet 9 (R - [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r))*
 ``` r
@@ -222,8 +224,8 @@ demographics_ever[, fsm_ever_primary := max(fsmeligible), by = PupilMatchingRefA
 
 # The result
 
-Finally, we retain just four variables, PMR, `fsm_ever_primary`, `senprovision` and `specialist_school.` Note that we so far have not defined an “ever SEN” variable. We will do this in [Guide 11](guide11_combine.qmd). For now, we just save the resulting object as its own file and clear the workspace.
+At the end of this script, we retain just four variables, `PupilMatchingRefAnonymous`, `fsm_ever_primary`, `senprovision` and `specialist_school.` Note that we so far have not defined an “ever SEN” variable. We will do this in [Guide 11](guide11_combine.qmd). For now, we just save the resulting object as its own file and clear the workspace.
 
 # Coming up...
 
-In the [next Guide](guide05_demo_hes.qmd), we will think about why we might now also want to extract demographic data from HES and how you can adapt code provided in this Guide to do so.
+In total, we have therefore created three separate datasets containing the different types of demographic information that we will later join onto our spine. In the [next Guide](guide05_demo_hes.qmd), we will think about why we might now also want to extract demographic data from HES and how you can adapt code provided in this Guide to do so.
