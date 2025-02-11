@@ -39,11 +39,11 @@ Always be careful to check not just the variable name but also its description a
 
 # 2. Identify the HES tables you are interested in
 
-You might want to extract data from HES admitted patient care, outpatients, emergency care or any other health dataset. In any case, for this step, you can inspect the tables available in SQL Server and/or adapt the code from [Guide 3](guide03_cohort.qmd) where we extract the tables. We show an example in Code Snippet 1 in the next section. Remember, as discussed in [Guide 2](guide02_mgmt.qmd) when identifying birth cohorts, HES is organised in financial years, so ensure you select the right financial years that cover the academic years you are interested in. You can drop rows out of your data range later if you need to. You will also need to adopt the subsetting functions (i.e., changing the pattern supplied to `grepl()`) to ensure you select the right HES tables.
+You might want to extract data from HES admitted patient care, outpatients, emergency care or any other health dataset. In any case, for this step, you can inspect the tables available in SQL Server and/or adapt the code from [Guide 3](guide03_cohort.qmd) where we extract the tables. We show an example in Code Snippet 1 in the next section. Remember, HES is organised in financial years, so ensure you select the right financial years that cover the academic years you are interested in. You can drop rows out of your date range later if you need to. You will also need to adapt the subsetting functions (i.e., changing the pattern supplied to `grepl()`) to ensure you select the right HES tables.
 
-# 3. Define a function that loops through these tables and extracts the relevant variables.
+# 3. Define a function that loops through these tables and extracts the relevant variables
 
-Code Snippet 1 is taken from the script that identifies our HES birth cohort ([01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r), [Guide 3](guide03_cohort.qmd)). You will see that we incorporated the code that identifies the tables and the loop that carries out the extraction into one function. Modifying the `grepl()` pattern and the SQL query and supplying the correct vector of years should be enough to extract the data that you need.
+Code Snippet 1 is taken from the script that identifies our HES birth cohort ([01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r), [Guide 3](guide03_cohort.qmd)). Modifying the `grepl()` pattern where the tables are selected and the SQL query and supplying the correct vector of years should be enough to extract the data that you need.
 
 *Code Snippet 1 (R - [01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r))*
 ``` r
@@ -97,7 +97,7 @@ birth_records <- extract_hes_data(vector_of_years)
 
 # 4. Carry out necessary cleaning
 
-How you now clean the variables is now up to you. You at the very least need to think about missing values and ensure these are coded properly. Additional steps will then depend on how you are treating the data (i.e., as time-invariant or time-variant) and what summaries you therefore need. Consult [Guide 4](guide04_demo_npd.qmd) for more detail.
+How you clean the variables is up to you. You at the very least need to think about missing values and ensure these are coded properly. Additional steps will then depend on how you are treating the data (i.e., as time-invariant or time-variant) and what summaries you need. Consult [Guide 4](guide04_demo_npd.qmd) for more detail.
 
 # 5. Deduplicate and save
 
