@@ -89,4 +89,4 @@ You will also see that [00b_prelim.r](scripts/00b_prelim.r) contains the vector 
 
 # Coming up...
 
-In the next Guide—[Identify a cohort and create a cohort spine](guide03_cohort.qmd)—we will run the first substantive script sand carry out the actions necessary to create our cohort spine based on a school inception (NPD) cohort or a HES birth records cohort.
+In the next Guide—[Identify a cohort and create a cohort spine](guide03_cohort.qmd)—we will run the first substantive script and carry out the actions necessary to create our cohort spine based on a school inception (NPD) cohort or a HES birth records cohort.
