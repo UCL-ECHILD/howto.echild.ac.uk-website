@@ -33,7 +33,7 @@ We will create an analysis-ready dataset across several guides, each with its ow
 |---|-------|---------|
 | 1 | Introduction (this guide) | None |
 | 2 | [Script management, coding principles and working in the SRS](guide02_mgmt.qmd) | [00a_run_cleaning.r](scripts/00a_run_cleaning.r), [00b_prelim.r](scripts/00b_prelim.r) |
-| 3 | [Identify a cohort and create a cohort spine](guide03_cohort.qmd) | [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r), 01b_identify_hes_cohort.r |
+| 3 | [Identify a cohort and create a cohort spine](guide03_cohort.qmd) | [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r), [01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r) |
 | 4 | [NPD demographic and SEND data](guide04_demo_npd.qmd) | [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r), [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r), [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) |
 | 5 | [HES demographic data (your turn!)](guide05_demo_hes.qmd) | None |
 | 6 | [Birth characteristics](guide06_birth_chars.qmd) | [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) |
