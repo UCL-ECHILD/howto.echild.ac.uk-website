@@ -14,7 +14,7 @@ The approach depicted in Figure 1 represents a school inception cohort. We will 
 
 We have not attempted to provide the best approach scientifically. For example, we do not take account of health exposures or covariates during the secondary school years. We completely ignore the pre-school period. This example is designed to show how to manage the data to create an analysis-ready dataset. Exactly what those analyses are and what that dataset is, is of course up to you.
 
-Note also that these guides make use of the following modules of data:
+These guides make use of the following modules of data:
 
 * NPD censuses, including the autumn, spring and summer censuses and the alternative provision and pupil referral unit censuses
 * HES admitted patient care records 
@@ -27,7 +27,7 @@ Not all projects need access to all data and so you may not be able to reproduce
 
 # The scripts
 
-We will create an analysis-ready dataset across several guides, each with its own R scripts. You con download the scripts using the links in Table 1, below, or at the start of each guide.
+We will create an analysis-ready dataset across several guides, each with its own R scripts. You can download the scripts using the links in Table 1, below, or at the start of each guide. While these guides are not exhaustive of everything you can or should do with ECHILD, we hope that they will serve as a useful starting point and reference to support you in your data management and analyses.
 
 | # | Guide | Scripts |
 |---|-------|---------|
@@ -46,11 +46,11 @@ We will create an analysis-ready dataset across several guides, each with its ow
 
 : Table 1. Series of guides and scripts
 
-You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already [produced and published CSC data extraction and cleaning code that produces cleaned datasets](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in [Guide 11](guide11_combine.qmd) whereas [Guide 12](guide12_csc.qmd) discusses the CSC data more generally and summarise the cleaning steps that the other scripts undertake.
+You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already [produced and published CSC data extraction and cleaning code that produces cleaned datasets](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in [Guide 11](guide11_combine.qmd) whereas [Guide 12](guide12_csc.qmd) discusses the CSC data more generally and summarises the cleaning steps that the other scripts undertake.
 
 # How much R do I need and what version?
 
-These guides assume at least a basic working knowledge of R. Throughout we try to explain the more unusual and trickier concepts in detail. Because we have used only two packages, both of which are very widely used, we hope that the code provided here will prove robust to updates to R. The code was all developed and tested inside the Secure Research Service using R 4.4.0.
+These guides assume at least a basic working knowledge of R. Throughout we try to explain the more unusual and trickier concepts in detail. Because we have used only two packages, both of which are very widely used, we hope that the code provided here will prove robust to updates to R. The code was all developed and tested inside the Secure ONS Research Service using R 4.4.0.
 
 # Coming up...
 
