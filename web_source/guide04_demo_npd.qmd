@@ -115,16 +115,16 @@ Before we actually select our modal value, we should clean the data. The script 
 
 | Variable | Cleaning |
 |----------|----------|
-| Gender | Sets values `0` and `9` to `NA.` Then creates a variable called female, where `1` indicates female, and `0` male. This is a practice for binary variables that we recommend generally as there can never be confusion as to the coding. Binary variables coded as `1` and `2` should certainly be avoided. Then we drop the now-redundant gender variable. |
-| Ethnicity | Ethnicity	Ethnic groups are combined into the five major ethnic groups. |
-| Language | Language	Languages are combined into English or not English. |
+| Gender | Sets values `0` and `9` to `NA.` Then creates a variable called female, where `1` indicates female, and `0` male. This is a practice for binary variables that we recommend generally as there can never be confusion as to the coding. Binary variables coded as `1` and `2` should be avoided as this then requires one to consult a data dictionary. Then we drop the now-redundant gender variable. |
+| Ethnicity | Ethnic groups are combined into the five major ethnic groups. |
+| Language | Languages are combined into English or not English. |
 | Year and month of birth | None. |
 
 : Table 2. Data cleaning carried out prior to identifying modal values
 
 # Getting modal values
 
-In order to get the modal value, we use `mode_fun()`, which finds the modal element of a vector or, where the vector we supply is multimodal (i.e., there are at least two options that occur equally with the highest frequency), we pick one at random using a single random draw from a multinomial distribution (Code Snippet 5, from [00b_prelim.r](scripts/00b_prelim.r)).
+In order to get the modal value, we use `mode_fun()`, defined in [00b_prelim.r](scripts/00b_prelim.r), which finds the modal element of a vector or, where the vector is multimodal (i.e., there are at least two options that occur equally with the highest frequency), we pick one at random using a single random draw from a multinomial distribution (Code Snippet 5).
 
 *Code Snippet 5 (R - [00b_prelim.r](scripts/00b_prelim.r))*
 ``` r
@@ -166,7 +166,7 @@ get_last_value <- function(v) { return(v[length(v)]) }
 ---
 ```
 
-We use `mode_fun()` (Code Snippet 5) to get the modal value of each of the time invariant demographic variables by PMR, i.e., using all of each child’s records from reception to year 7 (Code Snippet 7). We first set a seed because we use a stochastic process (random draw from a multinomial distribution) in `mode_fun()`. 
+We use `mode_fun()` (Code Snippet 5) to get the modal value of each of the time invariant demographic variables by PMR, i.e., using all of each child’s records from reception to year 7 (Code Snippet 7). We first set a seed because we use a random process (random draw from a multinomial distribution) in `mode_fun()`. 
 
 *Code Snippet 7 (R - [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
 ``` r
@@ -185,12 +185,12 @@ demo_modals[, monthofbirth := mode_fun(monthofbirth), by = PupilMatchingRefAnony
 After deduplication, we end up with a data table that contains PMR, year of birth, month of birth, female, ethnic group and language group. We will save this as its own object before moving onto the next script to extract data at year 7.
 
 # Values at year 7
-Script [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r) is significantly simpler, as we are only dealing with one time point. Again, we extract data from the censuses, alternative provision and pupil referral units and deduplicate. We use `mode_fun()` again that we defined in the previous script. We then also save our resulting object, which contains PMR, FSM and IDACI data at year 7.
+Script [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r) is significantly simpler, as we are only dealing with one time point. Again, we extract data from the censuses, alternative provision and pupil referral units and deduplicate. We then save our resulting object, which contains PMR, FSM and IDACI data at year 7.
 
 
 # “Ever” values across reception to year 7
 
-Finally, script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) is a little more complex. We first extract data. We then identify which children are enrolled in special school schools (which we flag using a variable called `specialist_school`). To do this, we use the Get Information About Schools database and link the relevant information using the school unique reference number (URN) (Code Snippet 8). [Note: this step is still under construction.]
+Finally, script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) is a little more complex. We first extract data. We then identify which children are enrolled in special schools (which we flag using a variable called `specialist_school`). To do this, we use the Get Information About Schools database and link the relevant information using the school unique reference number (URN) (Code Snippet 8). [Note: this step is still under construction.]
 
 *Code Snippet 8 (R - [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r))*
 ``` r
@@ -199,7 +199,7 @@ Finally, script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) i
 ---
 ```
 
-Next, we clean our SEND variable to combine the old Action and Action Plus values with the new Support value. “Support” replaced Action/Action Plus from academic year 2014/15. Similarly, our SEND variable combines the old statements of SEND with the new Education, Health & Care Plan (which were phased in from 2014/15). We also add children enrolled in alternative provision or pupil referrals units to our `specialist_school` flag, as children only in alternative provision will not be captured in the Get Information About Schools database (Code Snippet 9).
+Next, we clean our SEND variable to combine the old Action and Action Plus values with the new Support value. Support replaced Action/Action Plus from academic year 2014/15. Similarly, our SEND variable combines the old statements of SEND with the new Education, Health & Care Plan (which were phased in from 2014/15). We also add children enrolled in alternative provision or pupil referrals units to our `specialist_school` flag, as children only in alternative provision will not be captured in the Get Information About Schools database (Code Snippet 9).
 
 *Code Snippet 9 (R - [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r))*
 ``` r
