@@ -45,7 +45,7 @@ Our first script, [02_npd_demographic_modals.r](scripts/02_npd_demographic_modal
 
 At this stage it is worth noting that the years we define here are 2008 to 2017 (Code Snippet 1).
 
-*Code Snippet 1 (R -[02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
+*Code Snippet 1 (R - [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r))*
 ``` r
 ---
 years <- 2008:2017
