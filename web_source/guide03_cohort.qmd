@@ -278,6 +278,7 @@ There is, however, one complicating factor: HES is organised in *financial years
 
 You will therefore see that the years we supply to our custom `extract_hes_data()` function are not exactly the birth cohort years that we specify in script [00b_prelim.r](scripts/00b_prelim.r). In Code Snippet 8, you will see that we supply `c(birth_cohorts[1] – 1, birth_cohorts)`:
 
+* `birth_cohorts = 2003, 2004, 2005`
 * `birth_cohorts[1] = 2003`
 * `birth_cohort[1] – 1 = 2002`
 * `c(birth_cohorts[1] – 1, birth_cohorts) = 2002, 2003, 2004, 2005`
