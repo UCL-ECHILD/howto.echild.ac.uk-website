@@ -20,7 +20,7 @@ Extracting enrolment data is rather straightforward (script [07_enrolment.r](scr
 
 There are two things to note about the years that we initially extract data from (Code Snippet 1). You will see we have supplied the years 2016 to 2021. This is a range of academic years that contain the years corresponding to year 8 to year 11 for all cohorts. For example, the cohort enrolled in year 7 in 2014/15 will be in year 8 in 2015/16. We are only interested in year 8 onward because, in our NPD inception design, pupils had to be enrolled in year 7 to be included.
 
-*Code Snippet 1*
+*Code Snippet 1 (R - [07_enrolment.r](scripts/07_enrolment.r))*
 ``` r
 ---
 enrolments <- generate_npd_source(2016:2021)
@@ -29,7 +29,7 @@ enrolments <- generate_npd_source(2016:2021)
 
 This does mean that, for some cohorts, years other than years 8 to 11 are included. For example, the cohort in year 7 in 2016/17 were in year 6 in 2014/15. We do not need these data. Our solution is to use the inception year to define the school year and then drop data outside of years 8 to 11 (Code Snippet 2).
 
-*Code Snippet 2*
+*Code Snippet 2 (R - [07_enrolment.r](scripts/07_enrolment.r))*
 ``` r
 ---
 enrolments <-
@@ -72,7 +72,7 @@ Unlike the exclusion data, children should be in the absence data, even if they 
 
 You will see in the code that for each of these, we actually extract four variables. Code Snippet 3 shows an example where we find the columns indicating the number of sessions possible for the autumn, spring and summer terms. The fourth line relates to the sixth half-term, which falls in the summer. Each term has two half-terms. Historically, NPD collected absence data for both half-terms in autumn and spring but only the first half-term from summer. Since 2012/13 (i.e., the summer term 2013), data from the second summer half-term are also available. These are collected in this separate variable.
 
-*Code Snippet 3*
+*Code Snippet 3 (R - [09_absence.r](scripts/09_absence.r))*
 ``` r
 ---
 sessions_possible_aut_column <- grepl("sessionspossible_autumn", temp_columns_lower)
@@ -86,7 +86,7 @@ sessions_possible_sum6_column <- grepl("sessionspossible_summer6th", temp_column
 
 Absence data are actually collected at enrolment level. Therefore, where a child was enrolment in more than one establishment in a year, they will have two rows in that year’s data. We therefore loop through all columns and take the sum of each column by child and academic year (in other words, we sum up each child’s records within each year) (Code Snippet 4).
 
-*Code Snippet 4*
+*Code Snippet 4 (R - [09_absence.r](scripts/09_absence.r))*
 ``` r
 ---
 print("Dealing with dual enrolment")
@@ -105,7 +105,7 @@ rm(i)
 
 Another quirk of the absence data relates to the summer 6th half-term in year 11. We want to ignore this half-term because we expect there to be a higher rate of absence due to study leave and the exam period. This, of course, may not be something you wish to do in your study but we provide an example of how to do it should you choose to do so. Our approach is simply to set all variables to zero (Code Snippet 5) so that, when we calculate annual absence in the next section, the summer 6th in year 11 is ignored.
 
-*Code Snippet 5*
+*Code Snippet 5 (R - [09_absence.r](scripts/09_absence.r))*
 ``` r
 ---
 print("Removing summer term in year 11")

@@ -27,7 +27,7 @@ Not all projects need access to all data and so you may not be able to reproduce
 
 # The scripts
 
-We will create an analysis-ready dataset across several guides, each with its own R scripts (Table 1).
+We will create an analysis-ready dataset across several guides, each with its own R scripts. You con download the scripts using the links in Table 1, below, or at the start of each guide.
 
 | # | Guide | Scripts |
 |---|-------|---------|

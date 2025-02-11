@@ -22,7 +22,7 @@ There are a number of sources of bias in hospital diagnostic data you should be 
 
 By now, you will be used to our approach to extracting data from the server and this time is no different. We start by identifying the relevant tables and then looping through these using a SQL query to extract the relevant data. There are a couple of things to note about the SQL query at this stage (Code Snippet 1).
 
-*Code Snippet 1*
+*Code Snippet 1 (R - [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r))*
 ``` r
 ---
 temp <- data.table(
@@ -50,7 +50,7 @@ The general approach is that we convert the diagnostic and (where relevant) oper
 
 The key difference is that here we are dealing with two separate phenotypes. We handle this by creating a new data table called `phen_codes` that stores the phenotype codes from both code lists, identified using a variable we create called `phen_group` (Code Snippet 2). 
 
-*Code Snippet 2*
+*Code Snippet 2 (R - [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r))*
 ``` r
 ---
 # Code that identifies Hardelid codes...

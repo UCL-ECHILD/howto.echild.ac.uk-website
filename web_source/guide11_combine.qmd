@@ -14,7 +14,7 @@ Recall that our plan was to create a master spine, onto which we later join othe
 
 Script [12_combine.r](scripts/12_combine.r) is perhaps the simplest. However, before we run it, in [00a_run_cleaning.r](scripts/00a_run_cleaning.r),  we first load all the files that we created up until this point (Code Snippet 1). In Code Snippet 1, note how we create a vector of strings called files, and then remove one file from it. This is the file that we ultimately create at the end of 12_combine.r. You will likely find yourself in a situation where you re-run your scripts and this step just ensures we are combining data into our original spine, not some later (and now incorrect) version of it.
 
-*Code Snippet 1 (R from [00a_run_cleaning.r](scripts/00a_run_cleaning.r))*
+*Code Snippet 1 (R - [00a_run_cleaning.r](scripts/00a_run_cleaning.r))*
 ``` r
 source("scripts/00b_prelim.r")
 
@@ -38,7 +38,7 @@ Starting with the demographics, we `merge()` the modal demographics file into th
 
 The “ever” variables are slightly more complex as the data table we created for them contained a single “ever FSM” variable but yearly SEN data. The general approach, however, is still relatively simple. For FSM, instead of using the `merge()` function, we exploit the `%in%` operator to check whether each PMR in the spine exists in the `demographics_ever` data table where `fsm_ever_primary` is equal to `1` in that table (Code Snippet 2). This will return, for each child, a `TRUE` if they ever had FSM in primary school and a `FALSE` if they did not. Notice how, wherever we use this approach, we subset to rows where the relevant identifier (PMR or TPID) is not missing. This is in order to induce a missing value where the identifier is missing.
 
-*Code Snippet 2*
+*Code Snippet 2 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
 cohort_spine[!is.na(PupilMatchingRefAnonymous), fsm_ever_primary := PupilMatchingRefAnonymous %in%
                demographics_ever[fsm_ever_primary == 1]$PupilMatchingRefAnonymous]
@@ -47,7 +47,7 @@ cohort_spine[!is.na(PupilMatchingRefAnonymous), fsm_ever_primary := PupilMatchin
 
 For highest level of SEN, we start by creating a factor variable within our `cohort_spine.` Then we set its value to the relevant levels, again using the `%in%` operator in a similar fashion to FSM. We then create a variable that indicates whether the child ever had SEN, meaning we actually have an “ever any SEN” variable as well as a “highest level of SEN” variable (Code Snippet 3).
 
-*Code Snippet 3*
+*Code Snippet 3 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
 cohort_spine[, highest_sen_primary := factor("None",
                                              levels = c("None",
@@ -82,7 +82,7 @@ The next part is only relevant if you adopted an NPD cohort inception. These are
 
 This part deals with the phenotypes. Because you might have multiple phenotypes, we have written a for loop as a way of looping through them all and creating a binary indicator that states whether the child in question ever had a code for each phenotype in question or not (Code Snippet 4). You may want to take a more nuanced approach, for example, by only including codes within a certain date range, for example. It is fairly straightforward to amend the code to include a subsetting condition along these lines.
 
-*Code Snippet 4*
+*Code Snippet 4 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
 for (chc in phen_groups) {
     
@@ -121,7 +121,7 @@ In the meantime, observe that we simply load the cleaned data, subset to those i
 
 Before saving, we also create an eligibility flag which declares whether each child was born in the relevant year and linked to HES (i.e., has a TPID) or NPD (i.e., has a PMR), depending on your cohort inception (Code Snippet 3). Strictly speaking, this should probably be in its own script, but we included it here because it was convenient to do so.
 
-*Code Snippet 5*
+*Code Snippet 5 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
 cohort_spine[, born_in_year := dob_approx >= paste0(min(birth_cohorts) - 1, "-09-01") & dob_approx < paste0(max(birth_cohorts), "-09-01")]
 cohort_spine[, eligible := !is.na(tokenpersonid) & born_in_year] # NPD inception cohort

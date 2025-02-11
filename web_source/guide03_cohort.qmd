@@ -31,7 +31,7 @@ The school censuses present us with two challenges. Each (three terms per year) 
 
 We could write our code that extracts data from each table individually, table by table, query by query, but this will be boring, time-consuming to code, more difficult to change things later (which may lead to errors), inelegant and more difficult to read later. It would be better to loop through the tables and select variables automatically. This is what the first part of our script starts to do (Code Snippet 1).
 
-*Code Snippet 1 (R)*
+*Code Snippet 1 (R - [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r))*
 ``` r
 ---
 dbhandle <- odbcDriverConnect(conn_str)
@@ -54,7 +54,7 @@ In Code Snippet 1, we first connect to the SQL server using the connection strin
 
 You will see we use a function called `grepl()`. This uses regular expressions (a specialist syntax for working with strings) and returns a vector of `TRUE` and `FALSE` based on the second argument. In the example in Code Snippet 2, we provide the regular expression `"Autumn|Spring|Summer"`. This means: the string that is “Autumn” or the string that is “Spring” or the string that is “Summer.” In `tables$TABLE_NAME` are the table names. The function will return a vector of the same length as `tables$TABLE_NAME`, with a `TRUE` if any of the three strings are found anywhere in each of the table names, otherwise a `FALSE.` We then use this to subset the `tables$TABLE_NAME` vector and store these in the keep object that we use to subset tables.
 
-*Code Snippet 2 (R)*
+*Code Snippet 2 (R - [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r))*
 ``` r
 ---
 keep <- tables$TABLE_NAME[grepl("Autumn|Spring|Summer", tables$TABLE_NAME)]
@@ -83,7 +83,7 @@ Running up to the end of Code Snippet 1 will give us a data frame (`tables`) of 
 
 Next, we create and run a function that loops through these tables and constructs and executes an SQL query (Code Snippet 4) for each, saving the output in an object `cohort_spine`. This object will be the focal point of all our data management and analyses.
 
-*Code Snippet 4 (R output)*
+*Code Snippet 4 (R - [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r))*
 ``` r
 ---
 generate_npd_source <- function() {
@@ -155,7 +155,7 @@ Some children do not follow the national curriculum, e.g., those in special scho
 
 You may have noticed that the regular expression used to select the age column begins with a circumflex character (Code Snippet 5). In the syntax of regular expressions, this means “only from the beginning.” This is necessary because there is another column, `[MonthPartOfAgeAtStartOfAcademicYear]`. If we did not include the circumflex, `grepl()` would have returned a `TRUE` for the age column we want as well as this one. This would cause an error (try running the code without the circumflex and see what happens). 
 
-*Code Snippet 5*
+*Code Snippet 5 (R - [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r))*
 ``` r
 ---
 age_column <- grepl("^ageatstartofacademicyear", temp_columns_lower)
@@ -164,7 +164,7 @@ age_column <- grepl("^ageatstartofacademicyear", temp_columns_lower)
 
 The final bit of the first part of this script then does a few more things (Code Snippet 6). First, we deduplicate based on PMR and census year. In other words, we only want one record per child per birth cohort. However, there is a very small number of children who appear in year 7 in two or more years. This may be linkage error or it may be that children are held back (though this only happens very rarely in England). You may wish to investigate this further. For now, we keep only the first row per child. Finally, in the interests of parsimony, we drop variables that are no longer required.
 
-*Code Snippet 6*
+*Code Snippet 6 (R - [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r))*
 ``` r
 ---
 cohort_spine <-
@@ -195,7 +195,7 @@ You will also see code for the pupil referral unit census, though this has been 
 
 Loading and selecting the HES TPID is also straightforward. The PMR-TPID links are held in a bridging file. We first load this in its entirety. However, before merging, we drop everyone not in our cohort and then we check to ensure that the number of rows is equal to the number of unique PMRs (Code Snippet 7). If these numbers differed, then we would have duplication which would need to be dealt with first.
 
-*Code Snippet 7 (R)*
+*Code Snippet 7 (R - [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r))*
 ``` r
 ---
 linkage_spine <- linkage_spine[PupilMatchingRefAnonymous %in% cohort_spine$PupilMatchingRefAnonymous]
@@ -217,7 +217,7 @@ We now turn to the script that creates a HES birth cohort, rather than a school 
 
 We even adopt a very similar approach in extracting the data from HES, whereby we identify relevant tables and loop through them (Code Snippet 8). HES is slightly easier, however, because variables have the same name throughout all years of HES.
 
-*Code Snippet 8 (R)*
+*Code Snippet 8 (R - 01a_identify_hes_cohort.r)*
 ``` r
 ---
 extract_hes_data <- function(years) {

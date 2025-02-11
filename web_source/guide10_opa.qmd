@@ -14,7 +14,7 @@ There are, however, situations where outpatient data may be useful. One is where
 
 In [11_outpatient_data.r](scripts/11_outpatient_data.r) we (yet again) adopt the same approach as in previous guides to data extraction: identify relevant tables and loop a query through them. In fact, we let the SQL query do all the heavy lifting (Code Snippet 1). You will see that we extract the appointment date, whether it was a first attendance, whether it was attended and the treatment specialty (`TRETPSEF`). We also only select appointments with services with treatment specialty `191` or `241`, both of which, as you will see in the HES data dictionary, represent pain services.
 
-*Code Snippet 1*
+*Code Snippet 1 (R - [11_outpatient_data.r](scripts/11_outpatient_data.r))*
 ``` r
 temp <- data.table(
   sqlQuery(

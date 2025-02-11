@@ -26,7 +26,7 @@ In terms of our example, Code Snippet 1 shows how we implement the SQL query to 
 * `KS4_GLEVEL2EM_PTQ_EE` = whether achieved 5 A*-C or 9-4 grades including English and maths
 * `KS4_EBACC_94` = whether achieved 9 to 4 passes in the EBacc
 
-*Code Snippet 1*
+*Code Snippet 1 (R - [10_exams.r](scripts/10_exams.r))*
 ``` r
 ---
 ks4 <-
