@@ -8,17 +8,17 @@
 
 # Introduction
 
-In this guide, we look out how to extract data on three secondary outcomes (which could of course serve as other types of variables in your analyses): enrolment, exclusion and absence.
+In this guide, we look out how to extract data on three secondary school outcomes (which could of course serve as other types of variables in your analyses): enrolment, exclusion and absence.
 
-Our interest in enrolment here is really in non-enrolment, as in [previous research](https://www.sciencedirect.com/science/article/pii/S0145213422001028){target="_blank"}. However, you could expand the same basic approach to look at, for example, enrolment in certain types of establishments such as special schools or alternative provision or to look at school instability (school moves outside of expected transition points). In this example, however, all we are interested in is whether a child is enrolled or not in secondary school. We therefore need to get their enrolment data across the secondary school years using the censuses. We will later create flags that indicate whether a child was not enrolled in a given year.
+Our interest in enrolment is really in non-enrolment, as in [previous research](https://www.sciencedirect.com/science/article/pii/S0145213422001028){target="_blank"}. However, you could expand the same basic approach to look at, for example, enrolment in certain types of establishments such as special schools or alternative provision or to look at school instability (school moves outside of expected transition points). In this example, however, all we are interested in is whether a child is enrolled or not in secondary school. We therefore need to get their enrolment data across the secondary school years using the censuses. We will later create flags that indicate whether a child was not enrolled in a given year.
 
 If you are unfamiliar with NPD exclusion and absence data, we recommend you examine the Department of Education’s routine publications as a starting point ([exclusions](https://www.gov.uk/government/publications/school-exclusion){target="_blank"} and [absence](https://explore-education-statistics.service.gov.uk/find-statistics/pupil-absence-in-schools-in-england){target="blank"}). Exclusion and absence data are provided in their own modules. In the case of exclusions, we are here interested in any exclusions but we will extract data on fixed-term and permanent exclusions. The absence data are rather more complex as they are available termly and there are different axes to consider, e.g.: termly or yearly; average absence rates or persistent absence; overall, authorised or unauthorised; health-related versus other; specific reasons. In the present example, we extract absence data and create yearly summaries with absence rates (overall, authorised and unauthorised), a persistent absence marker (overall absence) and health-related absence rates (combining illness and healthcare-related appointments).
 
 # Enrolment data
 
-Extracting enrolment data is rather straightforward (script [07_enrolment.r](scripts/07_enrolment.r)). All we need to do is extend the approach we took when identifying the cohort (if taking an NPD inception) to extract data from all secondary school years. You will therefore see that our code, again, follows the same basic pattern of identifying the relevant tables and running a query the minimal data necessary from those tables.
+Extracting enrolment data is rather straightforward (script [07_enrolment.r](scripts/07_enrolment.r)). All we need to do is extend the approach we took when identifying the cohort (if taking an NPD inception) to extract data from all secondary school years. You will therefore see that our code, again, follows the same basic pattern of identifying the relevant tables and running a query to extract the minimal data necessary from those tables.
 
-There are two things to note about the years that we initially extract data from (Code Snippet 1). You will see we have supplied the years 2016 to 2021. This is a range of academic years that contain the years corresponding to year 8 to year 11 for all cohorts. For example, the cohort enrolled in year 7 in 2014/15 will be in year 8 in 2015/16. We are only interested in year 8 onward because, in our NPD inception design, pupils had to be enrolled in year 7 to be included.
+There are two things to note about the years that we initially extract data from (Code Snippet 1). You will see we have supplied the years 2016 to 2021. This is a range of academic years that contain the years corresponding to year 8 to year 11 for all cohorts. We are only interested in year 8 onward because, in our NPD inception design, pupils had to be enrolled in year 7 to be included.
 
 *Code Snippet 1 (R - [07_enrolment.r](scripts/07_enrolment.r))*
 ``` r
@@ -27,7 +27,7 @@ enrolments <- generate_npd_source(2016:2021)
 ---
 ```
 
-This does mean that, for some cohorts, years other than years 8 to 11 are included. For example, the cohort in year 7 in 2016/17 were in year 6 in 2014/15. We do not need these data. Our solution is to use the inception year to define the school year and then drop data outside of years 8 to 11 (Code Snippet 2).
+This does mean that, for some cohorts, years other than years 8 to 11 are included. For example, the cohort in year 7 in 2016/17 were in year 6 in 2015/16. We do not need these data. Our solution is to use the inception year to define the school year and then drop data outside of years 8 to 11 (Code Snippet 2).
 
 *Code Snippet 2 (R - [07_enrolment.r](scripts/07_enrolment.r))*
 ``` r
@@ -49,11 +49,11 @@ enrolments <- enrolments[year >= 8 & year <= 11]
 
 This is a slightly clunky way of doing this. You could, for example, make use of the `NCYearActual` variable, which states what national curriculum year the child was following at the point of enrolment. A small number of children are not in the expected year, though this is unusual in England.
 
-After adding in enrolment data from Alternative Provision census, we simply save the dataset. We did not use the Pupil Referral Unit census as this merged with the main school census before our cohorts were in year 7.
+After adding in enrolment data from the Alternative Provision census, we simply save the dataset. We did not use the Pupil Referral Unit census as this merged with the main school census before our cohorts were in year 7.
 
 # Exclusion
 
-Exclusion data are available annually. There are two types of exclusion: permanent and fixed-term. Both types are available in the same tables, distinguished by the variable `category`. Each row represents an exclusion and for each a data is available. For fixed-term exclusions, the number of school sessions (a session is half a day) is also recorded. A child is only in the exclusions data if they had an exclusion. From a data management perspective, the exclusions data are therefore very straightforward.
+Exclusion data are available annually. There are two types of exclusion: permanent and fixed-term. Both types are available in the same tables, distinguished by the variable `category`. Each row represents an exclusion and for each a date is available. For fixed-term exclusions, the number of school sessions (a session is half a day) is also recorded. A child is only in the exclusions data if they had an exclusion. From a data management perspective, the exclusions data are therefore very straightforward.
 
 This time, we are interested in exclusions across years 7 to 11 and so we extract data for the academic years that include these years for all cohorts and then subset, just as we did with enrolments (script [08_exclusion.r](scripts/08_exclusion.r)).
 
@@ -61,7 +61,7 @@ This time, we are interested in exclusions across years 7 to 11 and so we extrac
 
 Unlike the exclusion data, children should be in the absence data, even if they had no absences. As noted above, the absence data are more complex for a number of reasons. In the example script ([09_absence.r](scripts/09_absence.r)), we extract the following from the absence tables, each for each term:
 
-* Sessions possible. Absence data are organised around school sessions. A session is half a school day. Roughly, if a child is enrolled on a full-time timetable, then they would be expected to be enrolled for about 380 sessions, or 190 days. The sessions possible variable is the number of sessions that the child could have attended school. If a child joins a school half way through the year, they would have half the number of possible sessions. This is therefore the denominator necessary when calculating each child’s absence rate.
+* Sessions possible. Absence data are organised around school sessions. A session is half a school day. Roughly, if a child is enrolled on a full-time timetable, then they would be expected to be enrolled for about 380 sessions, or 190 days, per year. The sessions possible variable is the number of sessions that the child could have attended school. If a child joins a school half way through the year, they would have half the number of possible sessions. This is therefore the denominator necessary when calculating each child’s absence rate.
 * Number of sessions missed due to authorised absence.
 * Number of sessions missed due to unauthorised absence.
 * Overall number of sessions missed.
@@ -70,7 +70,7 @@ Unlike the exclusion data, children should be in the absence data, even if they 
 
 # Summer 6th half-term
 
-You will see in the code that for each of these, we actually extract four variables. Code Snippet 3 shows an example where we find the columns indicating the number of sessions possible for the autumn, spring and summer terms. The fourth line relates to the sixth half-term, which falls in the summer. Each term has two half-terms. Historically, NPD collected absence data for both half-terms in autumn and spring but only the first half-term from summer. Since 2012/13 (i.e., the summer term 2013), data from the second summer half-term are also available. These are collected in this separate variable.
+You will see in the code that for each of these, we actually extract four variables. Code Snippet 3 shows an example where we find the columns indicating the number of sessions possible for the autumn, spring and summer terms. The fourth line relates to the sixth half-term, which falls in the summer. Each term has two half-terms. Historically, NPD collected absence data for both half-terms in autumn and spring but only the first half-term in summer. Since 2012/13 (i.e., the summer term 2013), data from the second summer half-term are also available. These are collected in this separate variable.
 
 *Code Snippet 3 (R - [09_absence.r](scripts/09_absence.r))*
 ``` r
@@ -84,7 +84,7 @@ sessions_possible_sum6_column <- grepl("sessionspossible_summer6th", temp_column
 
 # Dual enrolment
 
-Absence data are actually collected at enrolment level. Therefore, where a child was enrolment in more than one establishment in a year, they will have two rows in that year’s data. We therefore loop through all columns and take the sum of each column by child and academic year (in other words, we sum up each child’s records within each year) (Code Snippet 4).
+Absence data are actually collected at enrolment level. Therefore, where a child was enrolled in more than one establishment in a year, they will have two rows in that year’s data. We therefore loop through all columns and take the sum of each column by child and academic year (in other words, we sum up each child’s records within each year) (Code Snippet 4).
 
 *Code Snippet 4 (R - [09_absence.r](scripts/09_absence.r))*
 ``` r
@@ -122,12 +122,12 @@ rm(sum_col, sum_cols)
 
 # Greater than 420 sessions
  
-Finally, after creating annual variables and dropping the termly variables, and before calculating rates, cleaning our dataset and saving it, we drop from the absence data any rows where a child apparently had greater than 420 sessions. This is a method we replicate from the [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/pupil-absence-in-schools-in-england){target="_blank"} who do this on the basis that anything greater than 420 possible sessions is plausible and the data are not as trustworthy. By removing these rows from the dataset, we will induce missing values when we join the absence data into our spine later on.
+Finally, after creating annual variables and dropping the termly variables, and before calculating rates, cleaning our dataset and saving it, we drop from the absence data any rows where a child apparently had greater than 420 sessions. This is a method we replicate from the [Department for Education](https://explore-education-statistics.service.gov.uk/find-statistics/pupil-absence-in-schools-in-england){target="_blank"} who do this on the basis that anything greater than 420 possible sessions is implausible. By removing these rows from the dataset, we will induce missing values when we join the absence data onto our spine later on.
 
 # Summary
 
-At the end of these three scripts, we have created three datasets that contain children’s secondary school enrolment data, their exclusions and yearly absence. As with the other intermediate datasets, we will return to these when we join back onto the cohort spine in Guide 11.
+At the end of these three scripts, we have created three datasets that contain children’s secondary school enrolment data, their exclusions and yearly absence. As with the other intermediate datasets, we will return to these when we join back onto the cohort spine in [Guide 11](guide11_combine.qmd).
 
 # Coming up...
 
-[Guide 9](guide09_exam.qmd) will turn to exam results, focusing particular on GCSE results at the end of secondary school.
+[Guide 9](guide09_exam.qmd) will turn to exam results, focusing particularly on GCSE results at the end of secondary school.
