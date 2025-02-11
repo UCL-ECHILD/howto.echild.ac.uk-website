@@ -6,19 +6,19 @@
 
 # Introduction
 
-Exam data can be baffling. The tables containing the exams are very large. Not only do they contain millions of rows but also a great many columns. The sheer size of the dataset and the complexity of any single year’s tranche of exams is compounded by changes to the exam system over the years. Some of these are explicit and reflected in the data, such as the change from letter grades to number grades, and some are not easily visible, such as possible changes to marking practice over time. Then add in the fact that different systems operate at different points in the school curriculum and that different headline metrics have been used at different points (5 A*-C, progress 8, attainment 8, English Baccalaureate...).
+Exam data can be baffling. The tables containing the exams are very large. Not only do they contain millions of rows but also a great many columns. The sheer size of the dataset and the complexity of any single year’s tranche of exams is compounded by changes to the exam system over the years. Some of these are explicit and reflected in the data, such as the change from letter grades to number grades, and some are not easily visible, such as possible changes to marking practice over time. Then add in the fact that different systems operate at different points in the school curriculum and that different headline metrics have been used at different points over the years (5 A*-C, progress 8, attainment 8, English Baccalaureate...), and you will understand why many researchers find dealing with exam data a rather daunting task.
 
 # Where to start?
 All that said, for now, this guide will be very brief. This is because we have simplified our task by:
 
 * Only looking at GCSE results. GCSE stands for General Certificate of Secondary Education. These exams are the final exams at the end of compulsory schooling.
 * Because we are only looking at GCSE results, we only need to extract data from a select number of years corresponding to the Key Stage 4 period (years 10 and 11).
-* We will also some headline measures that are already computed and available in the NPD:
+* We will also use some headline measures that are already computed and available in the NPD:
   + Attainment 8. This is essentially a total point score in the child’s best 8 subjects, using certain combinations of subjects.
   + Whether the child achieved 5 A*-C (or 9-4) grades including English and maths. This is a long-standing headline metric.
   + Whether the child achieved 9 to 4 passes in the English Baccalaureate (EBacc). Note that unlike the International Baccalaureate, the EBacc is not actually a qualification in its own right. Instead, it describes the situation where a child achieves certain grades in a certain combination of subjects (across English, maths, science and the humanities).
   
-You of course may be interested in other metrics or in specific subjects. You should consult the NPD data tables, ECHILD documentation and previous research to help you determine which variables you need to extract.
+You of course may be interested in other metrics or in specific subjects. You should consult the NPD data tables, [ECHILD documentation](https://docs.echild.ac.uk){target="_blank"} and previous research to help you determine which variables you need to extract.
 
 In terms of our example, Code Snippet 1 shows how we implement the SQL query to extract the data. In terms of the exams, you will see we select the following:
 
