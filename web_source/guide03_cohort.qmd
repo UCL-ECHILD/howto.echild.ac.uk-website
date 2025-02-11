@@ -10,6 +10,7 @@
 There are two main approaches to defining a cohort in ECHILD: school inception cohorts (Figure 1) and HES cohorts (Figure 2). We will show you a basic approach for both. In either case, further NPD and HES data can be used to ascertain both exposures and outcomes, depending on the purpose of the study. There are, of course, many possibilities and refinements that could be made but we expect that most studies would adopt one of these two basic approaches.
 
 ![Figure 1: School cohort: children enrolled in a given year (e.g. year 7) or sitting certain exams (e.g. Key Stage 2 or GCSE exams) are identified and followed backwards and/or forwards.](static/cohort_approach_npd.png){fig-alt="Diagram showing a school inception cohort."}
+
 ![Figure 2: HES cohort: births are identified in HES birth episodes and followed forward in time with exposures and outcomes identified in later HES and NPD data. Inception could also be at another point with look back and forward (e.g. before and after first appointment with a given service).](static/cohort_approach_hes.png){fig-alt="Diagram showing a HES inception cohort."}
 
 # A note on selection and linkage bias
