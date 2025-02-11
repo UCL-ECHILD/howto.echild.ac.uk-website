@@ -7,9 +7,10 @@
 
 # Introduction
 
-There are two main approaches to defining a cohort in ECHILD (Figure 1): HES birth cohorts and school inception cohorts. We will show you a basic approach for both. In either case, further NPD and HES data can be used to ascertain both exposures and outcomes, depending on the purpose of the study. There are, of course, many possibilities and refinements that could be made but we expect that most studies would adopt one of these two basic approaches.
+There are two main approaches to defining a cohort in ECHILD: school inception cohorts (Figure 1) and HES cohorts (Figure 2). We will show you a basic approach for both. In either case, further NPD and HES data can be used to ascertain both exposures and outcomes, depending on the purpose of the study. There are, of course, many possibilities and refinements that could be made but we expect that most studies would adopt one of these two basic approaches.
 
-![Figure 1: Two possible cohort inception designs, HES birth records or NPD inception.](static/main_cohort_approaches.png){fig-alt="Diagrams showing a school inception cohrot and birth cohort."}
+![Figure 1: School cohort: children enrolled in a given year (e.g. year 7) or sitting certain exams (e.g. Key Stage 2 or GCSE exams) are identified and followed backwards and/or forwards.](static/cohort_approach_npd.png){fig-alt="Diagram showing a school inception cohort."}
+![Figure 2: HES cohort: births are identified in HES birth episodes and followed forward in time with exposures and outcomes identified in later HES and NPD data. Inception could also be at another point with look back and forward (e.g. before and after first appointment with a given service).](static/cohort_approach_hes.png){fig-alt="Diagram showing a HES inception cohort."}
 
 # A note on selection and linkage bias
 
@@ -17,9 +18,9 @@ It is important to recall that, whichever approach you adopt, your study may be 
 
 # Creating an NPD inception cohort
 
-We will start with creating an NPD inception cohort and move to HES birth cohorts later. When creating a cohort based on the NPD, our general approach to cohort construction is shown in Figure 2. We start by creating a cohort spine that contains Pupil Matching Reference (PMR), inception year and token person ID (TPID). This becomes our master file, onto which we extract and join data later on.
+We will start with creating an NPD inception cohort and move to HES birth cohorts later. When creating a cohort based on the NPD, our general approach to cohort construction is shown in Figure 3. We start by creating a cohort spine that contains Pupil Matching Reference (PMR), inception year and token person ID (TPID). This becomes our master file, onto which we extract and join data later on.
 
-![Figure 2: Cohort construction and data extraction (NPD inception).](static/data_extract_npd.png){fig-alt="Diagram showing data extraction across different modules of data (NPD inception cohort)."}
+![Figure 3: Cohort construction and data extraction (NPD inception).](static/data_extract_npd.png){fig-alt="Diagram showing data extraction across different modules of data (NPD inception cohort)."}
 
 # Loading year 7 enrolments
 
@@ -211,9 +212,9 @@ At the end of this script, you will end up with a data table called `cohort_spin
 
 # Creating a HES birth cohort
 
-We now turn to the script that creates a HES birth cohort, rather than a school inception cohort: `01b_identify_hes_cohort.r`. The same basic approach when starting with a HES birth cohort is the same as above: we start by creating a spine, then load data onto it (Figure 3). The difference is that before, every child had a PMR but not everyone had a TPID. Now, everyone has a TPID, but not a PMR. After this point, all the scripts are identical as we use the same identifiers to link subsequent data (i.e., we use PMR to link data from the NPD and we use TPID to link data from HES). We therefore use the same scripts for all subsequent guides.
+We now turn to the script that creates a HES birth cohort, rather than a school inception cohort: `01b_identify_hes_cohort.r`. The same basic approach when starting with a HES birth cohort is the same as above: we start by creating a spine, then load data onto it (Figure 4). The difference is that before, every child had a PMR but not everyone had a TPID. Now, everyone has a TPID, but not a PMR. After this point, all the scripts are identical as we use the same identifiers to link subsequent data (i.e., we use PMR to link data from the NPD and we use TPID to link data from HES). We therefore use the same scripts for all subsequent guides.
 
-![Figure 3: Cohort construction and data extraction (HES birth cohort). Note that all subsequent scripts and guides are identical, regardless of whether we use an NPD or HES birth inception. The only exception is that we do not need to extract HES birth characteristics in a subsequent script (covered in Guide 6) as this is done when defining our birth cohort.](static/data_extract_hes.png){fig-alt="Diagram showing data extraction across different modules of data (HES birth cohort)."}
+![Figure 4: Cohort construction and data extraction (HES birth cohort). Note that all subsequent scripts and guides are identical, regardless of whether we use an NPD or HES birth inception. The only exception is that we do not need to extract HES birth characteristics in a subsequent script (covered in Guide 6) as this is done when defining our birth cohort.](static/data_extract_hes.png){fig-alt="Diagram showing data extraction across different modules of data (HES birth cohort)."}
 
 We even adopt a very similar approach in extracting the data from HES, whereby we identify relevant tables and loop through them (Code Snippet 8). HES is slightly easier, however, because variables have the same name throughout all years of HES.
 
