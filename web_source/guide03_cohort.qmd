@@ -219,7 +219,7 @@ We now turn to the script that creates a HES birth cohort, rather than a school 
 
 We even adopt a very similar approach in extracting the data from HES, whereby we identify relevant tables and loop through them (Code Snippet 8). HES is slightly easier, however, because variables have the same name throughout all years of HES.
 
-*Code Snippet 8 (R - 01a_identify_hes_cohort.r)*
+*Code Snippet 8 (R - [01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r))*
 ``` r
 ---
 extract_hes_data <- function(years) {
@@ -272,7 +272,8 @@ birth_records <- birth_records[!duplicated(birth_records)]
 birth_records <-
   birth_records[
     epistart >= paste0(min(birth_cohorts) - 1, "-09-01") &
-      epistart < paste0(max(birth_cohorts), "-09-01")]
+      epistart < paste0(max(birth_cohorts), "-09-01")
+]
 ---
 ```
 
