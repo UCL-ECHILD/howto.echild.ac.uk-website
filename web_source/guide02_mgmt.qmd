@@ -7,13 +7,13 @@
 
 # Introduction
 
-Working with administrative data involves a significant amount of data management and processing before you have an analysis-ready dataset. For novices, this can be sometimes be one of the most challenging aspects of working with administrative data. Even experienced researchers may never have received any formal data management training. While the data have undergone various checks and cleaning (for example, on submission to the Department for Education and NHS England), this does not mean they are ready for running analyses. In addition, ECHILD data are held in over 600 tables, some containing hundreds of variables. While most projects will only ever have access to a subset of these, there will still be a very large amount of data to manage and process. Good coding practice is therefore essential to enable you to work effectively with the data and minimise disruption when you inevitably find errors or make changes to steps earlier in your processing pipeline.
+Working with administrative data involves a significant amount of data management and processing before you have an analysis-ready dataset. For novices, this can sometimes be one of the most challenging aspects of working with administrative data. Even experienced researchers may never have received any formal data management training. While the data have undergone various checks and cleaning (for example, on submission to the Department for Education and NHS England), this does not mean they are ready for running analyses. In addition, ECHILD data are held in over 600 tables, some containing hundreds of variables. While most projects will only ever have access to a subset of these, there will still be a very large amount of data to manage and process. Good coding practice is therefore essential to work effectively with the data and minimise disruption when you inevitably find errors or make changes to steps earlier in your processing pipeline.
 
 # Data are held on a SQL server
 
 All ECHILD data are stored on a Structured Query Language (SQL) server. Details of the server and database name are confidential and cannot be exported from the Secure Research Service (SRS). You will therefore need to obtain this information from ONS. Documentation should be in your project share.
 
-Because data are stored on a SQL server, you will need to use SQL queries to extract the data. SQL queries are a specialist syntax designed for working with databases. You only need a very basic knowledge of SQL. In these guides, we show you how to extract data from the SQL server directly into R. To do this, we embed a very simple SQL `SELECT` query into the R script. A `SELECT` query has the form as shown in Code Snippet 1, where the asterisk means “all columns.” Square brackets around table and column names are optional. If you ran this query when connected to a database, you would select everything from the table. You could always just do this and carry out further operations in R.
+Because data are stored on a SQL server, you will need to use SQL queries to extract the data. SQL queries are a specialist syntax for working with databases. You only need a very basic knowledge of SQL. In these guides, we show you how to extract data from the SQL server directly into R. To do this, we embed a very simple SQL `SELECT` query into the R script. A `SELECT` query has the form as shown in Code Snippet 1, where the asterisk means “all columns.” Square brackets around table and column names are optional. If you ran this query when connected to a database, you would select everything from the table. You could always just do this and carry out further operations in R.
 
 *Code Snippet 1 (SQL)*
 ``` sql
@@ -31,7 +31,7 @@ SELECT [col1], [col2], [col3] FROM [table_name]
 ---
 ```
 
-In the guides, we usually use a `WHERE` statement to subset according to certain variables (Code Snippet 3). Here the `WHERE` statement uses three conditions joined by `AND.` You could also join by `OR` and use brackets as you would with any Boolean operation (you will see this in the guides).
+In the guides, we usually use a `WHERE` statement to subset according to certain variables (Code Snippet 3). Here the `WHERE` statement uses three conditions joined by `AND.` Note how we explicitly specify `[col1]` twice in order to select rows where its value lies between two specified values. You could also join by `OR` and use brackets as you would with any Boolean operation (you will see this in the guides).
 
 *Code Snippet 3 (SQL)*
 ``` sql
@@ -69,7 +69,7 @@ library(RODBC)
 
 ## Working directory
 
-The working directory in all guides assumes a simple structure containing five sub-folders: `codelists`, `csc_data`, `outputs`, `processed`, `scripts` (Figure 1). Folder `codelists` contains phenotype code lists obtained from the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk){target="_blank"} (more information in [Guide 7](guide07_phenotype.qmd)). Folder `csc_data` contains a copy of the processed CSC data (more information in [Guide 12](guide12_csc.qmd)). Folder `outputs` would contain all outputs from analyses (e.g., tables and graphs), `processed` will contain our processed datasets and `scripts` contains the R scripts.
+The working directory in all guides assumes a simple structure containing five sub-folders: `codelists`, `csc_data`, `outputs`, `processed`, `scripts` (Figure 1). Folder `codelists` contains phenotype code lists obtained from the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk){target="_blank"} (more information in [Guide 7](guide07_phenotype.qmd)). Folder `csc_data` contains a copy of the processed CSC data (more information in [Guide 12](guide12_csc.qmd)). Folder `outputs` would contain all outputs from analyses (e.g., tables and graphs, though we never actually use this folder in these guides), `processed` will contain our processed datasets and `scripts` contains the R scripts.
 
 ![Figure 1: An example working directory](static/fake_wd.png){fig-alt="An example working directory."}
 
