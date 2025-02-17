@@ -6,7 +6,7 @@
 
 # Introduction
 
-A phenotype is any observable or measurable trait. In the present context, we are usually referring to specific conditions or groups of conditions (such as chronic conditions generally, neurodisability or congenital anomalies). Phenotypes might also describe types of presentation at hospital and broader circumstances surrounding them, including stress-related presentations and adversity-related admissions.
+A phenotype is any observable or measurable trait. In the present context, we are usually referring to specific health conditions or groups of conditions (such as chronic conditions generally, neurodisability or congenital anomalies). Phenotypes might also describe types of presentation at hospital and broader circumstances surrounding them, including stress-related presentations and adversity-related admissions.
 
 HES admitted patient care contains rich diagnostic data (ICD-10 codes) for all episodes and procedure coding (OPCS-4) where procedures are relevant. These data offer the opportunity to define a wide range of clinical phenotypes that can be used as exposures, outcomes or covariates in your analyses.
 
