@@ -29,11 +29,11 @@ Below we provide some guidance for each of these steps.
 
 Let’s say you are interested in extracting data on gender/sex, ethnic group and deprivation. Your first task is to use the [HES data dictionary](https://digital.nhs.uk/data-and-information/data-tools-and-services/data-services/hospital-episode-statistics/hospital-episode-statistics-data-dictionary){target="_blank"} to identify what these variables are called. The HES data dictionary is a large Excel file that can be a little clunky to navigate. There are separate sheets for each dataset (e.g., admitted patient care, outpatients and so on) and within each, each row represents one variable, sorted alphabetically. You can use Ctrl+F to search by text.
 
-For example, Figure 1 shows the entries for `imd04` (not available in ECHILD) and `imd04_decile`, found by searching “deprivation.”
+For example, Figure 1 shows the entries for `IMD04` (not available in ECHILD) and `IMD04_DECILE`, found by searching “deprivation.”
 
 ![Figure 1: Search of the HES admitted patient care dictionary for “deprivation”](static/hes_dd_deprivation.png){fig-alt="Screenshot from the HES data diciontary with a search for deprivation."}
 
-Always be careful to check not just the variable name but also its description and possible values. The IMD variable is a good example where the variable name can be misleading and researchers sometimes report this inaccurately. Although the variable is called `imd04_decile`, suggesting it represents the 2004 edition of the IMD, the variable description reveals that different versions of the IMD are used depending on different years of activity (Figure 2).
+Always be careful to check not just the variable name but also its description and possible values. The IMD variable is a good example where the variable name can be misleading and researchers sometimes report this inaccurately. Although the variable is called `IMD04_DECILE`, suggesting it represents the 2004 edition of the IMD, the variable description reveals that different versions of the IMD are used depending on different years of activity (Figure 2).
 
 ![Figure 2: Description and values for imd04_decile in the HES admitted patient care data dictionary](static/hes_dd_deprivation_descr.png){fig-alt="Screenshot from the HES data diciontary with the descriptions of imd04 and imd04_decile"}
 
