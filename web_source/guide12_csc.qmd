@@ -2,7 +2,7 @@
 
 ECHILD contains the two children’s social care (CSC) datasets: the child in need census and the children looked after return. These are the two national data sources that provide information on CSC activity in England. These services, which are organised by 153 local authorities, provide support for children in need of help and protection. This includes children who need additional services to maintain or achieve a ‘reasonable standard of health or development’ or who are disabled. It also includes children at risk of, or suffering, harm due to maltreatment.
 
-In this guide, we give a very broad overview of the datasets as well as further information about scripts we have created and published elsewhere that can be used to incorporate information with CSC contact into our cohort spine. The CSC datasets can be very tricky to work with. We provide further resources, including data resource profiles, for you to find out more detail.
+In this guide, we give a very broad overview of the datasets as well as further information about scripts we have created and published elsewhere that can be used to incorporate information with CSC contact into our cohort spine. As the CSC datasets can be very tricky to work with, we provide further resources, including data resource profiles, for you to find out more detail.
 
 # Children in need
 
@@ -10,15 +10,17 @@ Activity for children in need is captured in the child in need census. The censu
 
 A referral can come from many sources, commonly the police, schools, healthcare or self-referral. Note, however, that it is known that not all “referrals” are counted as such and this may vary by local authority. This is because some referrals in some areas might be directed through early help services, for example, which are not captured in the census. The census therefore is really a subset of all CSC activity.
 
-The dataset began in October 2008, running to March 2009. It is then available in financial years from then. However, data quality analyses revealed [poor completeness in early years](https://ijpds.org/article/view/2454){target="_blank"}, particularly for younger children. You would therefore need to consider this in deciding whether the earlier years are appropriate for your analyses. The dataset is organised according to referrals within financial years, meaning each row represents a referral. However, this is a significant amount of duplication because each year of the data contains all referrals open during that year. This means that where a referral spans two or more years, the same referral will appear two or more times. The later referrals may contain more up-to-date information than the earlier ones.
+The dataset began in October 2008, running to March 2009. It is then available in financial years from then. Data quality analyses revealed [poor completeness in early years](https://ijpds.org/article/view/2454){target="_blank"}, particularly for younger children. You would therefore need to consider this in deciding whether the earlier years are appropriate for your analyses.
 
-Note that linkage to other datasets is only possible via the NPD using the Pupil Matching Reference (PMR). However, because the PMR is primarily assigned when children start school, not all children in the data have a PMR, especially younger children (we found that only 70% of records in the data have a PMR). A separate identifier, the local authority child ID can be used to link children’s records, but this ID is unique only to the local authority that assigned it. This means that if a child moves local authority, the link will be lost (unless they have a PMR).
+The dataset is organised according to referrals within financial years, meaning each row represents a referral. However, there is a significant amount of duplication because each year of the data contains all referrals open during that year. This means that where a referral spans two or more years, the same referral will appear two or more times. The later referrals may contain more up-to-date information than the earlier ones.
+
+Note that linkage to other datasets is only possible via the NPD using the Pupil Matching Reference (PMR). However, because the PMR is primarily assigned when children start school, not all children in the data have a PMR, especially younger children (we found that only 70% of records in the data have a PMR). A separate identifier, the local authority child ID, can be used to link children’s records, but this ID is unique only to the local authority that assigned it. This means that if a child moves local authority, the link will be lost (unless they have a PMR).
 
 # Children looked after
 
-Children looked after are a subset of all children in need. They are defined as children under the care of a local authority or accommodated by them. This is often due to abuse or neglect but not always as children may be looked after, for example, under an agreed period of short-term breaks. About [0.7% of children are looked after on a given day](https://explore-education-statistics.service.gov.uk/find-statistics/children-looked-after-in-england-including-adoptions){target="_blank"} and [upwards of 3.3% of children are ever looked after across childhood](https://www.sciencedirect.com/science/article/pii/S0145213415003786){target="_blank"}. Although children looked after are, legally, also children in need, specific information on children looked after and their care placements is contained in the children looked after dataset (CLA), also known as the SSDA903 return.
+Children looked after are a subset of all children in need. They are defined as children under the care of, or accommodated by, a local authority. This is often due to abuse or neglect but not always as children may be looked after, for example, under an agreed period of short-term breaks. About [0.7% of children are looked after on a given day](https://explore-education-statistics.service.gov.uk/find-statistics/children-looked-after-in-england-including-adoptions){target="_blank"} and [upwards of 3.3% of children are ever looked after across childhood](https://www.sciencedirect.com/science/article/pii/S0145213415003786){target="_blank"}. Although children looked after are, legally, also children in need, specific information on children looked after and their care placements is contained in the children looked after dataset, also known as the SSDA903 return.
 
-This dataset began in 1992 and so has significant longevity. However, it was not until April 2005 that the CLA dataset contains PMR, meaning that linkage to the NPD is only possible from then. As with the child in need census, linkage to external datasets is only possible via NPD using the PMR.
+This dataset began in 1992 and so has significant longevity. However, it was not until April 2005 that the children looked after dataset contains PMR, meaning that linkage to the NPD is only possible from then. As with the child in need census, linkage to external datasets is only possible via NPD using the PMR.
 
 # Categorising children in need
 
@@ -28,7 +30,7 @@ You will need to consider how you wish to categorise children in need in your an
 *	Jay et al. [Risk of school exclusion among adolescents receiving social care or special educational needs services: A whole-population administrative data cohort study](https://www.sciencedirect.com/science/article/pii/S0145213423003137){target="_blank"}. Child Abuse & Neglect 2023;144:106325.
 *	Jay et al. [Evaluation of pushing out of children from all English state schools: Administrative data cohort study of children receiving social care and their peers](https://www.sciencedirect.com/science/article/pii/S0145213422001028){target="_blank"}. Child Abuse & Neglect 2022;127:105582.
 
-While simple and easy to implement (see, for example, what we did in [Guide 11](guide11_combine.qmd), this approach ignores that large degree of variation in lived experience. To capture some of this variation, some studies have used data-driven, e.g.:
+While simple and easy to implement (see, for example, what we did in [Guide 11](guide11_combine.qmd)), this approach ignores the large degree of variation in lived experience. To capture some of this variation, some studies have used data-driven approaches, e.g.:
 
 *	Mc Grath-Lone et al. [Exploring placement stability for children in out-of-home care in England: a sequence analysis of longitudinal administrative data](https://www.sciencedirect.com/science/article/pii/S0145213420303446){target="_blank"}. Child Abuse & Neglect 2020;109:104689.
 *	Mc Grath-Lone et al [Using longitudinal administrative data to characterise the use of out-of-home care among looked after children in England](https://discovery.ucl.ac.uk/id/eprint/10038396/){target="_blank"}. 2017 PhD Thesis.
@@ -46,7 +48,7 @@ Each of the CSC datasets has its own structure (see above) and, of course, varia
 
 # Further information
 
-To find out more about the data, we strongly recommend you consult the data resource profiles, especially those dedicated to each dataset:
+To find out more about the data, we strongly recommend you consult the data resource profiles:
 
 * Emmott EH, Jay MA and Woodman J. [Cohort Profile: Children in Need Census (CIN) records of children referred for social care support in England](https://bmjopen.bmj.com/content/9/2/e023771){target="_blank"}. BMJ Open 2019;9:e023771.
 * Mc Grath-Lone L, Harron K, Dearden L, Nasim B, Gilbert R. [Data Resource Profile: Children Looked After Return (CLA)](https://pubmed.ncbi.nlm.nih.gov/27413104/){target="_blank"}. Int J Epi 2016;45(3):716-714f.
