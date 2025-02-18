@@ -25,6 +25,8 @@ Access the guides from the navigation pane to the left or here:
 
 You can also view a [glossary of key terms](glossary.qmd).
 
+More information and help about ECHILD can be found on our [main website](https://www.echild.ac.uk/){target="_blank"}, the [user guide](https://docs.echild.ac.uk/){target="_blank"}, the [ECHILD Code List Repository](https://code.echild.ac.uk/){target="_blank"} and the [discussion forum](https://github.com/orgs/UCL-ECHILD/discussions){target="_blank"}.
+
 # ECHILD
 
 ECHILD is [Education and Child Health Insights from Linked Data](https://www.echild.ac.uk){target="_blank"}, which links the National Pupil Database and Hospital Episode Statistics plus other relevant datasets for all of England.
