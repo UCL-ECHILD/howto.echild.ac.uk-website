@@ -1,14 +1,60 @@
 # Guide 12: children's social care {.unnumbered}
 
-*This page is under construction. Please check back soon.*
+ECHILD contains the two children’s social care (CSC) datasets: the child in need census and the children looked after return. These are the two national data sources that provide information on CSC activity in England. These services, which are organised by 153 local authorities, provide support for children in need of help and protection. This includes children who need additional services to maintain or achieve a ‘reasonable standard of health or development’ or who are disabled. It also includes children at risk of, or suffering, harm due to maltreatment.
 
-ECHILD contains the two children's social care datasets: the child in need (CiN) census and the children looked after (CLA) return. The CiN contains data on children referred to social care, including children in need and those on child protection plans. The CLA return contains data on all children looked after.
+In this guide, we give a very broad overview of the datasets as well as further information about scripts we have created and published elsewhere that can be used to incorporate information with CSC contact into our cohort spine. The CSC datasets can be very tricky to work with. We provide further resources, including data resource profiles, for you to find out more detail.
 
-While we build this page, to find out more about children's social care data you can consult the data resource profiles:
+# Children in need
+
+Activity for children in need is captured in the child in need census. The census contains data on children referred to CSC, including children in need and those on child protection plans. It is possible to identify referrals, where children have received a social work assessment (most referrals), where children are accepted as being children in need and where children are placed on child protection plans. Each year, around [5%-6% of children are referred to CSC and around 3% are children in need on any given day](https://explore-education-statistics.service.gov.uk/find-statistics/children-in-need){target="_blank"}. We estimated that just over a [third are ever referred across childhood and 25% are children in need at least once](https://ijpds.org/article/view/2454){target="_blank"}.
+
+A referral can come from many sources, commonly the police, schools, healthcare or self-referral. Note, however, that it is known that not all “referrals” are counted as such and this may vary by local authority. This is because some referrals in some areas might be directed through early help services, for example, which are not captured in the census. The census therefore is really a subset of all CSC activity.
+
+The dataset began in October 2008, running to March 2009. It is then available in financial years from then. However, data quality analyses revealed [poor completeness in early years](https://ijpds.org/article/view/2454){target="_blank"}, particularly for younger children. You would therefore need to consider this in deciding whether the earlier years are appropriate for your analyses. The dataset is organised according to referrals within financial years, meaning each row represents a referral. However, this is a significant amount of duplication because each year of the data contains all referrals open during that year. This means that where a referral spans two or more years, the same referral will appear two or more times. The later referrals may contain more up-to-date information than the earlier ones.
+
+Note that linkage to other datasets is only possible via the NPD using the Pupil Matching Reference (PMR). However, because the PMR is primarily assigned when children start school, not all children in the data have a PMR, especially younger children (we found that only 70% of records in the data have a PMR). A separate identifier, the local authority child ID can be used to link children’s records, but this ID is unique only to the local authority that assigned it. This means that if a child moves local authority, the link will be lost (unless they have a PMR).
+
+# Children looked after
+
+Children looked after are a subset of all children in need. They are defined as children under the care of a local authority or accommodated by them. This is often due to abuse or neglect but not always as children may be looked after, for example, under an agreed period of short-term breaks. About [0.7% of children are looked after on a given day](https://explore-education-statistics.service.gov.uk/find-statistics/children-looked-after-in-england-including-adoptions){target="_blank"} and [upwards of 3.3% of children are ever looked after across childhood](https://www.sciencedirect.com/science/article/pii/S0145213415003786){target="_blank"}. Although children looked after are, legally, also children in need, specific information on children looked after and their care placements is contained in the children looked after dataset (CLA), also known as the SSDA903 return.
+
+This dataset began in 1992 and so has significant longevity. However, it was not until April 2005 that the CLA dataset contains PMR, meaning that linkage to the NPD is only possible from then. As with the child in need census, linkage to external datasets is only possible via NPD using the PMR.
+
+# Categorising children in need
+
+You will need to consider how you wish to categorise children in need in your analysis, a question which, given the heterogeneity in experiences, is not easy. Many studies use relatively basic, mutually exclusive and hierarchical categories (e.g. no CSC contact, child in need, on a child protection plan, looked after). Some examples from research include:
+
+*	Sebba et al. [The Educational Progress of Looked After Children in England](https://www.education.ox.ac.uk/wp-content/uploads/2019/05/Linking-Care-and-Educational-Data-Overview-Report-Nov-2015.pdf){target="_blank"}, 2015 report.
+*	Jay et al. [Risk of school exclusion among adolescents receiving social care or special educational needs services: A whole-population administrative data cohort study](https://www.sciencedirect.com/science/article/pii/S0145213423003137){target="_blank"}. Child Abuse & Neglect 2023;144:106325.
+*	Jay et al. [Evaluation of pushing out of children from all English state schools: Administrative data cohort study of children receiving social care and their peers](https://www.sciencedirect.com/science/article/pii/S0145213422001028){target="_blank"}. Child Abuse & Neglect 2022;127:105582.
+
+While simple and easy to implement (see, for example, what we did in [Guide 11](guide11_combine.qmd), this approach ignores that large degree of variation in lived experience. To capture some of this variation, some studies have used data-driven, e.g.:
+
+*	Mc Grath-Lone et al. [Exploring placement stability for children in out-of-home care in England: a sequence analysis of longitudinal administrative data](https://www.sciencedirect.com/science/article/pii/S0145213420303446){target="_blank"}. Child Abuse & Neglect 2020;109:104689.
+*	Mc Grath-Lone et al [Using longitudinal administrative data to characterise the use of out-of-home care among looked after children in England](https://discovery.ucl.ac.uk/id/eprint/10038396/){target="_blank"}. 2017 PhD Thesis.
+*	Hood et al [Categorising Demand for Child Welfare Services Using Latent Class Analysis: A Study of the National Data-sets on Children in Need in England](https://academic.oup.com/bjsw/article/53/8/3704/7199770){target="_blank"}. Br J Soc Work 2023;53:3704-3724.
+
+Another approach is to use pre-defined, but more detailed groupings, e.g.:
+
+*	Berridge et al [Children in Need and Children in Care: Educational Attainment and Progress](https://www.bristol.ac.uk/policybristol/policy-briefings/children-in-need-and-in-care-education-progress/){target="_blank"}, 2020 report.  
+
+Remember that you may need to combine information from both the child in need census and the children looked after return.
+
+# Data cleaning
+
+Each of the CSC datasets has its own structure (see above) and, of course, variables. Getting to grips with them can therefore be quite tricky. We have, however, previously released R code that performs some basic cleaning to produce a more-or-less analysis-ready dataset. [You can find out more about the code and access the code and its documentation here](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. In [Guide 11](guide11_combine.qmd), we had used the dataset that this code produced in order to define a mutually exclusive, hierarchical CSC variable in our cohort spine.
+
+# Further information
+
+To find out more about the data, we strongly recommend you consult the data resource profiles, especially those dedicated to each dataset:
 
 * Emmott EH, Jay MA and Woodman J. [Cohort Profile: Children in Need Census (CIN) records of children referred for social care support in England](https://bmjopen.bmj.com/content/9/2/e023771){target="_blank"}. BMJ Open 2019;9:e023771.
 * Mc Grath-Lone L, Harron K, Dearden L, Nasim B, Gilbert R. [Data Resource Profile: Children Looked After Return (CLA)](https://pubmed.ncbi.nlm.nih.gov/27413104/){target="_blank"}. Int J Epi 2016;45(3):716-714f.
 * Jay MA, Mc Grath-Lone L and Gilbert R. [Data Resource Profile: National Pupil Database (NPD)](https://ijpds.org/article/view/1101){target="_blank"}. Int J Pop Data Sci 2019;4:1:08.
 * Mc Grath-Lone L, Libuy N, Harron K, Jay MA, Wijlaars L, Etoori D, Lilliman M, Gilbert R, Blackburn R. [Data Resource Profile: The Education and Child Health Insights from Linked Data (ECHILD) Database](https://academic.oup.com/ije/advance-article/doi/10.1093/ije/dyab149/6425590){target="_blank"}. Int J Epi 2021. doi: 10.1093/ije/dyab149.
 
-You can read more about children's social care data cleaning and R code in a [blog post on the ADRUK website](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}.
+# The end
+
+Congratulations! You have made it through to the end of the ECHILD How To Guides. We hope that you have found them useful and that they have made ECHILD a little easier to use. Remember that even more information can be found on our [main website](https://www.echild.ac.uk/){target="_blank"}, the [user guide](https://docs.echild.ac.uk/){target="_blank"}, the [ECHILD Code List Repository](https://code.echild.ac.uk/){target="_blank"} and the [discussion forum](https://github.com/orgs/UCL-ECHILD/discussions){target="_blank"}.
+
+Good luck with your use of ECHILD!
