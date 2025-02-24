@@ -47,7 +47,7 @@ ks4 <-
 ---
 ```
 
-After this, the script is very simply and short. Where a child has two or more records, we take their maximum, though this is infrequent. Other approaches may be more valid.
+After this, the script is very simple and short. Where a child has two or more records, we take their maximum, though this is infrequent. Other approaches may be more valid.
 
 # Coming up...
 
