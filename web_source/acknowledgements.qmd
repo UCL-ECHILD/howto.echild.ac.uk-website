@@ -1,11 +1,21 @@
 # Acknowledgements {.unnumbered}
 
-The website and series of guides was launched in February 2025 and was created by [Matthew Jay](https://profiles.ucl.ac.uk/60536-matthew-jay){target="_blank"}. Matt has been working with messy administrative data for well over a decade, first at Great Ormond Street Hospital as a data manager and later at UCL as an epidemiologist. He hopes that these guides will help researchers, especially those new to ECHILD's constituent datasets, to avoid the many frustrations that have kept him tied to his desk well into the night over the years.
+The website and series of guides was launched in February 2025 and was created by [Matthew Jay](https://profiles.ucl.ac.uk/60536-matthew-jay){target="_blank"}. Matt has been working with messy administrative data for well over a decade, first at Great Ormond Street Hospital as a data manager and later at UCL as an epidemiologist. He hopes that these guides will help researchers, especially those new to ECHILD's constituent datasets, to avoid the many frustrations that have kept him tied to his desk well into the night over the years. He is grateful to Vincent Nguyen and Ania Zylbersztejn who have contributed code and to Tone Stone who helped with technical aspects of this website.
 
 Suggested citation:
 
-* TBD
+* Jay MA, Stone T, Nguyen V, Zylbersztejn A. ECHILD How To Guides. [https://howto.echild.ac.uk](https://howto.echild.ac.uk){target="_blank"}. UCL (University College London) 2025.
 
-This website is supported by ADR UK (Administrative Data Research UK), an Economic and Social Research Council (part of UK Research and Innovation) programme (ES/V000977/1, ES/X000427/1 and ES/X003663/1).
+# Acknwowledgements
+
+The ECHILD project is in partnership with NHS England and the Department for Education (DfE) and we thank the following individuals for their valuable contributions to the project: Jodie Taylor-Brown, Ian Goodwin, Garry Coleman, Richard Caulton, Catherine Day (NHS England), and Gary Connell, Harriet Fearn, Kirsty Knox (DfE). We are also grateful to Bill South and Alan Cotterill from the Office for National Statistics (ONS) for providing the Trustworthy Research Environment for ECHILD.
+
+We thank all the children, young people, parents and carers who contributed to the ECHILD project. We also gratefully acknowledge all children and families whose de-identified data form this research database.
+
+ECHILD uses data from the DfE, NHS England and ONS. The DfE, NHS England and ONS do not accept responsibility for any inferences or conclusions derived by the authors.
+
+This research benefits from and contributes to research conducted by the NIHR Children and Families Policy Research Unit but was not commissioned by the National Institute for Health Research (NIHR) Policy Research Programme. The views expressed herein are those of the authors and not necessarily those of the NIHR or the Department of Health and Social Care.
+
+This website is supported by ADR UK (Administrative Data Research UK), an Economic and Social Research Council (part of UK Research and Innovation) programme ([ES/V000977/1](https://gtr.ukri.org/projects?ref=ES/X003663/1){target="_blank"}, [ES/X000427/1](https://gtr.ukri.org/projects?ref=ES/X000427/1){target="_blank"} and [ES/X003663/1](https://gtr.ukri.org/projects?ref=ES/X003663/1){target="_blank"}).
 
 You can find out more about ECHILD on the [ECHILD website](https://www.echild.ac.uk/){target="_blank"} and on [UCL's website](https://www.ucl.ac.uk/child-health/research/population-policy-and-practice-research-and-teaching-department/cenb-clinical-20){target="_blank"}. 
