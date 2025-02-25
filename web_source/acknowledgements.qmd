@@ -1,6 +1,6 @@
 # Acknowledgements {.unnumbered}
 
-The website and series of guides was launched in February 2025 and was created by [Matthew Jay](https://profiles.ucl.ac.uk/60536-matthew-jay){target="_blank"}. Matt has been working with messy administrative data for well over a decade, first at Great Ormond Street Hospital as a data manager and later at UCL as an epidemiologist. He hopes that these guides will help researchers, especially those new to ECHILD's constituent datasets, to avoid the many frustrations that have kept him tied to his desk well into the night over the years. He is grateful to Vincent Nguyen and Ania Zylbersztejn who have contributed code and to Tone Stone who helped with technical aspects of this website.
+The website and series of guides was launched in February 2025 and was created by [Matthew Jay](https://profiles.ucl.ac.uk/60536-matthew-jay){target="_blank"}. Matt has been working with messy administrative data for well over a decade, first at Great Ormond Street Hospital as a data manager and later at UCL as an epidemiologist. He hopes that these guides will help researchers, especially those new to ECHILD's constituent datasets, to avoid the many frustrations that have kept him tied to his desk well into the night over the years. He is grateful to [Vincent Nguyen](https://profiles.ucl.ac.uk/64668-vincent-grigori){target="_blank"} and [Ania Zylbersztejn](https://profiles.ucl.ac.uk/47044-ania-zylbersztejn){target="_blank"} who have contributed code and to Tone Stone who helped with technical aspects of this website.
 
 Suggested citation:
 
