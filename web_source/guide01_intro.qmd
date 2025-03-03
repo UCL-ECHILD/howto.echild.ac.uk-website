@@ -12,7 +12,7 @@ The general approach is depicted in Figure 1. We will carry out a longitudinal s
 
 The approach depicted in Figure 1 represents a school inception cohort. We will also show you how you can alternatively create a cohort based on birth records in the HES admitted patient care data. Whether you start with a school or HES cohort, however, the general approach to data extraction will be the same, described in more detail in [Guide 3 – Identify a cohort and create a cohort spine](guide03_cohort.qmd).
 
-We have not attempted to provide the best approach scientifically. For example, we do not take account of health exposures or covariates during the secondary school years. We completely ignore the pre-school period. Instead. this example is designed to show how to manage the data to create an analysis-ready dataset. Exactly what those analyses are and what that dataset is, is of course up to you.
+We have not attempted to provide the best approach scientifically. For example, we do not take account of health exposures or covariates during the secondary school years. We completely ignore the pre-school period. Instead, this example is designed to show how to manage the data to create an analysis-ready dataset. Exactly what those analyses are and what that dataset is, is of course up to you.
 
 These guides make use of the following modules of data:
 
