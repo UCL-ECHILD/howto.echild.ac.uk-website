@@ -83,7 +83,7 @@ This part is only relevant if you adopted an NPD cohort inception. These are the
 
 # CHC exposure
 
-This part deals with the phenotypes. Because you might have multiple phenotypes, we have written a for loop as a way of looping through them all and creating a binary indicator that states whether the child in question ever had a code for each phenotype in question or not (Code Snippet 4). You may want to take a more nuanced approach, for example, by only including codes within a certain date range, for example. It is fairly straightforward to amend the code to include a subsetting condition along these lines.
+This part deals with the phenotypes. Because you might have multiple phenotypes, we have written a for loop as a way of looping through them all and creating a binary indicator that states whether the child in question ever had a code for each phenotype in question or not (Code Snippet 4). You may want to take a more nuanced approach, for example by only including codes within a certain date range. It is fairly straightforward to amend the code to include a subsetting condition along these lines.
 
 *Code Snippet 4 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
