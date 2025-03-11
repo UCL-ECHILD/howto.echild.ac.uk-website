@@ -2,7 +2,7 @@
 
 # Overview
 
-This series of “How To?” guides will take you through discrete aspects of working with Hospital Episode Statistics (HES), National Pupil Database (NPD) and social care data in ECHILD. Each ones tackles a particular problem, providing hints and warnings as well as example code that you are free to copy, use and adapt however you wish.
+This series of “How To?” guides will take you through discrete aspects of working with Hospital Episode Statistics (HES), National Pupil Database (NPD) and social care data in ECHILD. Each one tackles a particular problem, providing hints and warnings as well as example code that you are free to copy, use and adapt however you wish.
 
 Each guide should really be read in order as they follow on from each other. They aim to create a dataset that will enable you to answer the hypothetical research question: What is the association between chronic health conditions identified during primary school and exam results, absences, exclusions and non-enrolment in secondary school, accounting for demographic factors, social care involvement and special educational needs provision? We are keeping this question broad so that we can use it to highlight different aspects of ECHILD, and different ways of doing things, as we go along.
 
@@ -24,11 +24,11 @@ These guides make use of the following modules of data:
 * NPD KS4 data
 * Children’s social care (CSC) data
 
-Not all projects need access to all data and so you may not be able to reproduce all scripts exactly as they are given in these guides. Additionally, there are datasets we have not used, such as exams results from other Key Stages or the early years data. There should, however, be enough to get you going.
+Not all projects need access to all data and so you may not be able to reproduce all scripts exactly as they are given in these guides. Additionally, there are datasets we have not used, such as exams results from other Key Stages or the early years data. While these guides are not exhaustive of everything you can or should do with ECHILD, we hope that they will serve as a useful starting point and reference to support you in your data management and analyses.
 
 # The scripts
 
-We will create an analysis-ready dataset across several guides, each with its own R scripts. You can download the scripts using the links in Table 1, below, or at the start of each guide. While these guides are not exhaustive of everything you can or should do with ECHILD, we hope that they will serve as a useful starting point and reference to support you in your data management and analyses.
+We will create an analysis-ready dataset across several guides, each with its own R script or scripts. You can download the scripts using the links in Table 1, below, or at the start of each guide.
 
 | # | Guide | Scripts |
 |---|-------|---------|
@@ -47,7 +47,7 @@ We will create an analysis-ready dataset across several guides, each with its ow
 
 : Table 1. Series of guides and scripts
 
-You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already [produced and published CSC data extraction and cleaning code that produces cleaned datasets](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in [Guide 11](guide11_combine.qmd) whereas [Guide 12](guide12_csc.qmd) discusses the CSC data more generally and summarises the cleaning steps that the other scripts undertake.
+You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already [produced and published CSC data extraction and cleaning code that produces cleaned datasets](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in [Guide 11](guide11_combine.qmd) whereas [Guide 12](guide12_csc.qmd) discusses the CSC data more generally.
 
 # How much R do I need and what version?
 
