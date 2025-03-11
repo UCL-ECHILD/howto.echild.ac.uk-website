@@ -12,7 +12,7 @@ Recall that our plan was to create a master spine, onto which we later join othe
 
 # Loading datasets
 
-Script [12_combine.r](scripts/12_combine.r) is perhaps the simplest. However, before we run it, in [00a_run_cleaning.r](scripts/00a_run_cleaning.r),  we first load all the files that we created up until this point (Code Snippet 1). In Code Snippet 1, note how we create a vector of strings called `files`, and then remove one file from it. This is the file that we ultimately create at the end of [12_combine.r](scripts/12_combine.r). You will likely find yourself in a situation where you re-run your scripts and this step just ensures we are combining data into our original spine, not some later (and now incorrect) version of it.
+Script [12_combine.r](scripts/12_combine.r) is perhaps the simplest. However, before we run it, in [00a_run_cleaning.r](scripts/00a_run_cleaning.r),  we first load all the files that we created up until this point (Code Snippet 1). In Code Snippet 1, note how we create a vector of strings called `files`, and then remove one file from it. This is the file that we ultimately create at the end of [12_combine.r](scripts/12_combine.r). You will likely find yourself in a situation where you re-run your scripts and this step just ensures we are combining data into our original spine, not some other (and now incorrect) version of it.
 
 *Code Snippet 1 (R - [00a_run_cleaning.r](scripts/00a_run_cleaning.r))*
 ``` r
