@@ -16,6 +16,7 @@ Script [12_combine.r](scripts/12_combine.r) is perhaps the simplest. However, be
 
 *Code Snippet 1 (R - [00a_run_cleaning.r](scripts/00a_run_cleaning.r))*
 ``` r
+---
 source("scripts/00b_prelim.r")
 
 files <- list.files("processed/")
@@ -40,6 +41,7 @@ The “ever” variables are slightly more complex as the data table we created 
 
 *Code Snippet 2 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
+---
 cohort_spine[!is.na(PupilMatchingRefAnonymous), fsm_ever_primary := PupilMatchingRefAnonymous %in%
                demographics_ever[fsm_ever_primary == 1]$PupilMatchingRefAnonymous]
 ---
@@ -49,6 +51,7 @@ For highest level of SEN, we start by creating a factor variable within our `coh
 
 *Code Snippet 3 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
+---
 cohort_spine[, highest_sen_primary := factor("None",
                                              levels = c("None",
                                                         "Support",
@@ -84,6 +87,7 @@ This part deals with the phenotypes. Because you might have multiple phenotypes,
 
 *Code Snippet 4 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
+---
 for (chc in phen_groups) {
     
   new_col <- paste0("chc_", chc)
@@ -121,6 +125,7 @@ Before saving, we also create an eligibility flag which declares whether each ch
 
 *Code Snippet 5 (R - [12_combine.r](scripts/12_combine.r))*
 ``` r
+---
 cohort_spine[, born_in_year := dob_approx >= paste0(min(birth_cohorts) - 1, "-09-01") & dob_approx < paste0(max(birth_cohorts), "-09-01")]
 cohort_spine[, eligible := !is.na(tokenpersonid) & born_in_year] # NPD inception cohort
 # cohort_spine[, eligible := !is.na(PupilMatchingRefAnonymous) & born_in_year] # HES inception cohort
