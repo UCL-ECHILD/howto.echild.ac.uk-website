@@ -101,7 +101,7 @@ rm(i)
 ---
 ```
 
-# Summer 6th half-term term in year 11
+# Summer 6th half-term in year 11
 
 Another quirk of the absence data relates to the summer 6th half-term in year 11. We want to ignore this half-term because we expect there to be a higher rate of absence due to study leave and the exam period. This, of course, may not be something you wish to do in your study but we provide an example of how to do it should you choose to do so. Our approach is simply to set all variables to zero (Code Snippet 5) so that, when we calculate annual absence in the next section, the summer 6th in year 11 is ignored.
 
