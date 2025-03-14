@@ -19,7 +19,7 @@ temp <- temp[TOKEN_PERSON_ID %in% cohort_spine$tokenpersonid]
 ---
 ```
 
-Recall that we are here implementing the code list that identifies birth episodes available through the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk/births_zylb_v1){target="_blank"}. It will be well worth consulting the documentation for this code list and the papers on which it is based if you are interested in using birth records in HES.
+Recall that we are here implementing the approach of identifying birth episodes by [Zylbersztejn et al](https://pmc.ncbi.nlm.nih.gov/articles/PMC7737962/){target="_blank"}. It will be well worth consulting the paper on which it is based if you are interested in using birth records in HES.
 
 # Coming up...
 
