@@ -8,8 +8,9 @@
 
 In the previous guide, we extracted a range of demographic data across children’s records on NPD. In this guide, we consider extraction of same data from HES. We might want to do this because:
 
-* Although NPD generally has low levels of missing data on key variables, data can still be missing. Ensure you check the metadata to spot how values such as “unclear,” “not provided” or “unknown” are coded as these will not always be imported as system missing values.
-* There are known differences in values across different data sources, which can have an appreciable impact on analyses. We discussed how, for example, we might take modal values of time-invariant variables across a child’s records in NPD. You may wish to go one step further and compare records across NPD and HES and take modal values across these datasets.
+* Although NPD generally has low levels of missing data on key variables, data can still be missing. You may be able to infer values from other sources. Ensure you check the metadata to spot how values such as “unclear,” “not provided” or “unknown” are coded as these will not always be imported as system missing values.
+* [There are known differences in values across different data sources](https://pmc.ncbi.nlm.nih.gov/articles/PMC10916132/){target="_blank"}, which can have an appreciable impact on analyses. You might therefore be interested in comparing values across different datasets and running sensitivity analyses to understand how differences in coding might affect results.
+* In the previous guide, we discussed how, for example, we might take modal values of time-invariant variables across a child’s records in NPD. You may wish to go one step further and compare records across NPD and HES and take modal values across these datasets.
 
 In this guide, however, we are going to provide hints but leave it to you, as a challenge, to adapt the code we have already provided, to extract the relevant data.
 
