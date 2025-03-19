@@ -13,13 +13,15 @@ There are two main approaches to defining a cohort in ECHILD: school inception c
 
 ![Figure 2: HES cohort: births are identified in HES birth episodes and followed forward in time with exposures and outcomes identified in later HES and NPD data. Inception could also be at another point with look back and forward (e.g. before and after first appointment with a given service).](static/cohort_approach_hes.png){fig-alt="Diagram showing a HES inception cohort."}
 
-# A note on selection and linkage bias
+# Notes on selection and linkage bias
 
-It is important to recall that, whichever approach you adopt, your study may be subject to selection bias due to the fact that not all births are recorded in HES and that not all children are enrolled in the NPD. Each year, around 7% of children are in other settings (e.g., private schools, home schools or not receiving any education) and children may move in and out of the state sector. Additionally, there may be [bias induced by linkage error](https://ijpds.org/article/view/1671){target="_blank"}. Not all children in HES link to NPD records and not all children enrolled in the NPD link to HES records. In accordance with the [RECORD statement](https://www.record-statement.org/){target="_blank"}, you should always report linkage rates for your cohort and, where possible, investigate those who and do not link to inform possible biases in your analyses.
+It is important to recall that, whichever approach you adopt, your study may be subject to selection bias due to the fact that not all births are recorded in HES and that not all children are enrolled in the NPD. Each year, around [7% of children are in other settings](https://ijpds.org/article/view/1101){target="_blank"} (e.g., private schools, home schools or not receiving any education) and children may move in and out of the state sector. The rate at which children become unenrolled from the NPD is associated with various factors such as [deprivation, social care experience and special educational needs provision](https://www.sciencedirect.com/science/article/pii/S0145213422001028){target="_blank"}.
+
+Additionally, there may be [bias induced by linkage error](https://ijpds.org/article/view/1671){target="_blank"}. Not all children in HES link to NPD records and not all children enrolled in the NPD link to HES records. In accordance with the [RECORD statement](https://www.record-statement.org/){target="_blank"}, you should always report linkage rates for your cohort and, where possible, investigate those who and do not link to inform possible biases in your analyses.
 
 # Creating an NPD inception cohort
 
-We will start with creating an NPD inception cohort and move to HES birth cohorts later. When creating a cohort based on the NPD, our general approach to cohort construction is shown in Figure 3. We start by creating a cohort spine that contains Pupil Matching Reference (PMR), inception year and token person ID (TPID). This becomes our master file, onto which we extract and join data later on.
+We will start with an NPD inception cohort and move to HES birth cohorts later. When creating a cohort based on the NPD, our general approach to cohort construction is shown in Figure 3. We start by creating a cohort spine that contains Pupil Matching Reference (PMR), inception year and token person ID (TPID). This becomes our master file, onto which we extract and join data later on.
 
 ![Figure 3: Cohort construction and data extraction (NPD inception).](static/data_extract_npd.png){fig-alt="Diagram showing data extraction across different modules of data (NPD inception cohort)."}
 
