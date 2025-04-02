@@ -10,7 +10,7 @@ You are free to use and adapt the material on this site as you wish. Indeed, giv
 
 Access the guides from the navigation pane to the left or here:
 
-* @introduction
+* @sec-introduction
 * [Guide 2: script management, coding principles and working in the SRS](guide02_mgmt.qmd)
 * Guide 3: working with data.table (coming soon)
 * [Guide 4: identify a cohort and create a cohort spine](guide03_cohort.qmd)

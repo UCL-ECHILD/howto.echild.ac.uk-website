@@ -1,4 +1,4 @@
-# Guide 1: introduction {.unnumbered #introduction}
+# Guide 1: introduction {.unnumbered #sec-introduction}
 
 # Overview
 
