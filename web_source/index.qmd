@@ -10,19 +10,19 @@ You are free to use and adapt the material on this site as you wish. Indeed, giv
 
 Access the guides from the navigation pane to the left or here:
 
-* @sec-introduction
-* [Guide 2: script management, coding principles and working in the SRS](guide02_mgmt.qmd)
-* Guide 3: working with data.table (coming soon)
-* [Guide 4: identify a cohort and create a cohort spine](guide03_cohort.qmd)
-* [Guide 5: NPD demographic and SEND data](guide04_demo_npd.qmd)
-* [Guide 6: HES demographic data (your turn!)](guide05_demo_hes.qmd)
-* [Guide 7: birth characteristics](guide06_birth_chars.qmd)
-* [Guide 8: phenotyping](guide07_phenotype.qmd)
-* [Guide 9: enrolment, exclusions and absence](guide08_enr_abs_excl.qmd)
-* [Guide 10: exams](guide09_exam.qmd)
-* [Guide 11: outpatients](guide10_opa.qmd)
-* [Guide 12: combine it all together](guide11_combine.qmd)
-* [Guide 13: children's social care](guide12_csc.qmd)
+* @sec-intro
+* @sec-mgmt
+* @sec-data-table
+* @sec-cohort
+* @sec-demo-npd
+* @sec-demo-hes
+* @sec-birth_chars
+* @sec-phenotype
+* @sec-enr-abs-excl
+* @sec-exam
+* @cec-opa
+* @sec-combine
+* @sec-csc
 
 You can also view a [glossary of key terms](glossary.qmd).
 

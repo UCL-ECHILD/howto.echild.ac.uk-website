@@ -1,4 +1,4 @@
-# Guide 12: children's social care {.unnumbered}
+# Children's social care {#sec-csc}
 
 # Scripts needed for this guide
 
@@ -50,7 +50,7 @@ Remember that you may need to combine information from both the child in need ce
 
 # Data cleaning
 
-Each of the CSC datasets has its own structure (see above) and, of course, variables. Getting to grips with them can therefore be quite tricky. We have, however, previously released R code that performs some basic cleaning to produce a more-or-less analysis-ready dataset. [You can find out more about the code and access the code and its documentation here](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. In [Guide 11](guide11_combine.qmd), we had used the dataset that this code produced in order to define a mutually exclusive, hierarchical CSC variable in our cohort spine.
+Each of the CSC datasets has its own structure (see above) and, of course, variables. Getting to grips with them can therefore be quite tricky. We have, however, previously released R code that performs some basic cleaning to produce a more-or-less analysis-ready dataset. [You can find out more about the code and access the code and its documentation here](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. In @csc-combine, we had used the dataset that this code produced in order to define a mutually exclusive, hierarchical CSC variable in our cohort spine.
 
 # Further information
 

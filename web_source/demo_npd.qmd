@@ -1,4 +1,4 @@
-# Guide 4: NPD demographic and SEND data {.unnumbered}
+# NPD demographic and SEND data {#demo-npd}
 
 # Scripts needed for this guide
 
@@ -224,8 +224,8 @@ demographics_ever[, fsm_ever_primary := max(fsmeligible), by = PupilMatchingRefA
 
 # The result
 
-At the end of this script, we retain just four variables, `PupilMatchingRefAnonymous`, `fsm_ever_primary`, `senprovision` and `specialist_school.` Note that we so far have not defined an “ever SEN” variable. We will do this in [Guide 11](guide11_combine.qmd). For now, we just save the resulting object as its own file and clear the workspace.
+At the end of this script, we retain just four variables, `PupilMatchingRefAnonymous`, `fsm_ever_primary`, `senprovision` and `specialist_school.` Note that we so far have not defined an “ever SEN” variable. We will do this in @sec-combine. For now, we just save the resulting object as its own file and clear the workspace.
 
 # Coming up...
 
-In total, we have therefore created three separate datasets containing the different types of demographic information that we will later join onto our spine. In the [next Guide](guide05_demo_hes.qmd), we will think about why we might now also want to extract demographic data from HES and how you can adapt code provided in this Guide to do so.
+In total, we have therefore created three separate datasets containing the different types of demographic information that we will later join onto our spine. In @sec-demo-hes, we will think about why we might now also want to extract demographic data from HES and how you can adapt code provided in this Guide to do so.

@@ -1,4 +1,4 @@
-# Guide 8: enrolment, exclusions and absence {.unnumbered}
+# Enrolment, exclusions and absence {#sec-enr-abs-excl}
 
 # Scripts needed for this guide
 
@@ -126,8 +126,8 @@ Finally, after creating annual variables and dropping the termly variables, and 
 
 # Summary
 
-At the end of these three scripts, we have created three datasets that contain children’s secondary school enrolment data, their exclusions and yearly absence. As with the other intermediate datasets, we will return to these when we join back onto the cohort spine in [Guide 11](guide11_combine.qmd).
+At the end of these three scripts, we have created three datasets that contain children’s secondary school enrolment data, their exclusions and yearly absence. As with the other intermediate datasets, we will return to these when we join back onto the cohort spine in @sec-combine.
 
 # Coming up...
 
-[Guide 9](guide09_exam.qmd) will turn to exam results, focusing particularly on GCSE results at the end of secondary school.
+@sec-exam will turn to exam results, focusing particularly on GCSE results at the end of secondary school.

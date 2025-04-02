@@ -1,4 +1,4 @@
-# Guide 7: phenotyping {.unnumbered}
+# Phenotyping {#sec-phenotype}
 
 # Script needed for this guide
 
@@ -10,7 +10,7 @@ A phenotype is any observable or measurable trait. In the present context, we ar
 
 HES admitted patient care contains rich diagnostic data (ICD-10 codes) for all episodes and procedure coding (OPCS-4) where procedures are relevant. These data offer the opportunity to define a wide range of clinical phenotypes that can be used as exposures, outcomes or covariates in your analyses.
 
-We are focusing on HES admitted patient care episodes. There is limited scope for identifying clinical phenotypes in outpatients as diagnostic data is largely absent. We show how you can use outpatient specialty in [Guide 10](guide10_opa.qmd). A&E data contain some diagnostic information but its use is relatively underexplored. The National Pupil Database censuses also contain information on special educational needs that may be relevant to your phenotypes.
+We are focusing on HES admitted patient care episodes. There is limited scope for identifying clinical phenotypes in outpatients as diagnostic data is largely absent. We show how you can use outpatient specialty in @sec-opa. A&E data contain some diagnostic information but its use is relatively underexplored. The National Pupil Database censuses also contain information on special educational needs that may be relevant to your phenotypes.
 
 If you are unfamiliar with phenotyping and phenotype code lists, we recommend you visit the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk/){target="_blank"} for a primer on phenotyping, including an introduction to the coding systems used in HES, as well as a catalogue of code lists that you can easily implement in ECHILD along with example code. In fact, we used and adapted the example code developed for the Repository in this guide.
 
@@ -82,5 +82,5 @@ At the end of this script, you will end up with a long format dataset that inclu
 
 # Coming up...
 
-In the next guide, we return to the NPD to look at how to extract [enrolment, exclusion and absence data](guide08_enr_abs_excl.qmd).
+In the next guide (@sec-enr-abs-excl), we return to the NPD to look at how to extract enrolment, exclusion and absence data.
 

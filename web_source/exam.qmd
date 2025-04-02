@@ -1,4 +1,4 @@
-# Guide 9: exams {.unnumbered}
+# Exams {#sec-exam}
 
 # Script needed for this guide
 
@@ -51,4 +51,4 @@ After this, the script is very simple and short. Where a child has two or more r
 
 # Coming up...
 
-[Guide 10](guide10_opa.qmd) will take us back to HES again, this time focusing on outpatient data as an example of how to use the treatment specialty variable to identify a cohort of patients with a particular condition seen in outpatients.
+@sec-opa will take us back to HES again, this time focusing on outpatient data as an example of how to use the treatment specialty variable to identify a cohort of patients with a particular condition seen in outpatients.

@@ -1,4 +1,4 @@
-# Guide 10: outpatients {.unnumbered}
+# Outpatients {#sec-opa}
 
 # Script needed for this guide
 
@@ -40,4 +40,4 @@ Some things to bear in mind about outpatient data:
 
 # Coming up...
 
-In [Guide 11](guide11_combine.qmd), we finally return to our spine and combine all the data so far extracted into it. With this, we shall have an analysis-ready dataset.
+In @sec-combine, we finally return to our spine and combine all the data so far extracted into it. With this, we shall have an analysis-ready dataset.

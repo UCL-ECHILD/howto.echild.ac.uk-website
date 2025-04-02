@@ -1,4 +1,4 @@
-# Guide 11: combine it all together {.unnumbered}
+# Combine it all together {#sec-combine}
 
 # Script needed for this guide
 
@@ -75,11 +75,11 @@ cohort_spine[, ever_sen_primary := ifelse(highest_sen_primary == "None", F, T)]
 
 # HES demographics data
 
-Recall that in [Guide 5](guide05_demo_hes.qmd), we provided some hints on how you can adapt our code to extract demographic data from HES. If you did this, remember to also adapt the code here to import it into your spine.
+Recall that in @sec-demo-hes, we provided some hints on how you can adapt our code to extract demographic data from HES. If you did this, remember to also adapt the code here to import it into your spine.
 
 # HES birth characteristics
 
-This part is only relevant if you adopted an NPD cohort inception. These are the birth data we extracted in [Guide 6](guide06_birth_chars.qmd). Remember to comment out or delete this section if you do not need it.
+This part is only relevant if you adopted an NPD cohort inception. These are the birth data we extracted in @sec-birth-chards. Remember to comment out or delete this section if you do not need it.
 
 # CHC exposure
 
@@ -111,11 +111,11 @@ Given how we extracted the exam data, we get away with a simple `merge()` here.
 
 # Outpatients
 
-With the outpatient data (recall that our dataset contains appointments with pain services), we first create a binary flag indicating “ever” attendance. We then merge the date of the first recorded chronic pain clinic attendance. Remember, as discussed in [Guide 10](guide10_opa.qmd), you may want to consider what to do with cancelled and non-attended appointments, which we ignore here.
+With the outpatient data (recall that our dataset contains appointments with pain services), we first create a binary flag indicating “ever” attendance. We then merge the date of the first recorded chronic pain clinic attendance. Remember, as discussed in @sec-opa, you may want to consider what to do with cancelled and non-attended appointments, which we ignore here.
 
 # Children’s social care (CSC)
 
-We now turn to the CSC data, the only component that has not so far been treated in its own guide. This is because elsewhere [we have published code](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"} that extracts and cleans the two CSC datasets (the child in need census and the children looked after return) in their entirety. See the next guide, [Guide 12](guide12_csc.qmd), for more information about the CSC data and that cleaning code.
+We now turn to the CSC data, the only component that has not so far been treated in its own guide. This is because elsewhere [we have published code](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"} that extracts and cleans the two CSC datasets (the child in need census and the children looked after return) in their entirety. See the next guide, @sec-csc, for more information about the CSC data and that cleaning code.
 
 In the meantime, observe that we simply load the cleaned data, subset to those in our cohort and to primary school records. Then we create “ever” binary flags and a variable that indicates the highest level of CSC involvement ever experienced.
 
@@ -137,5 +137,5 @@ cohort_spine <- cohort_spine[order(PupilMatchingRefAnonymous, y7_year)]
 
 You should now have an analysis-ready dataset. The rest is up to you!
 
-(Though, if you are interested in children’s social care data, you may want to read onto [Guide 12](guide12_csc.qmd) to learn more about that.)
+(Though, if you are interested in children’s social care data, you may want to read onto @sec-csc to learn more about that.)
 

@@ -1,4 +1,4 @@
-# Guide 3: identify a cohort and create a cohort spine {.unnumbered}
+# Identify a cohort and create a cohort spine {#sec-cohort}
 
 # Scripts needed for this guide
 
@@ -312,4 +312,4 @@ Whichever approach you took, all subsequent scripts are the same. They will use 
 
 # Coming up...
 
-In the next Guide—[NPD demographic and SEND data](guide04_demo_npd.qmd)—we will run three scripts that will extract and save demographic data.
+In @sec-demo-npd we will run three scripts that will extract and save demographic data.

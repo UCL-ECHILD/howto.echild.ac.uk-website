@@ -1,4 +1,4 @@
-# Guide 1: introduction {#sec-introduction}
+# Introduction {#sec-intro}
 
 # Overview
 
@@ -10,7 +10,7 @@ The general approach is depicted in Figure 1. We will carry out a longitudinal s
 
 ![Figure 1: Study design diagram](static/school_cohort.png){fig-alt="Diagram showing longitudinal design."}
 
-The approach depicted in Figure 1 represents a school inception cohort. We will also show you how you can alternatively create a cohort based on birth records in the HES admitted patient care data. Whether you start with a school or HES cohort, however, the general approach to data extraction will be the same, described in more detail in [Guide 3 – Identify a cohort and create a cohort spine](guide03_cohort.qmd).
+The approach depicted in Figure 1 represents a school inception cohort. We will also show you how you can alternatively create a cohort based on birth records in the HES admitted patient care data. Whether you start with a school or HES cohort, however, the general approach to data extraction will be the same, described in more detail in @sec-cohort.
 
 We have not attempted to provide the best approach scientifically. For example, we do not take account of health exposures or covariates during the secondary school years. We completely ignore the pre-school period. Instead, this example is designed to show how to manage the data to create an analysis-ready dataset. Exactly what those analyses are and what that dataset is, is of course up to you.
 
@@ -30,24 +30,25 @@ Not all projects need access to all data and so you may not be able to reproduce
 
 We will create an analysis-ready dataset across several guides, each with its own R script or scripts. You can download the scripts using the links in Table 1, below, or at the start of each guide.
 
-| # | Guide | Scripts |
-|---|-------|---------|
-| 1 | Introduction (this guide) | None |
-| 2 | [Script management, coding principles and working in the SRS](guide02_mgmt.qmd) | [00a_run_cleaning.r](scripts/00a_run_cleaning.r), [00b_prelim.r](scripts/00b_prelim.r) |
-| 3 | [Identify a cohort and create a cohort spine](guide03_cohort.qmd) | [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r), [01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r) |
-| 4 | [NPD demographic and SEND data](guide04_demo_npd.qmd) | [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r), [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r), [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) |
-| 5 | [HES demographic data (your turn!)](guide05_demo_hes.qmd) | None |
-| 6 | [Birth characteristics](guide06_birth_chars.qmd) | [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) |
-| 7 | [Phenotyping](guide07_phenotype.qmd) | [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r) |
-| 8 | [Enrolment, exclusions and absence](guide08_enr_abs_excl.qmd) | [07_enrolment.r](scripts/07_enrolment.r), [08_exclusion.r](scripts/08_exclusion.r), [09_absence.r](scripts/09_absence.r) |
-| 9 | [Exams](guide09_exam.qmd) | [10_exams.r](scripts/10_exams.r) |
-| 10 | [Outpatients](guide10_opa.qmd) | [11_outpatient_data.r](scripts/11_outpatient_data.r) |
-| 11 | [Combine it all together](guide11_combine.qmd) | [12_combine.r](scripts/12_combine.r) |
-| 12 | [Children's social care](guide12_csc.qmd) | None |
+| Guide | Scripts |
+|-------|---------|
+| 1 Introduction (this guide) | None |
+| @sec-mgmt | [00a_run_cleaning.r](scripts/00a_run_cleaning.r), [00b_prelim.r](scripts/00b_prelim.r) |
+| @sec-data-table | Coming soon |
+| @sec-cohort | [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r), [01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r) |
+| @sec-demo-npd | [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r), [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r), [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) |
+| @sec-demo-hes | None |
+| @sec-birth_chars | [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) |
+| @sec-phenotype | [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r) |
+| @sec-enr-abs-excl | [07_enrolment.r](scripts/07_enrolment.r), [08_exclusion.r](scripts/08_exclusion.r), [09_absence.r](scripts/09_absence.r) |
+| @sec-exam | [10_exams.r](scripts/10_exams.r) |
+| @cec-opa | [11_outpatient_data.r](scripts/11_outpatient_data.r) |
+| @sec-combine | [12_combine.r](scripts/12_combine.r) |
+| @sec-csc | None |
 
 : Table 1. Series of guides and scripts
 
-You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already [produced and published CSC data extraction and cleaning code that produces cleaned datasets](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in [Guide 11](guide11_combine.qmd) whereas [Guide 12](guide12_csc.qmd) discusses the CSC data more generally.
+You will notice that we do not have a script for extracting and cleaning children’s social care (CSC) data. This is because we have already [produced and published CSC data extraction and cleaning code that produces cleaned datasets](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. We will use this cleaned dataset to very easily extract some flags into our cohort. This is dealt with via code in [Guide 12](combine.qmd) whereas [Guide 13](csc.qmd) discusses the CSC data more generally.
 
 # How much R do I need and what version?
 
@@ -55,5 +56,5 @@ These guides assume at least a basic working knowledge of R. Throughout we try t
 
 # Coming up...
 
-Guide 2—[Script management, coding principles and working in the SRS](guide02_mgmt.qmd)—will take you through some preliminary matters for working with ECHILD on the SRS, including where to the find the data, how to run SQL queries, the importance of modular coding and how we have set up the working directory and other matters that will be used throughout all the guides.
+@sec-mgmt will take you through some preliminary matters for working with ECHILD on the SRS, including where to the find the data, how to run SQL queries, the importance of modular coding and how we have set up the working directory and other matters that will be used throughout all the guides.
 
