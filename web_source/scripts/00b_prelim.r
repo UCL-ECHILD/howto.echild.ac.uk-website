@@ -41,15 +41,18 @@ clean_hes_dates <- function(hes_source) {
   # table(is.na(hes_source$admidate) & !is.na(hes_source$epistart))
   # hes_source[is.na(admidate)]$admidate <- hes_source[is.na(admidate)]$epistart
   
-  # table(is.na(hes_source$epiend) & !is.na(hes_source$disdate))
-  hes_source[is.na(epiend) & !is.na(disdate), epiend := disdate]
-  
-  #View(hes_source[tokenpersonid %in% hes_source[is.na(epiend)]$tokenpersonid])
+  # View(hes_source[tokenid %in% hes_source[is.na(epiend)]$tokenid])
   # largely seems to be empty or duplicate info - drop
   hes_source <- hes_source[!is.na(epiend)]  
   
-  # check whether admidate > disdate - dates seem the other way around
-  # table(hes_source[!is.na(disdate)]$admidate > hes_source[!is.na(disdate)]$disdate)
+  # table(is.na(hes_source$admidate) & !is.na(hes_source$epistart))
+  hes_source[is.na(admidate), admidate := epistart]
+  
+  # table(is.na(hes_source$epiend) & !is.na(hes_source$disdate))
+  hes_source[is.na(epiend) & !is.na(disdate), epiend := disdate]
+  
+  # table(is.na(hes_source$disdate))
+  hes_source[is.na(disdate), disdate := epiend]
   
   # they need to be turned around
   hes_source[, admidate_tmp := admidate]
@@ -57,35 +60,29 @@ clean_hes_dates <- function(hes_source) {
   hes_source[, epistart_tmp := epistart]
   hes_source[, epiend_tmp := epiend]
   
-  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$epiend <-
-    hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$epistart_tmp
-  
-  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$epistart <-
-    hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$epiend_tmp
-  
-  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$admidate <-
-    hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$disdate_tmp
-  
-  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$disdate <-
-    hes_source[admidate_tmp > disdate_tmp & !is.na(disdate)]$admidate_tmp
+  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate), epiend := epistart_tmp]
+  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate), epistart := epiend_tmp]
+  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate), admidate := disdate_tmp]
+  hes_source[admidate_tmp > disdate_tmp & !is.na(disdate), disdate := admidate_tmp]
   
   hes_source[, admidate_tmp := NULL]
   hes_source[, disdate_tmp := NULL]
   hes_source[, epistart_tmp := NULL]
   hes_source[, epiend_tmp := NULL]
   
-  # check episode start and end dates are sensible
   # table(hes_source$epistart > hes_source$epiend)
-  hes_source[epistart > epiend]$epistart <- hes_source[epistart > epiend]$admidate
-  hes_source[epistart > epiend]$epiend <- hes_source[epistart > epiend]$epistart
+  # View(hes_source[epistart > epiend, c("tokenid", "admidate", "epistart", "disdate", "epiend")])
+  hes_source[, flag := epistart > epiend]
+  hes_source[flag == T, epistart := admidate]
+  hes_source[flag == T, epiend := disdate]
+  hes_source[, flag := NULL]
   
-  #table(is.na(hes_source$disdate))
-  
+  # Create max disdate
   hes_source[, max_disdate := max(disdate, na.rm = T), by = .(tokenpersonid, admidate)]
   hes_source[, max_epiend := max(epiend, na.rm = T), by = .(tokenpersonid, admidate)]
   
   # table(is.na(hes_source$max_disdate))
-  hes_source[is.na(max_disdate)]$max_disdate <- hes_source[is.na(max_disdate)]$max_epiend
+  hes_source[is.na(max_disdate), max_disdate := max_epiend]
   
   
   print("Joining spells tegether")
