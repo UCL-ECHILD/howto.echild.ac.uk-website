@@ -38,6 +38,7 @@ book:
         - guide10_opa.qmd
         - guide11_combine.qmd
         - guide12_csc.qmd
+        - guideappendix_data.table.qmd
 format:
   html:
     theme:
