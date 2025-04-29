@@ -1,0 +1,232 @@
+# Appendix: a brief introduction to data.table (and other tips) {.unnumbered}
+
+# Scripts needed for this guide
+
+* [data.table.intro.r](scripts/data.table.demo.r)
+
+# Introduction
+
+Throughout these guides, we use just two additional R packages: [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"} and [RODBC](https://cran.r-project.org/web/packages/RODBC/index.html){target="_blank"}. The latter, `RODBC`, enables us to connect to the SQL Server using an ODBC connection, meaning we can run SQL queries from within our R scripts. The other package, `data.table`, is one that makes working with large data frames much easier. In this guide, we introduce `data.table`. This is by no means a comprehensive guide to data.table (we do not make full use of `data.table`’s functionality) but instead should give you just enough to get you going with the guides if you are unfamiliar with `data.table`.
+
+The second half of this guide also provides some hints and tips for managing memory and other tips that might come in handy when working with R.
+
+## Some pretend data
+
+For this guide, we are going to simulate some data to play with, rather than use real data. This is to keep things simple as we illustrate some points. The first part of the script [data.table.demo.r](scripts/data.table.demo.r) simulates a dataset with one million rows and a set of columns. While the columns represent the sorts of data you will encounter in ECHILD, their content is entirely randomly generated with no relationships specified between them.
+
+## Data tables are just fancy data frames
+
+The first thing to note is that `data.table` introduces a new object class, the `data.table`. A `data.table` is nothing other than a fancy `data.frame`: it does what a `data.frame` can do, and then some. In the [words of `data.table`’s creators](https://rdatatable.gitlab.io/data.table/){target="_blank"}, `data.table` "provides a high-performance version of base R's `data.frame` with syntax and feature enhancements for ease of use, convenience and programming speed." There are some key differences that make `data.table` syntax much tidier than base R and that make certain operations much easier. Another key advantage is that working with `data.table` is often much quicker than with the base R `data.frame`.
+
+## Indexing a data table and ordering
+
+In base R, we use square brackets to index an object such as a `data.frame`, supplying a value to the `i` (row) and `j` (column) coordinates. For example, we might supply integers to a specified cell or we might supply nothing to return a whole row or column. We can do the same thing with a `data.table` (Code Snippet 1).
+
+*Code Snippet 1 (R)*
+``` r
+---
+# Return the 1st row and 4th column:
+dt_dataframe[1, 4]
+dt_datatable[1, 4]
+---
+```
+
+In base R, we must include a comma in the square brackets, even if we leave the `j` coordinate blank (i.e., to return all columns). A key difference is that, with `data.table`, we do not need to explicitly supply the `j` coordinate and, if we are just indexing on `i` (row), we can omit the column (Code Snippet 2).
+
+*Code Snippet 2 (R)*
+``` r
+---
+# Return just the 1st row:
+dt_dataframe[1, ]
+dt_datatable[1, ]
+dt_datatable[1]
+
+# Return just the 4th column row:
+dt_dataframe[, 4]
+dt_datatable[, 4]
+---
+```
+
+Note how, as well, the output is more concise when using `data.table` (Code Snippet 3).
+
+*Code Snippet 3 (R output)*
+``` r
+---
+> dt_dataframe[, 4]
+   [1] "neurological" "respiratory"  "respiratory"  "infection"    "respiratory"  "infection"    "infection"    "neurological" "mental"      
+  [10] "respiratory"  "infection"    "infection"    "infection"    "mental"       "respiratory"  "infection"    "infection"    "infection"   
+  [19] "neurological" "neurological" "infection"    "cardiac"      "infection"    "infection"    "respiratory"  "respiratory"  "cardiac"     
+  [28] "infection"    "mental"       "infection"    "neurological" "respiratory"  "infection"    "infection"    "infection"    "mental"      
+  [37] "infection"    "infection"    "respiratory"  "respiratory"  "respiratory"  "neurological" "mental"       "cardiac"      "mental"      
+  [46] "neurological" "cardiac"      "infection"    "respiratory"  "respiratory"  "infection"    "neurological" "mental"       "neurological"
+  [55] "respiratory"  "neurological" "mental"       "respiratory"  "cardiac"      "cardiac"      "neurological" "cardiac"      "mental"      
+  [64] "cardiac"      "infection"    "infection"    "respiratory"  "neurological" "infection"    "cardiac"      "respiratory"  "mental"      
+  [73] "cardiac"      "cardiac"      "cardiac"      "infection"    "mental"       "mental"       "respiratory"  "cardiac"      "neurological"
+  [82] "cardiac"      "neurological" "respiratory"  "mental"       "cardiac"      "neurological" "infection"    "infection"    "mental"      
+  [91] "infection"    "mental"       "neurological" "neurological" "respiratory"  "infection"    "cardiac"      "mental"       "neurological"
+ [100] "respiratory"
+[ reached getOption("max.print") -- omitted 999900 entries ]
+
+
+> dt_datatable[, 4]
+            chc_group
+               <char>
+      1: neurological
+      2:  respiratory
+      3:  respiratory
+      4:    infection
+      5:  respiratory
+     ---             
+ 999996:       mental
+ 999997:       mental
+ 999998:  respiratory
+ 999999:    infection
+1000000:       mental
+---
+```
+
+## Creating variables explicitly
+
+To add a new variable to a base R `data.frame`, we use code as in the first part of Code Snippet 4. While we could do this to a `data.table`, `data.table`’s own way is slightly different, as shown in the second part of Code Snippet 4. Note how we can perform operations on other columns within the same `data.table` easily with reference to their column name. 
+
+*Code Snippet 4 (R)*
+``` r
+---
+# Add a new variable
+dt_dataframe$age_yr_sq <- dt_dataframe$age_yr ^ 2
+dt_datatable[, age_yr_sq := age_yr ^ 2]
+---
+```
+
+## Creating variables in a loop
+
+In Code Snippet 4, we created the new column explicitly, by specifying the new column names. Occasionally, however, in the guides we want to create a group of variables in a loop, where the new column is created dynamically (for example, when dealing with dual enrolment in guide 8). Study Code Snippet 5. Here we create variables that give the date that is the episode start date plus 365 days, 730 days, and so on until 3,650 days (i.e., roughly 10 years).
+
+*Code Snippet 5 (R)*
+``` r
+---
+# Add a new variable in a loop
+periods <- seq(365, 365 * 10, by = 365)
+for (period in periods) {
+  new_var <- paste0("epistart_plus_", period, "_days")
+  dt_datatable[, (new_var) := epistart + period]
+}
+rm(period, periods, new_var)
+---
+```
+
+## Reshaping
+
+Reshaping in base R is notoriously difficult. The syntax for the base R `reshape()` function is rather obscure and not at all intuitive. Fortunately, `data.table` comes with its own reshaping functions, `melt()` and `dcast()`, which are illustrated in Code Snippet 6, where we reshape the episode start date and the new dates we created in Code Snippet 5 into long format.
+
+*Code Snippet 6 (R)*
+``` r
+---
+# Reshape to long
+epistart_vars <- names(dt_datatable)[grepl("epistart", names(dt_datatable))]
+
+dt_datatable_long <-
+  melt(
+    dt_datatable[, c("tokenpersonid", epistart_vars), with = F],
+    id.vars = "tokenpersonid",
+    value.name = "date"
+  )
+
+dt_datatable_long <- dt_datatable_long[order(tokenpersonid)]
+
+# Reshape (back) to wide
+dt_datatable_wide <-
+  dcast(
+    dt_datatable_long,
+    formula = tokenpersonid ~ variable
+  )
+---
+```
+
+## `fread()` and `fwrite()`
+
+If you need to read (load) and write (save) text files (e.g., comma-separated value or tab delimited files), these two `data.table` functions will save you a significant amount of time. Their use is very similar to `read.csv()` and `write.csv()` but they are much faster. However, we generally advise against using such file formats in ECHILD as they are much larger on the disk than other formats, particular R’s *.rda format. See the next section for more.
+
+# Saving memory
+
+The ONS Secure Research Service (SRS) is a shared resource and the amount of hard disk space allotted to project shares is not infinite. Good memory management is therefore not merely a matter of courtesy to fellow SRS users, but also essential to ensure the smooth running of your projects. In this section of this guide, we offer some easy ways to reduce the amount of information held in memory during a session and, crucially, the amount of space taken up on the hard disk.
+
+## More compressed file formats
+
+A major factor to consider is the file format you use when writing to hard disk. Table 1 shows the file size of our synthetic data (as originally created), using .csv and R’s .rda format, as well as the length of time it took to write the file to disk (on an ordinary desktop computer, not in the SRS). When comparing .rda with .csv, saved using `data.table`’s `fwrite()` function, you will see that, albeit slower, R’s .rda format offers by far the greatest level of compression. It is for this reason that we use this format throughout the guides. You will see that, if you follow a similar way of working to these guides, that the time factor is not a major concern as you will not be writing to and reading from the hard disk very often.
+
+| File format | Time to save (seconds) | File size (KB) |
+|-------------|------------------------|----------------|
+| .csv (`fwrite()`) | 0.54 | 47,364 |
+| .csv (`write.csv()`) | 24.28 | 51,270 |
+| .rda | 4.59 | 14,262 |
+
+: Table 1. File size and time to save using different file formats
+
+## Intermediate datasets
+
+One practice that can consume very significant amounts of hard disk space is saving intermediate datasets to disk. These are datasets that are created at steps along the processing pipeline in order to support creating a final dataset at the end. This is a practice we actively discourage except where it is really necessary, where the intermediate dataset contains only absolutely essential information and where it is saved in a highly compressed format. You will see in the guides we do create a few intermediate datasets, but they are all very small on the disk.
+
+In R, avoiding intermediate datasets is easy as R can hold multiple objects in memory at once. Indeed, we could have written the scripts in a way that did not save any intermediate datasets at all. We chose to save some because it made conceptual sense to do so (at the end of processing a particular type of data, for example). This also would make it easier to identify and fix errors or make other changes to particular steps of the pipeline later on. However, we only saved variables that were absolutely necessary and we used a highly compressed file format (R’s own .rda format).
+
+Because Stata used to only allow users to hold one dataset in memory at once, some users find it necessary to save intermediate datasets to disk far more frequently than in R. However, a feature called frames was added with the release of Stata 16 in 2019. This feature enables users to hold multiple data frames in memory at once. While the How To Guides do not have accompanying Stata scripts, we strongly encourage Stata users of ECHILD to consider using frames. You can find out more information on [Stata’s website](https://www.stata.com/features/overview/multiple-datasets-in-memory/){target="_blank"} and we use frames in the example Stata scripts accompanying the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk){target="_blank"}.
+
+## No redundant variables
+
+Only what is essential should be saved to the hard disk. If there is a variable that can easily be recreated in code, consider whether you need to save the derived variable or if you just need to save the source data and recreate the variable each time.
+
+Consider a date. A date value `2025-04-23` in of itself contains all the information that you could possibly need when working with dates. From the single date variable, you can derive year (calendar, financial, academic), month and day. You may, of course, need to work with these latter variables in analysis, but consider whether you need to save them when you save your dataset to the hard disk. The answer may still be "Yes" because of when you need to derive the variables in your data processing pipeline and because of the time this takes, but it is always worth considering whether you do need to save them as columns in addition to the underlying date.
+
+Similarly, once you have cleaned you data, do you need to keep the source data, especially if you are never going to use it again?
+
+# Other tips
+
+In this final section, we provide some tips for writing cleaner, pithier code.
+
+## Keeping things short
+
+Keep your scripts short. As long as you have a clear method for keeping your scripts in order, more and shorter scripts are far easier to read and manage than fewer longer ones. Table 2 shows the total line length of each of the scripts associated with the How To Guides. You will see that the longest script is only 340 lines long. Granted, in real-world projects, you may have to carry out more operations than these scripts, but you can see that you can easily split up your scripts into shorter, more easily manageable scripts.
+
+| Script | Line length |
+|--------|------------:|
+| [00a_run_cleaning.r](scripts/00a_run_cleaning.r) | 40 |
+| [00b_prelim.r](scripts/00b_prelim.r) | 154 |
+| [01a_identify_npd_cohort.r](scripts/01a_identify_npd_cohort.r) | 202 |
+| [01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r) | 269 |
+| [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r) | 340 |
+| [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r) | 121 |
+| [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) | 172 |
+| [05_hes_birth_characteristics.r](scripts/05_hes_birth_characteristics.r) | 249 |
+| [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r) | 316 |
+| [07_enrolment.r](scripts/07_enrolment.r) | 119 |
+| [08_exclusion.r](scripts/08_exclusion.r) | 69 |
+| [09_absence.r](scripts/09_absence.r) | 320 |
+| [10_exams.r](scripts/10_exams.r) | 43 |
+| [11_outpatient_data.r](scripts/11_outpatient_data.r) | 68 |
+| [12_combine.r](scripts/12_combine.r) | 230 |
+
+: Table 2. Line length of each script
+
+## Writing functions
+
+One way of keeping scripts short is to use functions. Wherever you find yourself copying and pasting code, changing one element a time, in order to carry essentially the same operation (e.g., calculating a rate disaggregated by sub-group), then you have a prime candidate for writing a function instead. Indeed, anything repetitive is a prime target for automation. Functions are preferable to code copied and pasted over and over because:
+
+* It is more interesting to write. Your motivation as a researcher is important, not only to keep you interested in the research process, but because a lack of motivation and concentration can affect the next two points.
+* A function is less prone to error. When you copy and paste code, you must remember to change all the elements that must be changed. It is very easy to forget to change something, or change the wrong thing, or change the right thing in the wrong way. Functions are less prone to this because it is much clearer what you are doing and if you need to change the function itself, you only need to do this once. Of course, functions are not completely free of risk of error. You must always carefully test each line of your function to ensure it is behaving as you want it to.
+* It is easier to make changes. Imagine you have 80 lines of code because you had to copy and paste several lines of code performing an operation for a particular sub-group. Now imagine you want to change the operation in some way, to calculate a different summary metric or change the groupings, for example. You must either copy and paste another 80 lines of code and edit what needs editing (which comes with the same risks as above) or alter the original 80 lines of code, which also has the same risks but now you may also lose what you originally wrote. It is infinitely easier to edit or create a new function and just run that new function again.
+
+## Keep your scripts tidy
+
+Finally, keep your scripts tidy. Take advantage of the fact that RStudio indents for you and use spaces after commas and operators just as you would when writing prose and poetry. Compare Code Snippet 7 with Code Snippet 6. All lines would run perfectly fine, but which is easier to read is clear. This is not only for your own sake six months down the road when you have to revisit old code, but also for the sake of your colleagues and future researchers who may be using the code.
+
+*Code Snippet 7 (R, but messy)*
+``` r
+---
+epistart_vars<-names(dt_datatable )[grepl("epistart" ,names(dt_datatable ))]
+dt_datatable_long <-melt(dt_datatable[,c("tokenpersonid",epistart_vars),with=F],id.vars="tokenpersonid",value.name="date")
+dt_datatable_long<- dt_datatable_long[order(tokenpersonid)]
+# Reshape (back) to wide
+dt_datatable_wide <-dcast(dt_datatable_long,formula= tokenpersonid ~variable
+  )
+---
+```

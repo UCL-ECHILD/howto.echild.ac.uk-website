@@ -51,6 +51,8 @@ The ECHILD team is not prescriptive in how you go about your coding. It is up to
 * Reducing the amount of information held in memory during a session. This includes reducing the size of data frames (e.g., by dropping rows for individuals not in the cohort) and removing temporary objects as soon as they have served their purpose.
 * Using the simplest, clearest coding as possible, with as few additional packages as possible. This also involves good practice in writing code such as including spaces after commas and between operators, a clear structure overall and neat and tidy comments.
 
+Some more information to help with these points can be found in the [appendix guide](guideappendix_data.table.qmd).
+
 # Initialisation
 
 Open [00a_run_cleaning.r](scripts/00a_run_cleaning.r). The first section of this script sets the working directory, the R library path (necessary when working in the SRS) and loads necessary libraries. Note that system architecture (file structures and connection strings) is confidential and cannot be exported from the SRS. Consult your documentation to find your connection string.
@@ -76,6 +78,8 @@ The working directory in all guides assumes a simple structure containing five s
 ## R packages
 
 To use R packages in the SRS, the R library path must be set as in Code Snippet 4. We will make use of just two packages: [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"} and [RODBC](https://cran.r-project.org/web/packages/RODBC/index.html){target="_blank"}. Package `data.table` makes it significantly easier and quicker to work with data frames, especially large ones, and `RODBC` enables us to connect to the SQL Server where the data are stored. Consult documentation in your project or contact the SRS helpdesk for help on installing and loading packages if you are having problems.
+
+If you are new to `data.table`, please read the [appendix guide](guideappendix_data.table.qmd), which provides a brief introduction.
 
 # Run scripts
 

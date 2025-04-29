@@ -44,6 +44,7 @@ We will create an analysis-ready dataset across several guides, each with its ow
 | 10 | [Outpatients](guide10_opa.qmd) | [11_outpatient_data.r](scripts/11_outpatient_data.r) |
 | 11 | [Combine it all together](guide11_combine.qmd) | [12_combine.r](scripts/12_combine.r) |
 | 12 | [Children's social care](guide12_csc.qmd) | None |
+| 13 | [Appendix: a brief introduction to data.table (and other tips)](guideappendix_data.table.qmd) | [data.table.intro.r](scripts/data.table.demo.r) |
 
 : Table 1. Series of guides and scripts
 
