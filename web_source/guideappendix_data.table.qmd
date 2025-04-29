@@ -2,7 +2,7 @@
 
 # Script needed for this guide
 
-* [data.table.intro.r](scripts/data.table.demo.r)
+* [data.table.demo.r](scripts/data.table.demo.r)
 
 # Introduction
 
@@ -22,7 +22,7 @@ The first thing to note is that `data.table` introduces a new object class, the 
 
 In base R, we use square brackets to index an object such as a `data.frame`, supplying a value to the `i` (row) and `j` (column) coordinates. For example, we might supply integers to select a specified cell or we supply a vector to subset to certain rows. We can do the same thing with a `data.table` (Code Snippet 1). Note how the syntax for `data.table` is much simpler. In base R, we must include a comma in the square brackets, even if we leave the `j` coordinate blank (i.e., to return all columns). A key difference is that, with `data.table`, we do not need to explicitly supply the `j` coordinate and, if we are just indexing on `i` (row), we can omit the column.
 
-*Code Snippet 1 (R - [data.table.intro.r](scripts/data.table.demo.r))*
+*Code Snippet 1 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
 # Return the 1st row and 4th column
@@ -89,7 +89,7 @@ Note how, as well, the output is more concise when using `data.table` (Code Snip
 
 Ordering a `data.table` is also rather easier and quicker than ordering a `data.frame` (Code Snippet 3). In this example, ordering the `data.frame` took about 1.1 seconds compared to 0.05 for `data.table`.
 
-*Code Snippet 3 (R - [data.table.intro.r](scripts/data.table.demo.r))*
+*Code Snippet 3 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
 # Ordering
@@ -102,7 +102,7 @@ dt_datatable <- dt_datatable[order(chc_group, epistart)]
 
 To add a new variable to a base R `data.frame`, we use code as in the first part of Code Snippet 3. While we could do this to a `data.table`, `data.table`’s own way is slightly different, as shown in the second part of Code Snippet 4. Note how we can perform operations on other columns within the same `data.table` easily with reference to their column name. 
 
-*Code Snippet 4 (R - [data.table.intro.r](scripts/data.table.demo.r))*
+*Code Snippet 4 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
 # Add a new variable
@@ -115,7 +115,7 @@ dt_datatable[, age_yr_sq := age_yr ^ 2]
 
 In Code Snippet 4, we created the new column explicitly. Occasionally, however, in the guides we want to create a group of variables in a loop, where the new column is created dynamically (for example, when dealing with dual enrolment in guide 8). Study Code Snippet 5. Here we create variables that give the date that is the episode start date plus 365 days, 730 days, and so on until 3,650 days (i.e., roughly 10 years).
 
-*Code Snippet 5 (R - [data.table.intro.r](scripts/data.table.demo.r))*
+*Code Snippet 5 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
 # Add a new variable in a loop
@@ -132,7 +132,7 @@ rm(period, periods, new_var)
 
 Reshaping in base R is notoriously difficult. The syntax for the base R `reshape()` function is not at all intuitive. Fortunately, `data.table` comes with its own reshaping functions, `melt()` and `dcast()`, which are illustrated in Code Snippet 6, where we reshape the episode start date and the new dates we created in Code Snippet 5 into long format, and then back into wide.
 
-*Code Snippet 6 (R - [data.table.intro.r](scripts/data.table.demo.r))*
+*Code Snippet 6 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
 # Reshape to long
@@ -232,7 +232,7 @@ One way of keeping scripts short is to use functions. Wherever you find yourself
 
 Finally, keep your scripts tidy. Take advantage of the fact that RStudio indents for you and use spaces after commas and operators just as you would when writing prose and poetry. Compare Code Snippet 7 with Code Snippet 6. All lines would run perfectly fine, but which is easier to read is clear. This is not only for your own sake six months down the road when you have to revisit old code, but also for the sake of your colleagues and future researchers who may be using the code.
 
-*Code Snippet 7 (R, but messy - [data.table.intro.r](scripts/data.table.demo.r))*
+*Code Snippet 7 (R, but messy - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
 epistart_vars<-names(dt_datatable )[grepl("epistart" ,names(dt_datatable ))]
