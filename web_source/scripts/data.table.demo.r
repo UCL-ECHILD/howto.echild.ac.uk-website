@@ -63,6 +63,10 @@ dt_dataframe[, c("tokenpersonid", "age_yr")]
 dt_datatable[, c("tokenpersonid", "age_yr")]
 dt_datatable[, .(tokenpersonid, age_yr)]
 
+# Ordering
+dt_dataframe <- dt_dataframe[order(dt_dataframe$chc_group, dt_dataframe$epistart), ]
+dt_datatable <- dt_datatable[order(chc_group, epistart)]
+
 # Add a new variable
 dt_dataframe$age_yr_sq <- dt_dataframe$age_yr ^ 2
 dt_datatable[, age_yr_sq := age_yr ^ 2]
