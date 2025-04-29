@@ -54,6 +54,15 @@ dt_datatable[1]
 dt_dataframe[, 4]
 dt_datatable[, 4]
 
+# Return all columns for a specific group of children (in this case, all girls):
+dt_dataframe[dt_dataframe$female == 1, ]
+dt_datatable[female == 1]
+
+# Return all rows for specified columns
+dt_dataframe[, c("tokenpersonid", "age_yr")]
+dt_datatable[, c("tokenpersonid", "age_yr")]
+dt_datatable[, .(tokenpersonid, age_yr)]
+
 # Add a new variable
 dt_dataframe$age_yr_sq <- dt_dataframe$age_yr ^ 2
 dt_datatable[, age_yr_sq := age_yr ^ 2]
