@@ -22,6 +22,7 @@ Access the guides from the navigation pane to the left or here:
 * [Guide 10: outpatients](guide10_opa.qmd)
 * [Guide 11: combine it all together](guide11_combine.qmd)
 * [Guide 12: children's social care](guide12_csc.qmd)
+* [Appendix: a brief introduction to data.table (and other tips)](guideappendix_data.table.qmd)
 
 You can also view a [glossary of key terms](glossary.qmd).
 
