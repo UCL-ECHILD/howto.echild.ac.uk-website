@@ -37,7 +37,7 @@ dt_dataframe[, 4]
 dt_datatable[, 4]
 
 # Return all columns for a specific group of children (in this case, all girls)
-dr_dataframe[dt_dataframe$female == 1, ]
+dt_dataframe[dt_dataframe$female == 1, ]
 dt_datatable[female == 1]
 
 # Return all rows for specified columns
