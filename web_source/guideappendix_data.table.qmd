@@ -6,19 +6,17 @@
 
 # Introduction
 
-Throughout these guides, we use just two additional R packages: [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"} and [RODBC](https://cran.r-project.org/web/packages/RODBC/index.html){target="_blank"}. The latter, `RODBC`, enables us to connect to the SQL Server using an ODBC connection, meaning we can run SQL queries from within our R scripts. The other package, `data.table`, is one that makes working with large data frames much easier. In this guide, we introduce `data.table`. This is by no means a comprehensive guide to data.table (we do not make full use of `data.table`’s functionality) but instead should give you just enough to get you going with the guides if you are unfamiliar with the package.
-
-The second half of this guide also provides some hints and tips for writing scripts and managing memory that might come in handy when working with R.
+Throughout these guides, we use the R package [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"}. This package makes working with large data frames much easier. In this guide, we introduce `data.table`. While by no means comprehensive (we do not make full use of `data.table`’s functionality), it should give you just enough to get you going with the guides if you are unfamiliar with the package. The second half of this guide also provides some hints and tips for writing scripts and managing memory.
 
 ## Some pretend data
 
-For this guide, we are going to simulate some data to play with, rather than use real data. This is to keep things simple as we illustrate some points. The first part of the script [data.table.demo.r](scripts/data.table.demo.r) simulates a dataset with one million rows and a set of columns. While these data represent the sorts of data you will encounter in ECHILD, their content is entirely randomly generated with no relationships specified between them.
+We are going to simulate some data, rather than use real data. This is to keep things simple as we illustrate some points. The first part of the script [data.table.demo.r](scripts/data.table.demo.r) simulates a dataset with one million rows and a set of columns. While these represent the sorts of data you will encounter in ECHILD, their content is entirely randomly generated with no relationships specified among the variables.
 
-## Data tables are just fancy data frames
+## A `data.table` is just a fancy `data.frame`
 
 The first thing to note is that `data.table` introduces a new object class, the `data.table`. A `data.table` is nothing other than a fancy `data.frame`: it does what a `data.frame` can do, and then some. In the [words of its creators](https://rdatatable.gitlab.io/data.table/){target="_blank"}, `data.table` "provides a high-performance version of base R's `data.frame` with syntax and feature enhancements for ease of use, convenience and programming speed." There are some key differences that make `data.table` syntax much tidier than base R and that make certain operations much easier. Another key advantage is that working with `data.table` is often much quicker than with the base R `data.frame`.
 
-## Indexing a data table and ordering
+## Indexing a `data.table` and ordering
 
 In base R, we use square brackets to index an object such as a `data.frame`, supplying a value to the `i` (row) and `j` (column) coordinates. For example, we might supply integers to select a specified cell or we supply a vector to subset to certain rows. We can do the same thing with a `data.table` (Code Snippet 1). Note how the syntax for `data.table` is much simpler. In base R, we must include a comma in the square brackets, even if we leave the `j` coordinate blank (i.e., to return all columns). A key difference is that, with `data.table`, we do not need to explicitly supply the `j` coordinate and, if we are just indexing on `i` (row), we can omit the column.
 
@@ -92,7 +90,6 @@ Ordering a `data.table` is also rather easier and quicker than ordering a `data.
 *Code Snippet 3 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
-# Ordering
 dt_dataframe <- dt_dataframe[order(dt_dataframe$chc_group, dt_dataframe$epistart), ]
 dt_datatable <- dt_datatable[order(chc_group, epistart)]
 ---
@@ -100,12 +97,11 @@ dt_datatable <- dt_datatable[order(chc_group, epistart)]
 
 ## Creating variables explicitly
 
-To add a new variable to a base R `data.frame`, we use code as in the first part of Code Snippet 3. While we could do this to a `data.table`, `data.table`’s own way is slightly different, as shown in the second part of Code Snippet 4. Note how we can perform operations on other columns within the same `data.table` easily with reference to their column name. 
+To add a new variable to a base R `data.frame`, we use code as in the first line of Code Snippet 4. While we could do this to a `data.table`, `data.table`’s own way is slightly different, as shown in the second line of Code Snippet 4. Note how we can perform operations on other columns within the same `data.table` easily with reference to their column name. 
 
 *Code Snippet 4 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
-# Add a new variable
 dt_dataframe$age_yr_sq <- dt_dataframe$age_yr ^ 2
 dt_datatable[, age_yr_sq := age_yr ^ 2]
 ---
@@ -118,12 +114,13 @@ In Code Snippet 4, we created the new column explicitly. Occasionally, however, 
 *Code Snippet 5 (R - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
 ---
-# Add a new variable in a loop
 periods <- seq(365, 365 * 10, by = 365)
+
 for (period in periods) {
   new_var <- paste0("epistart_plus_", period, "_days")
   dt_datatable[, (new_var) := epistart + period]
 }
+
 rm(period, periods, new_var)
 ---
 ```
@@ -158,7 +155,7 @@ dt_datatable_wide <-
 
 ## `fread()` and `fwrite()`
 
-If you need to read (load) and write (save) text files (e.g., comma-separated value or tab delimited files), these two `data.table` functions will save you a significant amount of time. Their use is very similar to `read.csv()` and `write.csv()` but they are much faster. However, we generally advise against using such file formats in ECHILD as they are much larger on the disk than other formats, particular R’s .rda format. See the next section for more.
+If you need to read (load) and write (save) text files (e.g., comma-separated value or tab delimited files), these two `data.table` functions will save you a significant amount of time. Their use is very similar to `read.csv()` and `write.csv()` but they are much faster. However, we generally advise against using such file formats in ECHILD as they are much larger on the disk than other formats, particular R’s .rda format.
 
 # Saving memory
 
@@ -166,7 +163,7 @@ The ONS Secure Research Service (SRS) is a shared resource and the amount of har
 
 ## More compressed file formats
 
-A major factor to consider is the file format you use when writing to hard disk. Table 1 shows the file size of our synthetic data (as originally created), using .csv and R’s .rda format, as well as the length of time it took to write the file to disk (on an ordinary desktop computer, not in the SRS). When comparing .rda with .csv, saved using `data.table`’s `fwrite()` function, you will see that, albeit slower, R’s .rda format offers by far the greatest level of compression. It is for this reason that we use this format throughout the guides. You will see that, if you follow a similar way of working to these guides, that the time factor is not a major concern as you will not be writing to and reading from the hard disk very often.
+A major factor to consider is the file format used when writing to hard disk. Table 1 shows the file size of our synthetic data (as originally created), using .csv and R’s .rda format, as well as the length of time it took to write the file to disk (on an ordinary desktop computer, not in the SRS). When comparing .rda with .csv, saved using `data.table`’s `fwrite()` function, you will see that, albeit slower, R’s .rda format offers by far the greatest level of compression. It is for this reason that we use this format throughout the guides. You will see that, if you follow a similar way of working to these guides, the time factor is not a major concern as you will not be writing to and reading from the hard disk very often.
 
 | File format | Time to save (seconds) | File size (KB) |
 |-------------|------------------------|----------------|
@@ -198,7 +195,7 @@ In this final section, we provide some tips for writing cleaner, pithier code.
 
 ## Keeping things short
 
-Keep your scripts short. As long as you have a clear method for keeping your scripts in order, more and shorter scripts are far easier to read and manage than fewer longer ones. Table 2 shows the total line length of each of the scripts associated with the How To Guides. You will see that the longest script is only 340 lines long. Granted, in real-world projects, you may have to carry out more operations than these scripts, but you can see that you can easily split up your scripts into shorter, more easily manageable scripts.
+Keep your scripts short. As long as you have a clear method for keeping your scripts in order, more and shorter scripts are far easier to read and manage than fewer longer ones. Table 2 shows the total line length of each of the scripts associated with the How To Guides. You will see that the longest script is only 340 lines long. Granted, in real-world projects, you may have to carry out more operations than these scripts, but you can see that you can easily split up your scripts into shorter, more easily manageable ones.
 
 | Script | Line length |
 |--|---:|
@@ -230,7 +227,7 @@ One way of keeping scripts short is to use functions. Wherever you find yourself
 
 ## Keep your scripts tidy
 
-Finally, keep your scripts tidy. Take advantage of the fact that RStudio indents for you and use spaces after commas and operators just as you would when writing prose and poetry. Compare Code Snippet 7 with Code Snippet 6. All lines would run perfectly fine, but which is easier to read is clear. This is not only for your own sake six months down the road when you have to revisit old code, but also for the sake of your colleagues and future researchers who may be using the code.
+Finally, keep your scripts tidy. Take advantage of the fact that RStudio indents for you and use spaces after commas and operators just as you would when writing prose. Compare Code Snippet 7 with Code Snippet 6. All lines would run perfectly fine, but which is easier to read is clear. This is not only for your own sake six months down the road when you have to revisit old code, but also for the sake of your colleagues and future researchers who may be using the code.
 
 *Code Snippet 7 (R, but messy - [data.table.demo.r](scripts/data.table.demo.r))*
 ``` r
