@@ -1,6 +1,7 @@
 
 setwd("[omitted]")
 library(data.table)
+library(arrow) # for Parquet
 
 # Simulate some data ------------------------------------------------------
 
@@ -38,6 +39,9 @@ system.time(fwrite(dt_datatable, file = "dt.csv", row.names = F))
 system.time(write.csv(dt_datatable, file = "dt_write_csv.csv", row.names = F))
 system.time(save(dt_datatable, file = "dt.rda"))
 
+system.time(write_parquet(dt_datatable, sink = "dt.parqet"))
+system.time(write_parquet(dt_datatable, sink = "dt.gzip.parqet", compression = "gzip"))
+
 
 # Code snippets -----------------------------------------------------------
 
@@ -73,10 +77,12 @@ dt_datatable[, age_yr_sq := age_yr ^ 2]
 
 # Add a new variable to a data.table in a loop
 periods <- seq(365, 365 * 10, by = 365)
+
 for (period in periods) {
   new_var <- paste0("epistart_plus_", period, "_days")
   dt_datatable[, (new_var) := epistart + period]
 }
+
 rm(period, periods, new_var)
 
 # Reshape to long
