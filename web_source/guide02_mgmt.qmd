@@ -49,15 +49,21 @@ The ONS Secure Research Service (SRS) is a shared resource and the amount of har
 
 ## More compressed file formats
 
-A major factor to consider is the file format used when writing to hard disk. Table 1 shows the file size of the synthetic data as originally created for the [appendix guide](guideappendix_data.table.qmd), using .csv and R’s .rda format, as well as the length of time it took to write the file to disk (on an ordinary desktop computer, not in the SRS). When comparing .rda with .csv, saved using `data.table`’s `fwrite()` function, you will see that, albeit slower, R’s .rda format offers by far the greatest level of compression. It is for this reason that we use this format throughout the guides. **Indeed, ECHILD actively discourages the use of .csv for saving data.** You will see that, if you follow a similar way of working to these guides, the time factor is not a major concern as you will not be writing to and reading from the hard disk very often.
+A major factor to consider is the file format used when writing to hard disk. Table 1 shows the file size of the synthetic data as originally created for the [appendix guide](guideappendix_data.table.qmd), using .csv, R’s .rda format and the .parquet format. It is clear that .csv files are the largest. **Indeed, because of this, the ECHILD team actively discourages the use of .csv for saving data.** R's own .rda and .parquet were very similar, with .parquet being slightly smaller when using gzip compression. The .parquet format is "[an open source, column-oriented data file format designed for efficient data storage and retrieval](https://parquet.apache.org/){target="_blank"}". You can save and load .parquet files in R using [the `arrow` package](https://arrow.apache.org/docs/r/){target="_blank"}.
+
+Table 1 also shows how long it took to write the file to disk (on an ordinary desktop computer, not in the SRS). Clearly the `fwrite()` function (part of the `data.table` package) is the fastest, though, again, we discourage its use in ECHILD. The .parquet format was quicker than .rda. In this example, the difference is trivial, though you may see a more noticable difference in real-world projects. However, you will also see that, if you follow a similar way of working to these guides, the time factor is not a major concern as you will not be writing to and reading from the hard disk very often.
 
 | File format | Time to save (seconds) | File size (KB) |
 |-------------|------------------------|----------------|
-| .csv (`fwrite()`) | 0.54 | 47,364 |
-| .csv (`write.csv()`) | 24.28 | 51,270 |
-| .rda | 4.59 | 14,262 |
+| .csv (`write.csv()`) | 12.52 | 51,270 |
+| .csv (`fwrite()`) | 0.08 | 47,364 |
+| .parquet (without gzip compression) | 0.20 | 16,143 |
+| .rda | 2.21 | 14,262 |
+| .parquet (with gzip compression) | 0.98 | 12,018 |
 
-: Table 1. File size and time to save using different file formats
+: Table 1. File size and time to save using different file formats (ordered by file size)
+
+It should be borne in mind that the above results are applicable to the synthetic data created for the [appendix guide](guideappendix_data.table.qmd). However, we expect that the pattern will be similar in your projects (and it is certainly the case that .csv should be avoided). We therefore recommend using either .rda or .parquet when working with R in ECHILD, both of which result in similar file sizes. In these guides, to keep things simple, we stick to .rda.
 
 ## Intermediate datasets
 
