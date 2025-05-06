@@ -1,14 +1,14 @@
 # Guide 9: exams {.unnumbered}
 
-# Script needed for this guide
+## Script needed for this guide
 
 * [10_exams.r](scripts/10_exams.r)
 
-# Introduction
+## Introduction
 
 Exam data can be baffling. The tables containing the exams are very large. Not only do they contain millions of rows but also a great many columns. The sheer size of the dataset and the complexity of any single year’s tranche of exams is compounded by changes to the exam system over the years. Some of these are explicit and reflected in the data, such as the change from letter grades to number grades, and some are not easily visible, such as possible changes to marking practice over time. Then add in the fact that different systems operate at different points in the school curriculum and that different headline metrics have been used at different points over the years (5 A*-C, progress 8, attainment 8, English Baccalaureate...), and you will understand why many researchers find dealing with exam data a rather daunting task.
 
-# Where to start?
+## Where to start?
 All that said, for now, this guide will be very brief. This is because we have simplified our task by:
 
 * Only looking at GCSE results. GCSE stands for General Certificate of Secondary Education. These exams are the final exams at the end of compulsory schooling.
@@ -49,6 +49,6 @@ ks4 <-
 
 After this, the script is very simple and short. Where a child has two or more records, we take their maximum, though this is infrequent. Other approaches may be more valid.
 
-# Coming up...
+## Coming up...
 
 [Guide 10](guide10_opa.qmd) will take us back to HES again, this time focusing on outpatient data as an example of how to use the treatment specialty variable to identify a cohort of patients with a particular condition seen in outpatients.
