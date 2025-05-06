@@ -60,7 +60,7 @@ jobs:
       - name: Render pdf
         shell: bash
         run: |
-          quarto render web_source/ --to pdf --output-dir pdf/quarto-buggyness --output "ECHILD_How_To_Guides_${{ github.event.release.name }}.pdf"
+          quarto render web_source/ --to pdf --output-dir pdf/quarto-buggyness --output "ECHILD_How_To_Guides.pdf"
           
       - name: Render quarto website
         uses: quarto-dev/quarto-actions/render@v2
