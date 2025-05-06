@@ -1,10 +1,10 @@
 # Guide 5: HES demographic data (your turn!) {.unnumbered}
 
-# Script needed for this guide
+## Script needed for this guide
 
 * None!
 
-# Introduction
+## Introduction
 
 In the previous guide, we extracted a range of demographic data across children’s records on NPD. In this guide, we consider extraction of same data from HES. We might want to do this because:
 
@@ -14,7 +14,7 @@ In the previous guide, we extracted a range of demographic data across children�
 
 In this guide, however, we are going to provide hints but leave it to you, as a challenge, to adapt the code we have already provided, to extract the relevant data.
 
-# The general approach
+## The general approach
 
 We suggest you create a new script and adopt the same general approach we took in the previous Guide. That is:
 
@@ -26,7 +26,7 @@ We suggest you create a new script and adopt the same general approach we took i
 
 Below we provide some guidance for each of these steps.
 
-# 1. Identify the variables you are interested in
+## 1. Identify the variables you are interested in
 
 Let’s say you are interested in extracting data on gender/sex, ethnic group and deprivation. Your first task is to use the [HES data dictionary](https://digital.nhs.uk/data-and-information/data-tools-and-services/data-services/hospital-episode-statistics/hospital-episode-statistics-data-dictionary){target="_blank"} to identify what these variables are called. The HES data dictionary is a large Excel file that can be a little clunky to navigate. There are separate sheets for each dataset (e.g., admitted patient care, outpatients and so on) and within each, each row represents one variable, sorted alphabetically. You can use Ctrl+F to search by text.
 
@@ -38,11 +38,11 @@ Always be careful to check not just the variable name but also its description a
 
 ![Figure 2: Description and values for imd04_decile in the HES admitted patient care data dictionary](static/hes_dd_deprivation_descr.png){fig-alt="Screenshot from the HES data diciontary with the descriptions of imd04 and imd04_decile"}
 
-# 2. Identify the HES tables you are interested in
+## 2. Identify the HES tables you are interested in
 
 You might want to extract data from HES admitted patient care, outpatients, emergency care or any other health dataset. In any case, for this step, you can inspect the tables available in SQL Server and/or adapt the code from [Guide 3](guide03_cohort.qmd) where we extract the tables. We show an example in Code Snippet 1 in the next section. Remember, HES is organised in financial years, so ensure you select the right financial years that cover the academic years you are interested in. You can drop rows out of your date range later if you need to. You will also need to adapt the subsetting functions (i.e., changing the pattern supplied to `grepl()`) to ensure you select the right HES tables.
 
-# 3. Define a function that loops through these tables and extracts the relevant variables
+## 3. Define a function that loops through these tables and extracts the relevant variables
 
 Code Snippet 1 is taken from the script that identifies our HES birth cohort ([01b_identify_hes_cohort.r](scripts/01b_identify_hes_cohort.r), [Guide 3](guide03_cohort.qmd)). Modifying the `grepl()` pattern where the tables are selected and the SQL query and supplying the correct vector of years should be enough to extract the data that you need.
 
@@ -96,14 +96,14 @@ birth_records <- extract_hes_data(vector_of_years)
 ---
 ```
 
-# 4. Carry out necessary cleaning
+## 4. Carry out necessary cleaning
 
 How you clean the variables is up to you. You at the very least need to think about missing values and ensure these are coded properly. Additional steps will then depend on how you are treating the data (i.e., as time-invariant or time-variant) and what summaries you need. Consult [Guide 4](guide04_demo_npd.qmd) for more detail.
 
-# 5. Deduplicate and save
+## 5. Deduplicate and save
 
 And that’s it! See previous code for deduplication and save your dataset with an appropriate name, ready to be joined onto your spine later on. 
 
-# Coming up...
+## Coming up...
 
 The next guide, [Guide 6](guide06_birth_chars.qmd), is only relevant if you’ve adopted an NPD inception. In it, we will look back to extract birth characteristic data. If you’ve started with a HES birth inception, you, of course, already did this when identifying your cohort and you can skip ahead to [Guide 7](guide07_phenotype.qmd) on health condition phenotyping.
