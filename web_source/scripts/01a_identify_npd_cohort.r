@@ -23,7 +23,7 @@ generate_npd_source <- function() {
   
   npd_source <- data.table()
   
-  for(table_name in unique(tables$TABLE_NAME)) {
+  for (table_name in unique(tables$TABLE_NAME)) {
     
     gc()
     print(paste0("Now doing table: ", table_name))
@@ -49,7 +49,7 @@ generate_npd_source <- function() {
       sqlQuery(
         dbhandle, paste0(
           "SELECT ",
-          pupil_column , ", ",
+          pupil_column, ", ",
           age_column, ", ",
           ncyearactualcolumn, " FROM ", table_name, 
           " WHERE ", ncyearactualcolumn, " = '7' OR ",
