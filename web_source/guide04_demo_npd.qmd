@@ -1,12 +1,12 @@
 # Guide 4: NPD demographic and SEND data {.unnumbered}
 
-# Scripts needed for this guide
+## Scripts needed for this guide
 
 * [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r)
 * [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r)
 * [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r)
 
-# Introduction
+## Introduction
 
 In the previous guide, we created our initial cohort spine, whether using an NPD or HES inception. We will now extract demographic and SEND data. We are doing this across three different scripts because we are taking data at different time points/using different summaries (Table 1). Our choices here, including time frame, are more or less arbitrary and are chosen for the purposes of illustrating different ways of summarising and extracting this kind of data.
 
@@ -25,7 +25,7 @@ In the previous guide, we created our initial cohort spine, whether using an NPD
 
 : Table 1. Demographic data to be extracted. FSM free school meals; IDACI income deprivation affecting children index; SEND special educational needs and disability. * This is not necessarily the case. See text that follows.
 
-# Time invariant variables
+## Time invariant variables
 
 Time invariant variables are those that are fixed, or considered fixed, in analyses. A study participant in theory only ever has one value on these, regardless of when we observe them. Therefore, values on these variables should always be the same across a child’s records throughout ECHILD. However, as often happens with administrative data, we see that records belonging to the same PMR/TPID over time may have conflicting values. Leaving aside the possibility of linkage error, this could be a result of data entry error (or they are not really time invariant—see below). Where records conflict, we therefore need to pick just one. In our example, we are treating gender, ethnicity, language group, year of birth and month birth as time invariant and select the modal (i.e., most frequently occurring) value from each child’s records across reception to year 7.
 
@@ -33,15 +33,15 @@ When taking the modal value, we are assigning equal weight to each record. In ot
 
 Another factor to consider is whether the variable is truly time invariant. We have noted gender, ethnicity and language with an asterisk in Table 1 because, in reality, how people identify in terms of their gender, ethnicity and language can change over their life course. This could then be reflected in the data. When working with administrative data, this becomes difficult when recognising that data quality for variables such as ethnicity for some groups, e.g., non-White children, is likely to be poorer (see the reports by [Wickersham et al](https://pmc.ncbi.nlm.nih.gov/articles/PMC10916132/){target="_blank"} and [Razieh et al](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1004507){target="_blank"}). Additionally, it is not always clear who is reporting and recording the values in question, nor exactly what they think they are recording (consider the difference between gender and sex). As such, discerning whether a conflicting ethnicity, language or gender value is a true change in identity, correction of earlier records, data entry error, linkage error or something else, is very complex. You always have the option of sensitivity analyses, which may be warranted where the amount of conflicting information is high and/or where these variables are a particular focus of your study.
 
-# Time variant variables
+## Time variant variables
 
 Many variables are time variant, such as whether a child is getting free school meals (FSM) and their income deprivation affecting children index (IDACI) rank. This is because a child is not always necessarily eligible for FSM (this depends on their parents getting means-tested benefits) and because a child may move between areas, into areas of more or less deprivation.
 
 Sometimes we are only interested in values in a given year, for example, at baseline. In this example, we will extract FSM and IDACI rank (available in tenths in ECHILD) at year 7. In other instances, we may wish to know whether a child ever experienced something, such as whether they ever had FSM, or the highest level of something they experienced, such as the highest level of SEND provision they ever received. We therefore also extract variables that indicate whether a child ever had FSM, whether they ever had SEND provision and their highest level of SEND provision from reception to year 7.
 
-# Modal values from reception to year 7
+## Modal values from reception to year 7
 
-## Data extraction
+### Data extraction
 
 Our first script, [02_npd_demographic_modals.r](scripts/02_npd_demographic_modals.r), begins in a similar way to how we identified our NPD cohort in the previous guide: we define some year variables we are interested in, we extract the relevant census table names and then we run a function that creates the SQL query for each table, combining results into one data table. We then run some queries for the alternative provision and pupil referral unit censuses separately.
 
@@ -111,7 +111,7 @@ if (!(table_name %in% skips)) {
 ---
 ```
 
-## Data cleaning
+### Data cleaning
 
 Before we actually select our modal value, we should clean the data. The script carries out the steps shown in Table 2. 
 
@@ -124,7 +124,7 @@ Before we actually select our modal value, we should clean the data. The script 
 
 : Table 2. Data cleaning carried out prior to identifying modal values
 
-# Getting modal values
+### Getting modal values
 
 In order to get the modal value, we use `mode_fun()`, defined in [00b_prelim.r](scripts/00b_prelim.r), which finds the modal element of a vector or, where the vector is multimodal (i.e., there are at least two options that occur equally with the highest frequency), we pick one at random using a single random draw from a multinomial distribution (Code Snippet 5).
 
@@ -182,15 +182,15 @@ demo_modals[, monthofbirth := mode_fun(monthofbirth), by = PupilMatchingRefAnony
 ---
 ```
 
-## The result
+### The result
 
 After deduplication, we end up with a data table that contains PMR, year of birth, month of birth, female, ethnic group and language group. We will save this as its own object before moving onto the next script to extract data at year 7.
 
-# Values at year 7
+## Values at year 7
 Script [03_npd_demographic_year7.r](scripts/03_npd_demographic_year7.r) is significantly simpler, as we are only dealing with one time point. Again, we extract data from the censuses, alternative provision and pupil referral units and deduplicate. We then save our resulting object, which contains PMR, FSM and IDACI data at year 7.
 
 
-# “Ever” values across reception to year 7
+## “Ever” values across reception to year 7
 
 Script [04_npd_demographic_ever.r](scripts/04_npd_demographic_ever.r) is a little more complex. We first extract data. We then identify which children are enrolled in special schools (which we flag using a variable called `specialist_school`). To do this, we use the Get Information About Schools database and link the relevant information using the school unique reference number (URN) (Code Snippet 8). [Note: this step is still under construction.]
 
@@ -222,10 +222,10 @@ demographics_ever[, fsm_ever_primary := max(fsmeligible), by = PupilMatchingRefA
 ---
 ```
 
-# The result
+## The result
 
 At the end of this script, we retain just four variables, `PupilMatchingRefAnonymous`, `fsm_ever_primary`, `senprovision` and `specialist_school.` Note that we so far have not defined an “ever SEN” variable. We will do this in [Guide 11](guide11_combine.qmd). For now, we just save the resulting object as its own file and clear the workspace.
 
-# Coming up...
+## Coming up...
 
 In total, we have therefore created three separate datasets containing the different types of demographic information that we will later join onto our spine. In the [next Guide](guide05_demo_hes.qmd), we will think about why we might now also want to extract demographic data from HES and how you can adapt code provided in this Guide to do so.
