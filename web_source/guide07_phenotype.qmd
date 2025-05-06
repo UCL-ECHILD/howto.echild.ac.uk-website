@@ -1,10 +1,10 @@
 # Guide 7: phenotyping {.unnumbered}
 
-# Script needed for this guide
+## Script needed for this guide
 
 * [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r)
 
-# Introduction
+## Introduction
 
 A phenotype is any observable or measurable trait. In the present context, we are usually referring to specific health conditions or groups of conditions (such as chronic conditions generally, neurodisability or congenital anomalies). Phenotypes might also describe types of presentation at hospital and broader circumstances surrounding them, including stress-related presentations and adversity-related admissions.
 
@@ -14,11 +14,11 @@ We are focusing on HES admitted patient care episodes. There is limited scope fo
 
 If you are unfamiliar with phenotyping and phenotype code lists, we recommend you visit the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk/){target="_blank"} for a primer on phenotyping, including an introduction to the coding systems used in HES, as well as a catalogue of code lists that you can easily implement in ECHILD along with example code. In fact, we used and adapted the example code developed for the Repository in this guide.
 
-# A note on biases
+## A note on biases
 
 There are a number of sources of bias in hospital diagnostic data you should be mindful of.  As we are dealing with hospital admissions, we only detect diagnoses for sicker patients on average and we miss diagnoses for conditions that are primarily treated in non-hospital settings (such as many mental health conditions). We also only see instances of diagnostic recording: this may not be the actual date of diagnosis, which could have occurred outside of hospital, and we do not see if or when patients recover. There is also variation over time and space in coding practice that may affect your results independently of any changes in underlying disease incidence or prevalence.
 
-# Extracting inpatient data
+## Extracting inpatient data
 
 By now, you will be used to our approach to extracting data from the server and this time is no different. We start by identifying the relevant tables and then loop through these using a SQL query to extract the relevant data. There are a couple of things to note about the SQL query at this stage (Code Snippet 1).
 
@@ -42,7 +42,7 @@ The first is that we use `paste0()` as a way of selecting all `DIAG` and `OPERTN
 
 In this query, we are also selecting some additional data that will be necessary to deal with certain flags in the phenotype code lists that we are using. For example, we will use the [Hardelid et al list of chronic health conditions](https://code.echild.ac.uk/chc_hardelid_v1){target="_blank"}. In this list, certain codes are only valid if the length of stay is at least 3 days and others are only valid if the patient is aged at least 10 years. We therefore need information about the duration of the hospital spell and the patient’s age.
 
-# Identifying phenotypes
+## Identifying phenotypes
 
 In this example, we use the list of [chronic health conditions by Hardelid et al](https://code.echild.ac.uk/chc_hardelid_v1){target="_blank"} and the list of [stress-related presentations by Ní Chobhthaigh et al](https://code.echild.ac.uk/srp_nichobhthaigh_v2){target="_blank"}. In script [06_chc_diagnoses.r](scripts/06_chc_diagnoses.r). We incorporate the R scripts published on the [ECHILD Phenotype Code List Repository](https://code.echild.ac.uk/){target="_blank"} but without the same level of comment detail to avoid repetition.
 
@@ -76,11 +76,10 @@ save(phen_codes, file = "processed/phen_codes.rda")
 ---
 ```
 
-# Saving the dataset
+## Saving the dataset
 
 At the end of this script, you will end up with a long format dataset that includes relevant phenotype codes for each patient and the episode start where they were recorded. We save this dataset and, like the other datasets we save, we will return to it later when we join data into our spine.
 
-# Coming up...
+## Coming up...
 
 In the next guide, we return to the NPD to look at how to extract [enrolment, exclusion and absence data](guide08_enr_abs_excl.qmd).
-
