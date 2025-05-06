@@ -56,7 +56,12 @@ jobs:
         uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
-
+          
+      - name: Render pdf
+        shell: bash
+        run: |
+          quarto render web_source/ --to pdf --output-dir pdf/quarto-buggyness --output "ECHILD_How_To_Guides_${{ github.event.release.name }}.pdf"
+          
       - name: Render quarto website
         uses: quarto-dev/quarto-actions/render@v2
         with:
