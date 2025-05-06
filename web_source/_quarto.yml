@@ -1,6 +1,8 @@
 project:
   type: book
-  resources: static/*
+  resources:
+    - static/*
+    - pdf/*.pdf
   output-dir: ../_docs
   # pre-render: 
   # post-render:
