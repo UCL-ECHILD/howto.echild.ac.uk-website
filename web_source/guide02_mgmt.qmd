@@ -81,6 +81,10 @@ Consider a date. A date value `2025-04-23` in of itself contains all the informa
 
 Similarly, once you have cleaned you data, do you need to keep the source data, especially if you are never going to use it again? Do you need to keep rows of data for people not in your cohort? Dropping redundant data will not only reduce the size of the file on the disk, but also the amount of data held in memory. This will make the data easier to handle.
 
+## Archiving
+
+At the end of a particular sub-project, consider compressing all project files to free up space in your overall SRS project share. When doing this, consider whether you need to keep any processed data. If you have written your code well, you will be able to entirely reproduce the processed data from your scripts (if it is not possible to do so, then you have not carried out your project in a reproducible manner). We therefore advise deleting processed data before compressing and archiving project files.
+
 # Modular, tidy scripts
 
 You will find that, very quickly, you will have written a lot of code. You will need to come back to this code in the future. We also strongly encourage, in the spirit of open research, that you share your code with others. It is therefore important for your and others' sakes that your code is clear and managed well. 
