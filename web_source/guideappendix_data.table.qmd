@@ -1,22 +1,22 @@
 # Appendix: a brief introduction to data.table {.unnumbered}
 
-# Script needed for this guide
+## Script needed for this guide
 
 * [data.table.demo.r](scripts/data.table.demo.r)
 
-# Introduction
+## Introduction
 
 Throughout these guides, we use the R package [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"}. This package makes working with large data frames much easier. In this guide, we introduce `data.table`. While by no means comprehensive (we do not make full use of `data.table`’s functionality), it should give you just enough to get you going with the guides if you are unfamiliar with the package. The second half of this guide also provides some hints and tips for writing scripts and managing memory.
 
-# Some pretend data
+## Some pretend data
 
 We are going to simulate some data, rather than use real data. This is to keep things simple as we illustrate some points. The first part of the script [data.table.demo.r](scripts/data.table.demo.r) simulates a dataset with one million rows and a set of columns. While these represent the sorts of data you will encounter in ECHILD, their content is entirely randomly generated with no relationships specified among the variables.
 
-# A `data.table` is just a fancy `data.frame`
+## A `data.table` is just a fancy `data.frame`
 
 The first thing to note is that `data.table` introduces a new object class, the `data.table`. A `data.table` is nothing other than a fancy `data.frame`: it does what a `data.frame` can do, and then some. In the [words of its creators](https://rdatatable.gitlab.io/data.table/){target="_blank"}, `data.table` "provides a high-performance version of base R's `data.frame` with syntax and feature enhancements for ease of use, convenience and programming speed." There are some key differences that make `data.table` syntax much tidier than base R and that make certain operations much easier. Another key advantage is that working with `data.table` is often much quicker than with the base R `data.frame`.
 
-# Indexing a `data.table`
+## Indexing a `data.table`
 
 In base R, we use square brackets to index an object such as a `data.frame`, supplying a value to the `i` (row) and `j` (column) coordinates. For example, we might supply integers to select a specified cell or we supply a vector to subset to certain rows. We can do the same thing with a `data.table` (Code Snippet 1). Note how the syntax for `data.table` is much simpler. In base R, we must include a comma in the square brackets, even if we leave the `j` coordinate blank (i.e., to return all columns). A key difference is that, with `data.table`, we do not need to explicitly supply the `j` coordinate and, if we are just indexing on `i` (row), we can omit the column.
 
@@ -85,7 +85,7 @@ Note how, as well, the output is more concise when using `data.table` (Code Snip
 ---
 ```
 
-# Ordering
+## Ordering
 
 Ordering a `data.table` is also rather easier and quicker than ordering a `data.frame` (Code Snippet 3). In this example, ordering the `data.frame` took about 1.1 seconds compared to 0.05 for `data.table`.
 
@@ -97,7 +97,7 @@ dt_datatable <- dt_datatable[order(chc_group, epistart)]
 ---
 ```
 
-# Creating variables explicitly
+## Creating variables explicitly
 
 To add a new variable to a base R `data.frame`, we use code as in the first line of Code Snippet 4. While we could do this to a `data.table`, `data.table`’s own way is slightly different, as shown in the second line of Code Snippet 4. Note how we can perform operations on other columns within the same `data.table` easily with reference to their column name. 
 
@@ -109,7 +109,7 @@ dt_datatable[, age_yr_sq := age_yr ^ 2]
 ---
 ```
 
-# Creating variables in a loop
+## Creating variables in a loop
 
 In Code Snippet 4, we created the new column explicitly. Occasionally, however, in the guides we want to create a group of variables in a loop, where the new column is created dynamically (for example, when dealing with dual enrolment in guide 8). Study Code Snippet 5. Here we create variables that give the date that is the episode start date plus 365 days, 730 days, and so on until 3,650 days (i.e., roughly 10 years).
 
@@ -127,7 +127,7 @@ rm(period, periods, new_var)
 ---
 ```
 
-# Reshaping
+## Reshaping
 
 Reshaping in base R is notoriously difficult. The syntax for the base R `reshape()` function is not at all intuitive. Fortunately, `data.table` comes with its own reshaping functions, `melt()` and `dcast()`, which are illustrated in Code Snippet 6, where we reshape the episode start date and the new dates we created in Code Snippet 5 into long format, and then back into wide.
 
@@ -155,6 +155,6 @@ dt_datatable_wide <-
 ---
 ```
 
-# Further help
+## Further help
 
 Hopefully between this guide and the others, you now have enough to get you going. If you have any questions, feel free to post a question in the ECHILD [discussion forum](https://github.com/orgs/UCL-ECHILD/discussions){target="_blank"}. There is, of course, also a wealth of information on `data.table` on the internet that you can search and consult.

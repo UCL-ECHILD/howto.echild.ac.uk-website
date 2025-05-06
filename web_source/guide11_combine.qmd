@@ -1,16 +1,16 @@
 # Guide 11: combine it all together {.unnumbered}
 
-# Script needed for this guide
+## Script needed for this guide
 
 * [12_combine.r](scripts/12_combine.r)
 
-# Introduction
+## Introduction
 
 Recall that our plan was to create a master spine, onto which we later join other data (Figure 1, showing the NPD inception scheme). We are now ready to join all the data together in order to produce a single, analysis-ready dataset.
 
 ![Figure 1: Cohort construction and data extraction (NPD inception).](static/data_extract_npd.png){fig-alt="Diagram showing data extraction across different modules of data (NPD inception cohort)."}
 
-# Loading datasets
+## Loading datasets
 
 Script [12_combine.r](scripts/12_combine.r) is perhaps the simplest. However, before we run it, in [00a_run_cleaning.r](scripts/00a_run_cleaning.r),  we first load all the files that we created up until this point (Code Snippet 1). In Code Snippet 1, note how we create a vector of strings called `files`, and then remove one file from it. This is the file that we ultimately create at the end of [12_combine.r](scripts/12_combine.r). You will likely find yourself in a situation where you re-run your scripts and this step just ensures we are combining data into our original spine, not some other (and now incorrect) version of it.
 
@@ -29,11 +29,11 @@ source("scripts/12_combine.r")
 ---
 ```
 
-# Combining data
+## Combining data
 
 We now turn to script [12_combine.r](scripts/12_combine.r). The basic idea is that we use `merge()` or we use boolean operators to create flags, depending on the dataset and what kind of variables we need, to combine each dataset with our spine.
 
-# NPD demographic data
+### NPD demographic data
 
 Starting with the demographics, we `merge()` the modal demographics file into the spine and create an approximate date of birth variable. NPD only contains month and year of birth but we often need an actual date value and so we arbitrarily create an approximate date of birth on the 15th day of whatever month and year the child was born. We then `merge()` the year 7 data into the spine. These two merge operations are simple because we only saved one record per child in each of these demographic datasets. Once merged, you should inspect missingness.
 
@@ -73,15 +73,15 @@ cohort_spine[, ever_sen_primary := ifelse(highest_sen_primary == "None", F, T)]
 ---
 ```
 
-# HES demographics data
+### HES demographics data
 
 Recall that in [Guide 5](guide05_demo_hes.qmd), we provided some hints on how you can adapt our code to extract demographic data from HES. If you did this, remember to also adapt the code here to import it into your spine.
 
-# HES birth characteristics
+### HES birth characteristics
 
 This part is only relevant if you adopted an NPD cohort inception. These are the birth data we extracted in [Guide 6](guide06_birth_chars.qmd). Remember to comment out or delete this section if you do not need it.
 
-# CHC exposure
+### Phenotypes
 
 This part deals with the phenotypes. Because you might have multiple phenotypes, we have written a for loop as a way of looping through them all and creating a binary indicator that states whether the child in question ever had a code for each phenotype in question or not (Code Snippet 4). You may want to take a more nuanced approach, for example by only including codes within a certain date range. It is fairly straightforward to amend the code to include a subsetting condition along these lines.
 
@@ -100,26 +100,26 @@ for (chc in phen_groups) {
 ---
 ```
 
-# Non-enrolment, exclusion and absence
+### Non-enrolment, exclusion and absence
 
 The next three sections are quite simple. For non-enrolment, we create binary indicators to show whether the child was NOT enrolled in each of years 8 to 11. We limit to the spring and alternative provision census for the sake of simplicity, but there is no reason why you could not expand this to include other censuses. For exclusion, we simply create a binary variable that indicates the child was excluded in each year. Again, you could separate out fixed-term and permanent exclusions by including an appropriate subsetting condition. The absence data have a few steps. First, we `dcast()` the data to wide format and then `merge()` into the spine.
 For all three outcomes, we also create variables that indicate whether each child ever experienced each of them across secondary school.
 
-# Exam data
+### Exam data
 
 Given how we extracted the exam data, we get away with a simple `merge()` here.
 
-# Outpatients
+### Outpatients
 
 With the outpatient data (recall that our dataset contains appointments with pain services), we first create a binary flag indicating “ever” attendance. We then merge the date of the first recorded chronic pain clinic attendance. Remember, as discussed in [Guide 10](guide10_opa.qmd), you may want to consider what to do with cancelled and non-attended appointments, which we ignore here.
 
-# Children’s social care (CSC)
+### Children’s social care (CSC)
 
 We now turn to the CSC data, the only component that has not so far been treated in its own guide. This is because elsewhere [we have published code](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"} that extracts and cleans the two CSC datasets (the child in need census and the children looked after return) in their entirety. See the next guide, [Guide 12](guide12_csc.qmd), for more information about the CSC data and that cleaning code.
 
 In the meantime, observe that we simply load the cleaned data, subset to those in our cohort and to primary school records. Then we create “ever” binary flags and a variable that indicates the highest level of CSC involvement ever experienced.
 
-# Eligibility flag
+## Eligibility flag
 
 Before saving, we also create an eligibility flag which declares whether each child was born in the relevant year and linked to HES (i.e., has a TPID) or NPD (i.e., has a PMR), depending on your cohort inception (Code Snippet 3). Strictly speaking, this should probably be in its own script, but we included it here because it was convenient to do so.
 
@@ -133,9 +133,8 @@ cohort_spine <- cohort_spine[order(PupilMatchingRefAnonymous, y7_year)]
 ---
 ```
 
-# Coming up... 
+## Coming up... 
 
 You should now have an analysis-ready dataset. The rest is up to you!
 
 (Though, if you are interested in children’s social care data, you may want to read onto [Guide 12](guide12_csc.qmd) to learn more about that.)
-

@@ -1,16 +1,16 @@
 # Guide 12: children's social care {.unnumbered}
 
-# Scripts needed for this guide
+## Scripts needed for this guide
 
 * Find out more about our children's social care cleaning code [here](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}
 
-# Introduction
+## Introduction
 
 ECHILD contains the two children’s social care (CSC) datasets: the child in need census and the children looked after return. These are the two national data sources that provide information on CSC activity in England. These services, which are organised by 153 local authorities, provide support for children in need of help and protection. This includes children who need additional services to maintain or achieve a ‘reasonable standard of health or development’ or who are disabled. It also includes children at risk of, or suffering, harm due to maltreatment.
 
 In this guide, we give a very broad overview of the datasets as well as further information about scripts we have created and published elsewhere that can be used to incorporate information with CSC contact into our cohort spine. As the CSC datasets can be very tricky to work with, we provide further resources, including data resource profiles, for you to find out more detail.
 
-# Children in need
+## Children in need
 
 Activity for children in need is captured in the child in need census. The census contains data on children referred to CSC, including children in need and those on child protection plans. It is possible to identify referrals, where children have received a social work assessment (most referrals), where children are accepted as being children in need and where children are placed on child protection plans. Each year, around [5%-6% of children are referred to CSC and around 3% are children in need on any given day](https://explore-education-statistics.service.gov.uk/find-statistics/children-in-need){target="_blank"}. We estimated that just over a [third are ever referred across childhood and 25% are children in need at least once](https://ijpds.org/article/view/2454){target="_blank"}.
 
@@ -22,13 +22,13 @@ The dataset is organised according to referrals within financial years, meaning 
 
 Linkage to other datasets is only possible via the NPD using the Pupil Matching Reference (PMR). Because the PMR is primarily assigned when children start school, not all children in the data have a PMR, especially younger children ([we found that only 70% of records in the data have a PMR](https://ijpds.org/article/view/24540){target="_blank"}). A separate identifier, the local authority child ID, can be used to link children’s records, but this ID is unique only to the local authority that assigned it. This means that if a child moves local authority, the link will be lost (unless they have a PMR).
 
-# Children looked after
+## Children looked after
 
 Children looked after are a subset of all children in need. They are defined as children under the care of, or accommodated by, a local authority. This is often due to abuse or neglect but not always as children may be looked after, for example, under an agreed period of short-term breaks. About [0.7% of children are looked after on a given day](https://explore-education-statistics.service.gov.uk/find-statistics/children-looked-after-in-england-including-adoptions){target="_blank"} and [upwards of 3.3% of children are ever looked after across childhood](https://www.sciencedirect.com/science/article/pii/S0145213415003786){target="_blank"}. Although children looked after are, legally, also children in need, specific information on children looked after and their care placements is contained in the children looked after dataset, also known as the SSDA903 return.
 
 This dataset began in 1992 and so has significant longevity. However, it was not until April 2005 that the children looked after dataset contains PMR, meaning that linkage to the NPD is only possible from then. As with the child in need census, linkage to external datasets is only possible via NPD using the PMR.
 
-# Categorising children in need
+## Categorising children in need
 
 You will need to consider how you wish to categorise children in need in your analysis, a question which, given the heterogeneity in experiences, is not easy. Many studies use relatively basic, mutually exclusive and hierarchical categories (e.g. no CSC contact, child in need, on a child protection plan, looked after). Some examples from research include:
 
@@ -48,11 +48,11 @@ Another approach is to use pre-defined, but more detailed groupings, e.g.:
 
 Remember that you may need to combine information from both the child in need census and the children looked after return.
 
-# Data cleaning
+## Data cleaning
 
 Each of the CSC datasets has its own structure (see above) and, of course, variables. Getting to grips with them can therefore be quite tricky. We have, however, previously released R code that performs some basic cleaning to produce a more-or-less analysis-ready dataset. [You can find out more about the code and access the code and its documentation here](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}. In [Guide 11](guide11_combine.qmd), we had used the dataset that this code produced in order to define a mutually exclusive, hierarchical CSC variable in our cohort spine.
 
-# Further information
+## Further information
 
 To find out more about the data, we strongly recommend you consult the data resource profiles:
 
@@ -61,7 +61,7 @@ To find out more about the data, we strongly recommend you consult the data reso
 * Jay MA, Mc Grath-Lone L and Gilbert R. [Data Resource Profile: National Pupil Database (NPD)](https://ijpds.org/article/view/1101){target="_blank"}. Int J Pop Data Sci 2019;4:1:08.
 * Mc Grath-Lone L, Libuy N, Harron K, Jay MA, Wijlaars L, Etoori D, Lilliman M, Gilbert R, Blackburn R. [Data Resource Profile: The Education and Child Health Insights from Linked Data (ECHILD) Database](https://academic.oup.com/ije/advance-article/doi/10.1093/ije/dyab149/6425590){target="_blank"}. Int J Epi 2021. doi: 10.1093/ije/dyab149.
 
-# The end
+## The end
 
 Congratulations! You have made it through to the end of the ECHILD How To Guides. We hope that you have found them useful and that they have made ECHILD a little easier to use. Remember that even more information can be found on our [main website](https://www.echild.ac.uk/){target="_blank"}, the [user guide](https://docs.echild.ac.uk/){target="_blank"}, the [ECHILD Code List Repository](https://code.echild.ac.uk/){target="_blank"} and the [discussion forum](https://github.com/orgs/UCL-ECHILD/discussions){target="_blank"}.
 

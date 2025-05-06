@@ -1,16 +1,16 @@
 # Guide 10: outpatients {.unnumbered}
 
-# Script needed for this guide
+## Script needed for this guide
 
 * [11_outpatient_data.r](scripts/11_outpatient_data.r)
 
-# Introduction
+## Introduction
 
 So far, from HES, we have exclusively used the admitted patient care data. The use of these data has a long pedigree and they contain rich diagnostic and procedure information, recorded on a mandatory basis. Outpatient data have been relatively underexplored. Even though the outpatient dataset has columns that could contain diagnoses, these data are missing in almost all instances (in fact, code `R69` – unknown and unspecified causes of morbidity is recorded). Procedure information is slightly more complete, but possibly of limited use (e.g., the most common procedure is OPCS-4 code `X62.1` – assessment by uniprofessional team). As a result, the outpatient data contain limited clinical or diagnostic information that is useful for phenotyping.
 
 There are, however, situations where outpatient data may be useful. One is where the interest is in use of hospitals generally, such as in the study by [Mc Grath-Lone et al on hospital use before and during the COVID-19 pandemic](https://adc.bmj.com/content/107/10/e29){target="_blank"}. Additionally, the outpatient dataset does contain information on the treatment specialty. It is therefore possible to identify patients using a particular service. If the referral acceptance criteria of such services are sensitive and specific enough, you may be able to use outpatient data for the purpose of identifying patients with such conditions. In this example, we therefore extract outpatient data in order to identify patients in our cohorts who attended specialist chronic pain clinics.
 
-# Data extraction
+## Data extraction
 
 In [11_outpatient_data.r](scripts/11_outpatient_data.r) we (yet again) adopt the same approach as in previous guides to data extraction: identify relevant tables and loop a query through them. In fact, we let the SQL query do all the heavy lifting (Code Snippet 1). You will see that we extract the appointment date, whether it was a first attendance, whether it was attended and the treatment specialty (`TRETPSEF`). We also only select appointments with services with treatment specialty `191` or `241`, both of which, as you will see in the [HES data dictionary](https://digital.nhs.uk/data-and-information/data-tools-and-services/data-services/hospital-episode-statistics/hospital-episode-statistics-data-dictionary){target="_blank"}, represent pain services.
 
@@ -29,7 +29,7 @@ temp <- data.table(
 
 Recall again that HES are organised in financial years. We therefore extract more years than we need and then subset. There is nothing much else to this script. We end up with a dataset that contains appointments with pain services.
 
-# Some outpatient quirks
+## Some outpatient quirks
 
 Some things to bear in mind about outpatient data:
 
@@ -38,6 +38,6 @@ Some things to bear in mind about outpatient data:
 * A patient could in theory have a “first” appointment with the same service more than once as they can be discharged and then re-referred.
 * There are two waiting time variables. `WAITING` relates to actual waiting days from the date the referral was received to the first planned appointment (whether attended or not). The other, `WAITDAYS`, refers to the waiting time according to the referral-to-treatment pathway, which includes clock stops. You may wish to calculate your own waiting time, for example using the referral received date (`REQDATE`) and the date of the first attended appointment.
 
-# Coming up...
+## Coming up...
 
 In [Guide 11](guide11_combine.qmd), we finally return to our spine and combine all the data so far extracted into it. With this, we shall have an analysis-ready dataset.
