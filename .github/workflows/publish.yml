@@ -25,8 +25,16 @@ jobs:
       # - name: Instal asdf and tools
       #   uses: asdf-vm/actions/install@v2
 
+      #- name: Install Inkscape
+      #  shell: bash
+      #  run: |
+      #    sudo apt update
+      #    sudo apt install inkscape
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
 
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
