@@ -6,7 +6,7 @@ Suggested citation:
 
 * Jay MA, Stone T, Nguyen V, Zylbersztejn A. ECHILD How To Guides. [https://howto.echild.ac.uk](https://howto.echild.ac.uk){target="_blank"}. UCL (University College London) 2025.
 
-The ECHILD project is in partnership with NHS England and the Department for Education (DfE) and we thank the following individuals for their valuable contributions to the project: Jodie Taylor-Brown, Ian Goodwin, Garry Coleman, Richard Caulton, Catherine Day (NHS England), and Gary Connell, Harriet Fearn, Kirsty Knox (DfE). We are also grateful to Bill South and Alan Cotterill from the Office for National Statistics (ONS) for providing the Trustworthy Research Environment for ECHILD.
+The ECHILD project is in partnership with NHS England and the Department for Education (DfE) and we thank the following individuals for their valuable contributions to the project: Jodie Taylor-Brown, Ian Goodwin, Garry Coleman, Richard Caulton, Catherine Day (NHS England), and Gary Connell, Harriet Fearn, Kirsty Knox (DfE). We are also grateful to Bill South and Alan Cotterill from the Office for National Statistics (ONS) for providing the Trusted Research Environment for ECHILD.
 
 We thank all the children, young people, parents and carers who contributed to the ECHILD project. We also gratefully acknowledge all children and families whose de-identified data form this research database.
 
