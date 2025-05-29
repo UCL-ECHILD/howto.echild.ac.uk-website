@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Throughout these guides, we use the R package [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"}. This package makes working with large data frames much easier. In this guide, we introduce `data.table`. While by no means comprehensive (we do not make full use of `data.table`’s functionality), it should give you just enough to get you going with the guides if you are unfamiliar with the package. The second half of this guide also provides some hints and tips for writing scripts and managing memory.
+Throughout these guides, we use the R package [data.table](https://cran.r-project.org/web/packages/data.table/index.html){target="_blank"}. This package makes working with large data frames much easier. In this guide, we introduce `data.table`. While by no means comprehensive (we do not make full use of `data.table`’s functionality), it should give you just enough to get you going with the guides if you are unfamiliar with the package.
 
 ## Some pretend data
 
