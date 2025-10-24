@@ -110,7 +110,6 @@ generate_npd_source <- function() {
     colnames(temp) <- c("PupilMatchingRefAnonymous", "gender", "ethnicgroupmajor",
                         "languagegroupmajor", "yearofbirth", "monthofbirth")
     temp <- temp[PupilMatchingRefAnonymous %in% cohort_spine$PupilMatchingRefAnonymous]
-    temp <- temp[!duplicated(temp)]
     
     npd_source <- rbind(npd_source, temp)
     
@@ -121,7 +120,6 @@ generate_npd_source <- function() {
 }
 
 demo_modals <- generate_npd_source()
-demo_modals <- demo_modals[!duplicated(demo_modals)]
 
 print("Adding AP and PRU")
 
@@ -157,8 +155,6 @@ ap <- ap[, c("PupilMatchingRefAnonymous",
              "yearofbirth",
              "monthofbirth")]
 
-ap <- ap[!duplicated(ap)]
-
 demo_modals <- rbind(demo_modals, ap)
 rm(ap)
 
@@ -188,14 +184,11 @@ setnames(pru, names(pru), c("PupilMatchingRefAnonymous",
                           "monthofbirth"))
 
 pru <- pru[PupilMatchingRefAnonymous %in% cohort_spine$PupilMatchingRefAnonymous]
-pru <- pru[!duplicated(pru)]
 demo_modals <- rbind(demo_modals, pru)
 rm(pru)
 
 
 print("Cleaning")
-demo_modals <- demo_modals[!duplicated(demo_modals)]
-
 # Gender
 demo_modals[gender %in% c("0", "9"), gender := NA]
 demo_modals[, female := ifelse(gender == "F" | gender == "2", 1, 0)]
@@ -308,10 +301,6 @@ demo_modals[, languagegroupmajor := NULL]
 # table(demo_modals$monthofbirth, useNA = "always")
 
 
-print("Deduplicating")
-demo_modals <- demo_modals[!duplicated(demo_modals)]
-
-
 print("Getting modal values")
 
 set.seed(100)
@@ -328,7 +317,7 @@ demo_modals[, monthofbirth := mode_fun(monthofbirth), by = PupilMatchingRefAnony
 # table(demo_modals$monthofbirth, useNA = "always")
 
 
-print("Deduplicating again")
+print("Deduplicating")
 demo_modals <- demo_modals[!duplicated(demo_modals)]
 length(unique(demo_modals$PupilMatchingRefAnonymous)); nrow(demo_modals)
 
