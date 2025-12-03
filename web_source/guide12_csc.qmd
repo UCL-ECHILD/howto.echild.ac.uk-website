@@ -2,7 +2,7 @@
 
 ## Scripts needed for this guide
 
-* Find out more about our children's social care cleaning code [here](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}
+* Find out more about our children's social care cleaning code [here](https://www.adruk.org/our-work/the-impact-of-our-work/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"}
 
 ## Introduction
 
