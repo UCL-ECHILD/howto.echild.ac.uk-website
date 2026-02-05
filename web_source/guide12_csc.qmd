@@ -21,7 +21,7 @@ The dataset began in October 2008, running to March 2009. It is then available i
 
 The dataset is organised according to referrals within financial years, meaning each row represents a referral. However, there is a significant amount of duplication because each year of the data contains all referrals open during that year. This means that where a referral spans two or more years, the same referral will appear two or more times. The later referrals may contain more up-to-date information than the earlier ones.
 
-Linkage to other datasets is only possible via the NPD using the Pupil Matching Reference (PMR). Because the PMR is primarily assigned when children start school, not all children in the data have a PMR, especially younger children ([we found that only 70% of records in the data have a PMR](https://ijpds.org/article/view/24540){target="_blank"}). A separate identifier, the local authority child ID, can be used to link children’s records, but this ID is unique only to the local authority that assigned it. This means that if a child moves local authority, the link will be lost (unless they have a PMR).
+Linkage to other datasets is only possible via the NPD using the Pupil Matching Reference (PMR). Because the PMR is primarily assigned when children start school, not all children in the data have a PMR, especially younger children ([we found that only 70% of records in the data have a PMR](https://ijpds.org/article/view/2454){target="_blank"}). A separate identifier, the local authority child ID, can be used to link children’s records, but this ID is unique only to the local authority that assigned it. This means that if a child moves local authority, the link will be lost (unless they have a PMR).
 
 ## Children looked after
 
