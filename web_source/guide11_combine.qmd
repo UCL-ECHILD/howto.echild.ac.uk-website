@@ -115,7 +115,7 @@ With the outpatient data (recall that our dataset contains appointments with pai
 
 ### Children’s social care (CSC)
 
-We now turn to the CSC data, the only component that has not so far been treated in its own guide. This is because elsewhere [we have published code](https://www.adruk.org/our-mission/our-impact/echild-childrens-social-care-and-the-impact-of-code-sharing/){target="_blank"} that extracts and cleans the two CSC datasets (the child in need census and the children looked after return) in their entirety. See the next guide, [Guide 12](guide12_csc.qmd), for more information about the CSC data and that cleaning code.
+We now turn to the CSC data, the only component that has not so far been treated in its own guide. This is because elsewhere we have published code that extracts and cleans the two CSC datasets (the child in need census and the children looked after return) in their entirety. See the next guide, [Guide 12](guide12_csc.qmd), for more information about the CSC data and that cleaning code.
 
 In the meantime, observe that we simply load the cleaned data, subset to those in our cohort and to primary school records. Then we create “ever” binary flags and a variable that indicates the highest level of CSC involvement ever experienced.
 
